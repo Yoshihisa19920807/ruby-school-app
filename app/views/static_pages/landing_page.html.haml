@@ -1,0 +1,82 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    %a.navbar-brand{:href => "#"} Navbar
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item
+          %a.nav-link.active{"aria-current" => "page", :href => "#"} Home
+        %li.nav-item
+          %a.nav-link{:href => "#"} Link
+        %li.nav-item.dropdown
+          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+            Dropdown
+          %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+            %li
+              %a.dropdown-item{:href => "#"} Action
+            %li
+              %a.dropdown-item{:href => "#"} Another action
+            %li
+              %hr.dropdown-divider/
+            %li
+              %a.dropdown-item{:href => "#"} Something else here
+        %li.nav-item
+          %a.nav-link.disabled{"aria-disabled" => "true", :href => "#", :tabindex => "-1"} Disabled
+      %form.d-flex
+        %input.form-control.me-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+        %button.btn.btn-outline-success{:type => "submit"} Search
+%h1 StaticPages#landing_page
+= link_to "Privacy Policy", privacy_policy_path
+= link_to privacy_policy_path, class: "btn btn-lg btn-warning" do
+  Privacy Policy
+  %i.fas.fa-file-word
+/ hoge
+%br/
+%span.badge.bg-secondary Thanks Yaro! It works
+%br/
+%span.badge.bg-secondary Thanks Yaro! It works!
+%h1
+  Example heading
+  %span.badge.bg-secondary New
+%h2
+  Example heading
+  %span.badge.bg-secondary New
+%h3
+  Example heading
+  %span.badge.bg-secondary New
+%h4
+  Example heading
+  %span.badge.bg-secondary New
+%h5
+  Example heading
+  %span.badge.bg-secondary New
+%h6
+  Example heading
+  %span.badge.bg-secondary New
+.card{:style => "width: 18rem;"}
+  %img.card-img-top{:alt => "...", :src => "..."}/
+  .card-body
+    %h5.card-title Card title
+    %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+    %a.btn.btn-primary{:href => "#"} Go somewhere
+.container
+  / Content here
+  hogeohoge
+%i.fas.fa-camera
+/ this icon's 1) style prefix == fas and 2) icon name == camera
+%i.fas.fa-camera
+/ using an <i> element to reference the icon
+%span.fas.fa-camera
+/ using a <span> element to reference the icon
+%button.btn.btn-primary{:type => "button"}
+  Notifications
+  %span.badge.bg-secondary 4
+\= simple_form_for @course do |f|
+\= f.error_notification
+\= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+\= f.input :title
+\= f.label :description
+\= f.rich_text_area :description
+\/= f.submit 'Save'
+\= f.button :submit
