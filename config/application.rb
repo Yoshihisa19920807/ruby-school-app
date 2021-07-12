@@ -10,6 +10,8 @@ module RubyGemsBootcamp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    
+    config.hosts << "1c70c97566c046c9b9b3b8359c0e23d5.vfs.cloud9.ap-northeast-1.amazonaws.com"
 
     # Configuration for the application, engines, and railties goes here.
     #
