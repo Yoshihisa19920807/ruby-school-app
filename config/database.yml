@@ -82,5 +82,6 @@ test:
 production:
   <<: *default
   database: ruby_gems_bootcamp_production
-  username: ruby_gems_bootcamp
-  password: <%= ENV['RUBY_GEMS_BOOTCAMP_DATABASE_PASSWORD'] %>
+  # create this user on ec2 instance with the previlege of create DB and with password
+  username: yoshi
+  password: dbabkidb8
