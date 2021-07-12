@@ -1,6 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
 <h1>StaticPages#landing_page</h1>
 <%= link_to "Privacy Policy", privacy_policy_path %>
+<%= link_to privacy_policy_path, class: "btn btn-lg btn-warning" do %>
+    Privacy Policy <i class="fas fa-file-word"></i>
+<% end %>
+<!--hoge-->
+<br>
+<span class="badge bg-secondary">Thanks Yaro! It works</span>
+<br>
+<span class="badge bg-secondary">Thanks Yaro! It works!</span>
+<h1>Example heading <span class="badge bg-secondary">New</span></h1>
+<h2>Example heading <span class="badge bg-secondary">New</span></h2>
+<h3>Example heading <span class="badge bg-secondary">New</span></h3>
+<h4>Example heading <span class="badge bg-secondary">New</span></h4>
+<h5>Example heading <span class="badge bg-secondary">New</span></h5>
+<h6>Example heading <span class="badge bg-secondary">New</span></h6>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 
-hoge
-<span class="badge badge-secondary">Thanks Yaro! It works</span>
-<span class="badge badge-secondary">Thanks Yaro! It works!</span> 
+<div class="container">
+  <!-- Content here -->
+  hogeohoge
+</div>
+
+<i class="fas fa-camera"></i> <!-- this icon's 1) style prefix == fas and 2) icon name == camera -->
+<i class="fas fa-camera"></i> <!-- using an <i> element to reference the icon -->
+<span class="fas fa-camera"></span> <!-- using a <span> element to reference the icon -->
+
+<button type="button" class="btn btn-primary">
+  Notifications <span class="badge bg-secondary">4</span>
+</button>
+
+= simple_form_for @course do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+  = f.input :title
+  = f.label :description
+  = f.rich_text_area :description
+  /= f.submit 'Save'
+  = f.button :submit
