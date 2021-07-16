@@ -1,32 +1,11 @@
-%h1 Listing courses
-
-%table.table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th User
-      %th
-      %th
-      %th
-
-  %tbody
-    - @courses.each do |course|
-      %tr
-        %td= course.title
-        %td= course.description
-        %td= course.user.email
-        %td= link_to 'Show', course
-        %td= link_to 'Edit', edit_course_path(course)
-        %td= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
+%h1
+  Courses:
+  = @courses.count
+  
+.card-columns
+  - @courses.each do |course|
+    .col-md-6
+      = render 'courses/course', course: course
+      %p
 
 %br
-
-= link_to 'New Course', new_course_path
-
-.alert.alert-danger
-
-%div{:class => "alert alert-danger", :role => "alert"}
-  %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
-  - p "hoge"
-  = content_tag :div, "fuga", :id => "flash_hoge" 

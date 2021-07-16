@@ -19,3 +19,7 @@ require("stylesheets/application.scss")
 import "@fortawesome/fontawesome-free/css/all"
 require("trix")
 require("@rails/actiontext")
+
+// 引数は指定しなくてよい
+// import Masonry from 'masonry-layout';
+import 'masonry-layout';
