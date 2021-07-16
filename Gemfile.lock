@@ -167,7 +167,7 @@ GEM
       rake (>= 0.13)
       thor (~> 1.0)
     raindrops (0.19.2)
-    rake (13.0.4)
+    rake (13.0.6)
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -269,4 +269,4 @@ RUBY VERSION
    ruby 3.0.2p107
 
 BUNDLED WITH
-   2.2.23
+   2.2.22
