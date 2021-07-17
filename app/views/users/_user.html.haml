@@ -1,0 +1,26 @@
+.card
+  .card-header
+    = user.email
+  .card-footer
+    Signed up
+    = time_ago_in_words(user.created_at)
+    ago
+  .card-footer
+    = 'sign_in_count'.humanize + ":"
+    = user.sign_in_count
+    .row
+    = 'current_sign_in_at'.humanize + ":"
+    = user.current_sign_in_at
+    .row
+    = 'current_sign_in_ip'.humanize + ":"
+    = user.current_sign_in_ip
+    .row
+    = 'last_sign_in_ip'.humanize + ":"
+    = user.last_sign_in_ip
+    
+    .card-footer
+      Confirmed email?
+      - if user.confirmed_at.present?
+        .badge.bg-success Yes
+      - else
+        .badge.bg-danger No
