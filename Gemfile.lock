@@ -169,11 +169,7 @@ GEM
       rake (>= 0.13)
       thor (~> 1.0)
     raindrops (0.19.2)
-<<<<<<< HEAD
-    rake (13.0.4)
-=======
     rake (13.0.6)
->>>>>>> 9017676e0e08371e198f49acf2fc27e573d9712b
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
