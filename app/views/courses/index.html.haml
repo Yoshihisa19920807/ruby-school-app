@@ -1,0 +1,11 @@
+%h1
+  Courses:
+  = @courses.count
+  
+.card-columns
+  - @courses.each do |course|
+    .col-md-6
+      = render 'courses/course', course: course
+      %p
+
+%br
