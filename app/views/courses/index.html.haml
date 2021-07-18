@@ -1,11 +1,34 @@
 %h1
   Courses:
   = @courses.count
-  
-.card-columns
-  - @courses.each do |course|
-    .col-md-6
-      = render 'courses/course', course: course
-      %p
-
-%br
+.row
+  .col-md-2
+    = search_form_for @q do |f|
+      = f.label :title
+      = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm'
+      -# -# alernative way for setting classes
+      -# = f.search_field :title_cont, placeholder: 'Title', class: ["form-control", "form-control-sm"]
+      = f.label :description
+      = f.search_field :short_description_cont, placeholder: 'Description', class: 'form-control form-control-sm'
+      = f.label :language
+      = f.select :language_cont, Course.languages, include_blank: true
+      = f.label :level
+      = f.select :level_cont, Course.levels, include_blank: true
+      = f.label :price_gteq
+      = f.search_field :price_gteq, class: 'form-control form-control-sm'
+      = f.label :price_lteq
+      = f.search_field :price_lteq, class: 'form-control form-control-sm'
+      = f.label :teacher
+      = f.search_field :user_email, placeholder: 'Teacher', class: 'form-control form-control-sm'
+      %br
+      = f.submit
+      .ml-2
+      %br
+      = link_to 'refresh', users_path
+  .col-md-10
+    .card-group
+      - @courses.each do |course|
+        .col-md-6
+          = render 'courses/course', course: course
+          %p
+  %br
