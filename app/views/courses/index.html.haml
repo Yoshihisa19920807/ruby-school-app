@@ -3,7 +3,8 @@
   = @courses.count
 .row
   .col-md-2
-    = search_form_for @q do |f|
+    -# = search_form_for @q do |f|
+    = search_form_for @courses_ransack, as: :search_courses, url: courses_path do |f|
       = f.label :title
       = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm'
       -# -# alernative way for setting classes
