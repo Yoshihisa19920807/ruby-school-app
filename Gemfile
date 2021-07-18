@@ -38,6 +38,8 @@ gem 'devise'
 
 gem 'friendly_id', '~> 5.4.0'
 
+gem 'ransack'
+
 # # 最下部に配置
 # gem 'font-awesome-sass'
 
