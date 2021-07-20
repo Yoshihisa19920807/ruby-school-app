@@ -1,0 +1,13 @@
+.card-header
+  %h1
+    Edit user role for 
+    = @user.email
+.card-body
+  = simple_form_for @user do |f|
+    -# f.collection_check_boxes(メソッド名(パラメータ名), 送信されるパラメータの要素,　表示される要素
+    = f.collection_check_boxes :role_ids, Role.all, :id, :name
+    = f.error :roles, class: 'text-danger'
+    %hr
+    = f.button :submit, class: 'btn btn-success'
+.card-footer
+  = link_to "Cancel", users_path, class: 'btn btn-link'
