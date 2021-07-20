@@ -6,10 +6,10 @@ class UserPolicy < ApplicationPolicy
   end
   
   def edit?
-    @user.has_role?:admin
+    @user.has_role?:admin if @user.present?
   end
   
   def update?
-    @user.has_role?:admin
+    @user.has_role?:admin if @user.present?
   end  
 end
