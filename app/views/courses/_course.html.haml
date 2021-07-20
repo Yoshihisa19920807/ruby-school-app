@@ -8,10 +8,13 @@
     %small= simple_format(course.short_description)
     // = course.description
   .card-footer
-    .row
-      .text-center
-        .fas.fa-dollar-sign
-        = course.price
+    .text-center
+      -# .fas.fa-dollar-sign
+      -# = course.price
+      = number_to_currency(course.price)
+  .card-footer
+    .fas.fa-book
+    = course.lessons.count
   .card-footer
     .row
       .col-6
@@ -32,4 +35,3 @@
       = link_to 'Show', course, class: 'btn btn-sm btn-primary'
       = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
       = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
-    

@@ -1,0 +1,14 @@
+%p
+  %b Title:
+  = lesson.title
+%p
+  %b Content:
+  = lesson.content
+%p
+  %b Course:
+  = lesson.course
+
+= link_to 'Edit', edit_lesson_path(lesson), class: 'btn btn-sm btn-warning'
+-# methodでpost delete put etcから指定出来る？
+-# link_to 'リンクの文言', 'パス', class: 'クラス名', method: :HTTPリクエスト %>
+= link_to 'Delete', lesson, method: :delete, data: {confirm : 'Are you sure?'}, class: 'btn btn-sm btn-secondary'
