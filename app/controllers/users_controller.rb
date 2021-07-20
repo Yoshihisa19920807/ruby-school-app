@@ -13,14 +13,18 @@ class UsersController < ApplicationController
   end
   
   def edit
-    
+    authorize @user
   end
   
   def update
+    # p "update_user_"
+    # p "self.roles___"
+    # p user_params
     
-    p "update"
-    p "user_params"
-    p user_params
+    authorize @user
+    # p "update"
+    # p "user_params"
+    # p user_params
     if @user.update(user_params)
       # redirect to users page
       redirect_to users_path, notice: 'User roles were successfully updated.'
