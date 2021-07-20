@@ -44,6 +44,8 @@ gem "rolify"
 
 gem 'ransack'
 
+gem "pundit"
+
 # # 最下部に配置
 # gem 'font-awesome-sass'
 
