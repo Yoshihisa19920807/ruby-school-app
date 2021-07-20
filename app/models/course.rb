@@ -38,5 +38,6 @@ class Course < ApplicationRecord
   end
 
   belongs_to :user
+  has_many :lessons, dependent: :destroy
   has_rich_text :description
 end
