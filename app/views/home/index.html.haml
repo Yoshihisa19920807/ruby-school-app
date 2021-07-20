@@ -48,7 +48,7 @@
   Popular courses
 -# if you use masonry
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
-.card-group
+.row.row-cols-1.row-cols-md-3.g-4
   - @courses.each do | course |
     = render 'courses/course', course: course
     
@@ -57,7 +57,7 @@
   Top rated courses
 -# if you use masonry
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
-.card-group
+.row.row-cols-1.row-cols-md-3.g-4
   - @courses.each do |course|
     = render 'courses/course', course: course
 
@@ -66,6 +66,6 @@
   Latest courses
 -# if you use masonry
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
-.card-group
+.row.row-cols-1.row-cols-md-3.g-4
   - @latest_courses.each do |course|
     = render 'courses/course', course: course
