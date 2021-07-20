@@ -1,8 +1,14 @@
-%h1
+-#%h1
   Courses:
   = @courses.count
+%h3
+  .text-center
+    Courses:
+    .badge.bg-info
+      = @courses.count
+%p
   
-.card-columns
+.row.row-cols-1.row-cols-md-3.g-4
   - @courses.each do |course|
     .col-md-6
       = render 'courses/course', course: course
