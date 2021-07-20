@@ -42,6 +42,8 @@ gem 'public_activity'
 
 gem "rolify"
 
+gem 'ransack'
+
 # # 最下部に配置
 # gem 'font-awesome-sass'
 

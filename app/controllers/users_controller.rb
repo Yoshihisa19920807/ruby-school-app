@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   
   def index
     if current_user.has_role?(:admin)
-      @users = User.all.order(created_at: :desc)
+      # @users = User.all.order(created_at: :desc)
+      @q = User.ransack(params[:q])
+      @users = @q.result(distinct: true)
     else
       redirect_to root_path, alert: 'You do not have access'
     end
