@@ -1,15 +1,23 @@
 .card.bg-light
   .display-4
     What do you want to learn today?
-    
+
   .p-4
-  .form-infinite.my-2.my-lg-0
-    =form_tag(courses_path, method: :get) do
-      .input-group
-        = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
-        %span.input-group-append
-          %button.btn.btn-primary.btn-sm{:type => "submit"}
-            %span.fa.fa-search{"aira-hidden" => "true"}
+    .form-inline.my-2.my-lg-0
+      = search_form_for @courses_ransack, as: :search_courses, url: courses_path do |f|
+        .input-group
+          = f.search_field :title_cont, style: 'float: left;', placeholder: 'Title', class: 'form-control form-control-sm'
+          %span.input-group-append
+            %button.btn.btn-primary.btn-sm{:type => "submit"}
+              %span.fa.fa-search{"aira-hidden" => "true"}
+  -# .form-infinite.my-2.my-lg-0
+  -#   =form_tag(courses_path, method: :get) do
+  -#     .input-group
+  -#       = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+  -#       %span.input-group-append
+  -#         %button.btn.btn-primary.btn-sm{:type => "submit"}
+  -#           %span.fa.fa-search{"aira-hidden" => "true"}
+
 
 .card-group
   .card.card-body
@@ -70,5 +78,6 @@
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
 .row.row-cols-1.row-cols-md-3.g-4
   - @latest_courses.each do |course|
+    = render 'courses/course', course: course
     .col-md-4
       = render 'courses/course', course: course

@@ -8,3 +8,50 @@
 .card-group
   - @users.each do |user|
     = render 'users/user', user: user
+
+%br
+.form-inline
+  = search_form_for @q do |f|
+    = f.label :email_cont
+    = f.search_field :email_cont
+    and
+    %br
+    = f.label :sign_in_count_gt
+    = f.search_field :sign_in_count_gt
+    and
+    %br
+    = f.label :sign_in_count_lt
+    = f.search_field :sign_in_count_lt
+    -# -# not working
+    -# = f.search_field :email_or_sign_in_count_eq, placeholder: 'email or sign in count'
+    -# -# needs datepicker or something
+    -# = f.search_field :last_sign_in_at_gteq, placeholder: 'last sign in is later than or equal'
+    -# = f.search_field :last_sign_in_at_lteq, placeholder: 'last sign in is earlier than or equal'
+    %br
+    = f.submit
+    .ml-2
+    %br
+    = link_to 'refresh', users_path
+
+%table.table.table-boarded
+  %thead
+    %tr
+      %th id
+      %th= sort_link(@q, :email)
+      %th created_at
+      %th= 'sign_in_count'.humanize
+      %th= 'current_sign_in_at'.humanize
+      %th= 'last_sign_in_at'.humanize
+      %th= 'current_sign_in_ip'.humanize
+      %th= 'last_sign_in_ip'.humanize
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.email
+        %td= user.created_at
+        %td= user.sign_in_count
+        %td= user.current_sign_in_at
+        %td= user.last_sign_in_at
+        %td= user.current_sign_in_ip
+        %td= user.last_sign_in_ip
