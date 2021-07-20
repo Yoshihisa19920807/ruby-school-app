@@ -10,11 +10,12 @@ class CoursesController < ApplicationController
     #   @q = Course.ransack(params[:q])
     #   @courses = @q.result.includes(:user)
     # end
-    p "@courses_ransack"
-    p @courses_ransack
+
+    # p "@courses_ransack"
+    # p @courses_ransack
     @courses = @courses_ransack.result.includes(:user)
-    p "@courses"
-    p @courses
+    # p "@courses"
+    # p @courses
   end
 
   # GET /courses/1 or /courses/1.json
@@ -28,6 +29,11 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    # authorize by pundit
+    p "courses_controller_def_edit"
+    
+    # refers to edit method in course_policy
+    authorize @course
   end
 
   # POST /courses or /courses.json
