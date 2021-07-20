@@ -40,6 +40,8 @@ gem 'friendly_id', '~> 5.4.0'
 
 gem 'public_activity'
 
+gem "rolify"
+
 # # 最下部に配置
 # gem 'font-awesome-sass'
 
