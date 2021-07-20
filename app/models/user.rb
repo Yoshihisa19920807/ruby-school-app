@@ -11,9 +11,9 @@ class User < ApplicationRecord
     email
   end
 
+  extend FriendlyId
+  friendly_id :email, use: :slugged
   
-  after_create :assign_default_role
-
   after_create :assign_default_role
   
   def assign_default_role

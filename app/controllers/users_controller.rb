@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
   
   def index
     if current_user.has_role?(:admin)
@@ -9,7 +9,9 @@ class UsersController < ApplicationController
     else
       redirect_to root_path, alert: 'You do not have access'
     end
-    
+  end
+  
+  def show
   end
   
   def edit
@@ -37,7 +39,7 @@ class UsersController < ApplicationController
   private
   
   def set_user
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
   
   def user_params
