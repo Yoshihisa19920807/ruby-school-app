@@ -3,10 +3,11 @@
     %h1 New course
   .card-body  
     = render 'form'
-.br
-  %br
-    :css
-      .br {
-        line-height: 50%;
-      }
-= link_to 'Back', courses_path , class: 'btn btn-link'
+  .br
+    %br
+      :css
+        .br {
+          line-height: 50%;
+        }
+  .card-footer
+    = link_to 'Back', courses_path , class: 'btn btn-link'
