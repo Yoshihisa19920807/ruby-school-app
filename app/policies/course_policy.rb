@@ -6,7 +6,7 @@ class CoursePolicy < ApplicationPolicy
   end
   
   def show?
-    @user.has_role?(:admin) || @record.user_id == @user.id
+    # @user.has_role?(:admin) || @record.user_id == @user.id
   end
   
   def edit?
@@ -35,6 +35,9 @@ class CoursePolicy < ApplicationPolicy
   end
   
   def new?
+    
+    p "____@record"
+    p @record
     @user.has_role?(:teacher) if @user.present?
   end
   

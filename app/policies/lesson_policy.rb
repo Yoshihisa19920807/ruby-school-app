@@ -6,7 +6,7 @@ class LessonPolicy < ApplicationPolicy
   end
   
   def show?
-    @user.has_role?(:admin) || @record.course.user_id == @user.id
+    # @user.has_role?(:admin) || @record.course.user_id == @user.id
   end
   
   def edit?
@@ -31,11 +31,11 @@ class LessonPolicy < ApplicationPolicy
   end
   
   def create?
-    @user.has_role?(:teacher) if @user.present?
+    @record.course.user_id == @user.id if @user.present?
   end
   
   def new?
-    @user.has_role?(:teacher) if @user.present?
+    @record.course.user_id == @user.id if @user.present?
   end
   
   def destroy?
