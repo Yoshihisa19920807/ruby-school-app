@@ -1,6 +1,8 @@
 class Course < ApplicationRecord
-  validates :title, :short_description, :level, :language, :price, presence: true
+  validates :title, :short_description, :level, :language, presence: true
   validates :description, presence: true, length: { :minimum => 5}
+  validates :price, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 2**32 }
+  
   # attr_accessor :slug
 
   extend FriendlyId
