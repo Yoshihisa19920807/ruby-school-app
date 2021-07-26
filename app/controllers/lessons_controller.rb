@@ -12,7 +12,10 @@ class LessonsController < ApplicationController
 
   # GET /lessons/new
   def new
+    # p "_____params"
+    # p params
     @lesson = Lesson.new
+    @course = Course.friendly.find(params[:course_id])
     authorize @lesson
   end
 
@@ -24,10 +27,11 @@ class LessonsController < ApplicationController
   # POST /lessons or /lessons.json
   def create
     @lesson = Lesson.new(lesson_params)
+    @course = Course.friendly.find(params[:course_id])
     authorize @lesson
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to @lesson, notice: "Lesson was successfully created." }
+        format.html { redirect_to [@course, @lesson], notice: "Lesson was successfully created." }
         format.json { render :show, status: :created, location: @lesson }
       else
         format.html { render :new, status: :unprocessable_entity }

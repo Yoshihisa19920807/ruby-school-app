@@ -1,5 +1,14 @@
-%h1 New lesson
+.card
+  .card-header
+    %h1 New lesson
+  .card-body  
+    = render 'form'
 
-= render 'form'
-
-= link_to 'Back', lessons_path
+.br
+  %br
+    :css
+      .br {
+        line-height: 50%;
+      }
+    
+= link_to 'Back', @course , class: 'btn btn-link'
