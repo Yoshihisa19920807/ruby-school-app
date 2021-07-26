@@ -29,7 +29,8 @@
     = course.created_at.strftime('%d-%b-%Y')
     .row
     .fa.fa-chalkboard-teacher
-    = course.user
+    -# = course.user
+    = link_to course.user, user_path(course.user)
   .card-footer
     - if policy(course).edit?
       = link_to 'Show', course, class: 'btn btn-sm btn-primary'
