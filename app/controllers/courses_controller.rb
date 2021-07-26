@@ -20,13 +20,14 @@ class CoursesController < ApplicationController
 
   # GET /courses/1 or /courses/1.json
   def show
+    authorize @course
     @lessons = @course.lessons
   end
 
   # GET /courses/new
   def new
-    authorize @course
     @course = Course.new
+    authorize @course
   end
 
   # GET /courses/1/edit
@@ -40,9 +41,10 @@ class CoursesController < ApplicationController
 
   # POST /courses or /courses.json
   def create
-    authorize @course
     @course = Course.new(course_params)
     @course.user = current_user
+    
+    authorize @course
 
     respond_to do |format|
       if @course.save
