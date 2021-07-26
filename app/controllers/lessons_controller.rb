@@ -41,7 +41,7 @@ class LessonsController < ApplicationController
     authorize @lesson
     respond_to do |format|
       if @lesson.update(lesson_params)
-        format.html { redirect_to @lesson, notice: "Lesson was successfully updated." }
+        format.html { redirect_to [@course, @lesson], notice: "Lesson was successfully updated." }
         format.json { render :show, status: :ok, location: @lesson }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -64,6 +64,7 @@ class LessonsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
       @lesson = Lesson.friendly.find(params[:id])
+      @course = @lesson.course
     end
 
     # Only allow a list of trusted parameters through.

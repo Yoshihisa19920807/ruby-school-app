@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', @lesson, class: 'btn btn-secondary'
+= link_to 'Show', [@course, @lesson], class: 'btn btn-secondary'
 \|
-= link_to 'Lessons', lessons_path, class: 'btn btn-primary'
+= link_to 'Lessons', course_lessons_path, class: 'btn btn-primary'

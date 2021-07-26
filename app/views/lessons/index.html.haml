@@ -4,6 +4,7 @@
   %thead
     %tr
       %th Title
+      %th Teacher
       %th Content
       %th Course
       %th
@@ -14,11 +15,13 @@
     - @lessons.each do |lesson|
       %tr
         %td= lesson.title
+        %td= lesson.course.user.email
         %td= lesson.content
         %td= lesson.course
-        %td= link_to 'Show', lesson
-        %td= link_to 'Edit', edit_lesson_path(lesson)
-        %td= link_to 'Destroy', lesson, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Show', [lesson.course, lesson]
+        -#%td= link_to 'Show', course_lesson_path(lesson.course, lesson)
+        %td= link_to 'Edit', [:edit, lesson.course, lesson]
+        %td= link_to 'Destroy', [lesson.course, lesson], method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
