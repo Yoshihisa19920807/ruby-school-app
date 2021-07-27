@@ -37,6 +37,7 @@ gem "rolify"
 gem 'ransack'
 gem "pundit"
 gem 'exception_notification'
+# gem 'rmagick'
 # # 最下部に配置
 # gem 'font-awesome-sass'
 

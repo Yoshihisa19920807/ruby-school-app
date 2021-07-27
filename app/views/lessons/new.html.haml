@@ -1,7 +1,16 @@
+=link_to "Courses", courses_path
+\/
+=link_to @course.title, course_path(@course)
+\/
+New Lesson
+%hr
+
 .card
   .card-header
-    %h1 New lesson
-  .card-body  
+    %h3
+      .far.fa-plus-square
+      New Lesson
+  .card-body
     = render 'form'
   // .br
   //   %br
@@ -9,5 +18,5 @@
   //       .br {
   //         line-height: 50%;
   //       }
-  .card-footer  
+  .card-footer
     = link_to 'Back', @course, class: 'btn btn-sm btn-link'
