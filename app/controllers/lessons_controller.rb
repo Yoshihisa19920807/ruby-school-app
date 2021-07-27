@@ -9,6 +9,7 @@ class LessonsController < ApplicationController
 
   # GET /lessons/1 or /lessons/1.json
   def show
+    # raise "This is an exception"
   end
 
   # GET /lessons/new

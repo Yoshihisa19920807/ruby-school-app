@@ -119,6 +119,7 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.hosts << "54.248.194.243"
+  # config.hosts << "localhost"
   config.action_mailer.default_url_options = { host: '54.248.194.243' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
@@ -137,6 +138,7 @@ Rails.application.configure do
       # deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
       email_prefix: '[PREFIX] ',
       sender_address: %{"notifier" <notifier@example.com>},
-      exception_recipients: %w{exceptions@example.com}
+      # ↓email address to send error message
+      exception_recipients: %w{yoshi19920807@gmail.com}
     }
 end
