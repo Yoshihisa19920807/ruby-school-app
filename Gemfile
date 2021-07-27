@@ -40,6 +40,7 @@ gem 'exception_notification'
 # gem 'rmagick'
 # # 最下部に配置
 # gem 'font-awesome-sass'
+gem 'pagy'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

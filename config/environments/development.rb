@@ -89,12 +89,12 @@ Rails.application.configure do
     :password => "wbzqxbstvmfairbc",
     :authentication => 'login'
   }
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-    email: {
-      # deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
-      email_prefix: '[PREFIX] ',
-      sender_address: %{"notifier" <notifier@example.com>},
-      # ↓email address to send error message
-      exception_recipients: %w{yoshi19920807@gmail.com}
-    }
+  # Rails.application.config.middleware.use ExceptionNotification::Rack,
+  #   email: {
+  #     # deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+  #     email_prefix: '[PREFIX] ',
+  #     sender_address: %{"notifier" <notifier@example.com>},
+  #     # ↓email address to send error message
+  #     exception_recipients: %w{yoshi19920807@gmail.com}
+  #   }
 end

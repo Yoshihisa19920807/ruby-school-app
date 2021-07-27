@@ -14,7 +14,9 @@ class CoursesController < ApplicationController
 
     # p "@courses_ransack"
     # p @courses_ransack
-    @courses = @courses_ransack.result.includes(:user)
+    # @courses = @courses_ransack.result.includes(:user)
+    @pagy, @courses = pagy(@courses_ransack.result.includes(:user))
+    # @activities = PublicActivity::Activity.all
     # p "@courses"
     # p @courses
   end
