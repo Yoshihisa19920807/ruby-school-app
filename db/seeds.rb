@@ -1,4 +1,12 @@
-User.create!(email: 'admin@example.com', password: 'admin@example.com', password_confirmation: 'admin@example.com')
+# User.create!(email: 'admin@example.com', password: 'admin@example.com', password_confirmation: 'admin@example.com')
+PublicActivity.enabled = false
+user = User.new(
+  email: 'admin@example.com',
+  password: 'admin@example.com',
+  password_confirmation: 'admin@example.com'
+)
+user.skip_confirmation!
+user.save!
 
 30.times do
   Course.create!([{

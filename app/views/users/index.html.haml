@@ -5,9 +5,9 @@
       = @users.count
 %p
 
-.card-group
-  - @users.each do |user|
-    = render 'users/user', user: user
+-# .card-group
+-#   - @users.each do |user|
+-#     = render 'users/user', user: user
 
 %br
 .form-inline
@@ -44,14 +44,24 @@
       %th= 'last_sign_in_at'.humanize
       %th= 'current_sign_in_ip'.humanize
       %th= 'last_sign_in_ip'.humanize
+      %th Confirmed email?
+      %th Roles
   %tbody
     - @users.each do |user|
       %tr
         %td= user.id
-        %td= link_to user.email, user_path(user) 
+        %td= link_to user.email, user_path(user)
         %td= user.created_at
         %td= user.sign_in_count
         %td= user.current_sign_in_at
         %td= user.last_sign_in_at
         %td= user.current_sign_in_ip
         %td= user.last_sign_in_ip
+        %td= user.confirmed? ? "Yes" : "No"
+        %td
+          - user.roles.each do |role|
+            .badge.bg-info
+              = role.name
+          - if policy(user).edit?
+            .mt-1
+            = link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning'
