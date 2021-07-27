@@ -127,8 +127,16 @@ Rails.application.configure do
     :address => "smtp.gmail.com",
     :port => 587,
     :domain => 'smtp.gmail.com',
-    :user_name => "yoshi19920807@gmail.com", 
-    :password => "wbzqxbstvmfairbc", 
+    :user_name => "yoshi19920807@gmail.com",
+    :password => "wbzqxbstvmfairbc",
     :authentication => 'login'
-}
+  }
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+      # deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+      email_prefix: '[PREFIX] ',
+      sender_address: %{"notifier" <notifier@example.com>},
+      exception_recipients: %w{exceptions@example.com}
+    }
 end
