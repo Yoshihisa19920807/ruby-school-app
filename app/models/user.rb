@@ -10,7 +10,7 @@ class User < ApplicationRecord
   def to_s
     email
   end
-  
+
   def online?
     # 2.minutes.ago: current time - 2 minutes
     updated_at > 2.minutes.ago
@@ -18,9 +18,9 @@ class User < ApplicationRecord
 
   extend FriendlyId
   friendly_id :email, use: :slugged
-  
+
   after_create :assign_default_role
-  
+
   def assign_default_role
     # if this is the first user
     if User.count == 1
@@ -38,8 +38,7 @@ class User < ApplicationRecord
   private
 
   def must_have_a_role
-    # p "____roles"
-    # p roles
+    # roles is equal to self.roles
     unless roles.any?
       errors.add(:roles, "must have at least one role")
     end
