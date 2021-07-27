@@ -36,5 +36,14 @@
         .col-md-4
           = render 'courses/course', course: course
           %p
+    %hr
+    -# != pagy_nav(@pagy)
+    != pagy_bootstrap_nav(@pagy)
+    -# != pagy_bootstrap_nav_js(@pagy)
+    -# != pagy_bootstrap_combo_nav_js(@pagy)
+
+
+-# = p @activities
+
 %br
 
