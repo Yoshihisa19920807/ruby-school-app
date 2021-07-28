@@ -23,11 +23,11 @@ class EnrollmentPolicy < ApplicationPolicy
     # p "____@record"
     # p @record
     
-    @user.has_role?(:admin) || @record.course.user_id == @user.id
+    @user.has_role?(:admin) || @record.course.user_id == @user.id if @user.present?
   end
   
   def update?
-    @user.has_role?(:admin) || @record.course.user_id == @user.id
+    @user.has_role?(:admin) || @record.course.user_id == @user.id if @user.present?
   end
   
   def create?
