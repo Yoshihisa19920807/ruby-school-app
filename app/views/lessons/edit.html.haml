@@ -1,8 +1,19 @@
+- content_for :title do
+  Coursego
+  \|
+  Courses
+  \|
+  = @course.title
+  \|
+  Editing Lesson:
+  = @lesson.title
+
 =link_to "Courses", courses_path
 \/
 =link_to @course.title, course_path(@course)
 \/
-Edit Lesson
+Edit Lesson: 
+= @lesson.title
 %hr
 
 .card
