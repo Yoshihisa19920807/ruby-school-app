@@ -5,15 +5,20 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments or /enrollments.json
   def index
     @enrollments = Enrollment.all
+    # authorizeするオブジェクトのクラスモデルのポリシー（※コントローラ名と一致する必要あり。一致しない場合はapplication__olicyに飛ばされる）を参照する。この場合はenrollment_policy。
+    authorize @enrollments  
   end
 
   # GET /enrollments/1 or /enrollments/1.json
   def show
+    authorize @enrollment
   end
 
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
+    @enrollment.course = @course
+    # authorize @enrollment
   end
 
   # GET /enrollments/1/edit
@@ -38,6 +43,7 @@ class EnrollmentsController < ApplicationController
           format.json { render :show, status: :created, location: @enrollment }
         else
           p "save_enrollment_failed___"
+          p @enrollment.errors
           flash.now[:alert] = "The process wasn't done properly."
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @enrollment.errors, status: :unprocessable_entity }

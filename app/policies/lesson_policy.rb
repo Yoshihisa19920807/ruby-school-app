@@ -6,7 +6,8 @@ class LessonPolicy < ApplicationPolicy
   end
   
   def show?
-    # @user.has_role?(:admin) || @record.course.user_id == @user.id
+    p "lesson_show?"
+    @user.has_role?(:admin) || @record.course.user_id == @user.id || @record.course.bought?(@user)
   end
   
   def edit?
@@ -35,6 +36,8 @@ class LessonPolicy < ApplicationPolicy
   end
   
   def new?
+    p "lessons_new_____"
+    p @record
     @record.course.user_id == @user.id if @user.present?
   end
   

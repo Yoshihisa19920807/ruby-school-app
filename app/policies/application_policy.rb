@@ -10,6 +10,8 @@ class ApplicationPolicy
   end
 
   def index?
+    
+    p "application_policy"
     false
   end
 
