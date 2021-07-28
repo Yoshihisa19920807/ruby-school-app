@@ -1,3 +1,8 @@
+- content_for :title do
+  Coursego
+  \|
+  Activities
+
 %h3
   .text-center
     Activity
@@ -12,6 +17,23 @@
       = activity.trackable_type
       = activity.trackable_id
       -# link_to 表示名, パス
-      = link_to activity.trackable, activity.trackable
+      // = link_to activity.trackable, activity.trackable
+      - if activity.trackable_type == "Lesson"
+        - if Lesson.where(id: activity.trackable_id).any?
+          = link_to activity.trackable, course_lesson_path(activity.trackable.course, activity.trackable)
+        - else
+          that was deleted
+        // - elsif activity.trackable_type == "Comment"
+        //   - if Comment.where(id: activity.trackable_id).any?
+        //     = link_to activity.trackable.content, course_lesson_path(activity.trackable.lesson.course, activity.trackable.lesson)
+        //   - else
+        //     that was deleted
+      - elsif activity.trackable_type == "Course"
+        - if Course.where(id: activity.trackable_id).any?
+          = link_to activity.trackable, activity.trackable
+        - else
+          that was deleted
+      - else
+        = link_to activity.trackable, activity.trackable
       = activity.owner
       = activity.key

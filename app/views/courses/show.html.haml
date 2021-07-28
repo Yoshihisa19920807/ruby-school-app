@@ -1,3 +1,11 @@
+- content_for :title do
+  Coursego
+  \|
+  Courses
+  \|
+  Course Detail:
+  = @course.title
+
 = link_to 'Courses', courses_path
 \/
 = link_to @course.title, course_path(@course)
@@ -5,13 +13,13 @@
 %hr
 
 .row
-	.col-lg-6
-		= render 'courses/course', course: @course
-	.col-lg-6
-		- if policy(@course).new?
-			.d-grid
-				= link_to 'Add lesson', new_course_lesson_path(@course, course_id: @course.id), class: 'btn btn-primary btn-sm btn-block'
-		%hr
-		- @lessons.each do |lesson|
-			= render 'lessons/lesson', lesson: lesson
-			%hr
+  .col-lg-6
+    = render 'courses/course', course: @course
+  .col-lg-6
+    - if policy(@course).new?
+      .d-grid
+        = link_to 'Add lesson', new_course_lesson_path(@course, course_id: @course.id), class: 'btn btn-primary btn-sm btn-block'
+    %hr
+    - @lessons.each do |lesson|
+      = render 'lessons/lesson', lesson: lesson
+      %hr
