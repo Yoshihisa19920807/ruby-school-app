@@ -7,6 +7,7 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   belongs_to :user
   has_many :enrollments
+  has_rich_text :description
 
   extend FriendlyId
   friendly_id :title, use: [:slugged]
@@ -41,8 +42,9 @@ class Course < ApplicationRecord
   def to_s
     title
   end
+  
+  def bought? user
+    self.enrollments.where(user_id: user.id).any?
+  end
 
-  belongs_to :user
-  has_many :lessons, dependent: :destroy
-  has_rich_text :description
 end
