@@ -4,6 +4,9 @@ class Course < ApplicationRecord
   validates :price, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 2**32 }
   
   # attr_accessor :slug
+  has_many :lessons, dependent: :destroy
+  belongs_to :user
+  has_many :enrollments
 
   extend FriendlyId
   friendly_id :title, use: [:slugged]
