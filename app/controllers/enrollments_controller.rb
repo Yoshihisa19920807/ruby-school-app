@@ -1,5 +1,6 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ new create ]
 
   # GET /enrollments or /enrollments.json
   def index
@@ -21,17 +22,34 @@ class EnrollmentsController < ApplicationController
 
   # POST /enrollments or /enrollments.json
   def create
-    @enrollment = Enrollment.new(enrollment_params)
-
-    respond_to do |format|
-      if @enrollment.save
-        format.html { redirect_to @enrollment, notice: "Enrollment was successfully created." }
-        format.json { render :show, status: :created, location: @enrollment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+    
+    if @course.price > 0
+      flash.now[:alert] = "This course is currently unavailable."
+      render :new
+      
+      # flash[:alert] = "You can not access paid courses yet."
+      # redirect_to new_course_enrollment_path(@course)
+    else
+      @enrollment = Enrollment.new(course: @course, user: current_user, price: @course.price)
+      respond_to do |format|
+        if @enrollment.save
+          p "save_enrollment_succeeded___"
+          format.html { redirect_to @course, notice: "Enrollment was successfully created." }
+          format.json { render :show, status: :created, location: @enrollment }
+        else
+          p "save_enrollment_failed___"
+          flash.now[:alert] = "The process wasn't done properly."
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+        end
       end
+      
+      
+      # # @course = Course.friendly.find(params[:course_id])
+      # @enrollment = Enrollment.create(course: @course, user: current_user, price: @course.price)
+      # redirect_to course_path(@course)
     end
+    
   end
 
   # PATCH/PUT /enrollments/1 or /enrollments/1.json
@@ -60,6 +78,10 @@ class EnrollmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_enrollment
       @enrollment = Enrollment.find(params[:id])
+    end
+
+    def set_course
+      @course = Course.friendly.find(params[:course_id])
     end
 
     # Only allow a list of trusted parameters through.

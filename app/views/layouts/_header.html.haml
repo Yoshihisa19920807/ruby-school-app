@@ -19,9 +19,9 @@
             .fa.fa-plus
             New Course
         %li.nav-item{class: "#{'active fw-bold' if current_page?(enrollments_path)}"}
-          = link_to new_enrollment_path, class: 'nav-link' do
+          = link_to enrollments_path, class: 'nav-link' do
             .fas.fa-sign-in-alt
-            Enroll
+            Enrollments
         %li.nav-item{class: "#{'active fw-bold' if current_page?(users_path)}"}
           = link_to users_path, class: 'nav-link' do
             .fa.fa-users

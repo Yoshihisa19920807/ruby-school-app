@@ -1,8 +1,15 @@
 .card
   .card-header
-    New Enrollment
+    Join the course:
+    %br
+    %h3
+      .fas.fa-graduation-cap
+      = @course.title
   .card-body
-    = render 'enrollments/form'
+    // = render 'enrollments/form', course: @course
+    = form_with url: course_enrollments_path(@course, method: :post) do |f|
+      = submit_tag "pay #{number_to_currency(@course.price)}", class:'btn btn-success text-light'
+
   .card-footer
     = link_to 'Back', enrollments_path
 

@@ -11,7 +11,26 @@
     .text-center
       -# .fas.fa-dollar-sign
       -# = course.price
-      = number_to_currency(course.price)
+      // = number_to_currency(course.price)
+      = enrollment_button(course)
+      // // moved to enrollment_button method in course helper
+      // - if current_user
+      //   - if course.user == current_user
+      //     = link_to "You created this course. View analytics", course_path(course)
+      //   - elsif course.enrollments.where(user: current_user).any?
+      //     = link_to "You bought this course. Keep learning", course_path(course)
+      //   - elsif course.price > 0
+      //     = link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-success text-light'
+      //   - else
+      //     = link_to "Price: Free", new_course_enrollment_path(course), class: 'btn btn-success text-light'
+      // - else
+      //   - unless current_page?(course_path(course))
+      //     = link_to "Check the price", course_path(course), class: "btn btn-md btn-success text-light"
+      //   - else 
+      //     = number_to_currency(course.price)
+      // // %br
+      // // .d-grid
+      // //   = link_to "Join the course", new_enrollment_path(course_id: @course), class: 'btn btn-sm btn-success'
   .card-footer
     .fas.fa-book
     = course.lessons.count
