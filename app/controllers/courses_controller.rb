@@ -54,6 +54,7 @@ class CoursesController < ApplicationController
         format.html { redirect_to @course, notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
       else
+        flash.now[:alert] = "The process wasn't done properly."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
