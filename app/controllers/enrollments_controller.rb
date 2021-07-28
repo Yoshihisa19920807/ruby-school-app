@@ -18,7 +18,7 @@ class EnrollmentsController < ApplicationController
   def new
     @enrollment = Enrollment.new
     @enrollment.course = @course
-    authorize @enrollment
+    # authorize @enrollment
   end
 
   # GET /enrollments/1/edit
@@ -43,6 +43,7 @@ class EnrollmentsController < ApplicationController
           format.json { render :show, status: :created, location: @enrollment }
         else
           p "save_enrollment_failed___"
+          p @enrollment.errors
           flash.now[:alert] = "The process wasn't done properly."
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @enrollment.errors, status: :unprocessable_entity }
