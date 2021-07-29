@@ -6,35 +6,7 @@
   Enrollment:
   =@enrollment.to_s
 
-%p#notice= notice
+-# -# notification
+-# %p#notice= notice
 
-// .card
-//   .card-header
-//     Enrollment
-//   .card-body
-//     = render 'enrollments/form'
-//   .card-footer
-//     = link_to 'Edit', edit_enrollment_path(@enrollment)
-//     \|
-//     = link_to 'Back', enrollments_path
-
-
-%p
-  %b User:
-  = @enrollment.user
-%p
-  %b Course:
-  = @enrollment.course
-%p
-  %b Rating:
-  = @enrollment.rating
-%p
-  %b Price:
-  = @enrollment.price
-%p
-  %b Review:
-  = @enrollment.review
-
-= link_to 'Edit', edit_enrollment_path(@enrollment)
-\|
-= link_to 'Back', enrollments_path
+= render 'enrollments/enrollment', enrollment: @enrollment

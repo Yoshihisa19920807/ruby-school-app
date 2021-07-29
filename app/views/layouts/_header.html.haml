@@ -51,7 +51,10 @@
             %b= current_user.email
             -#Dropdown
           .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
-            = link_to edit_user_registration_path, class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do
+            = link_to user_path(current_user), class: "dropdown-item" do
+              .fa.fa-user
+              %b My profile
+            = link_to edit_user_registration_path, class: "dropdown-item" do
               .fa.fa-cog
               %b Account settings
             = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
