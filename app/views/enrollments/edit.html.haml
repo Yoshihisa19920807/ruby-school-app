@@ -17,10 +17,10 @@
 .card
   .card-header
     .far.fa-edit-square
-    Edit Enrollment
+    Review
   .card-body
     = render 'enrollments/form'
   .card-footer
-    = link_to 'Edit', edit_enrollment_path(@enrollment)
+    = link_to 'Show Review', @enrollment
     \|
-    = link_to 'Back', enrollments_path
+    = link_to 'Back to course', course_path(@enrollment.course) 

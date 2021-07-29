@@ -9,11 +9,34 @@
   %table.table.table-bordered.table-striped.table-sm
     %thead
       %tr
-        %th User
-        %th Course
-        %th Rating
-        %th Price
-        %th Review
+        %th
+          .user{style: "display:flex; align-items:center"}
+            .fa.fa-user
+            User
+        %th
+          .course{style: "display:flex; align-items:center"}
+            .fa.fa-graduation-cap
+            Course
+        %th{style: "white-space:nowrap"}
+          .enrollment_date{style: "display:flex; align-items:center"}
+            .fa.fa-calendar-day
+            Enrollment Date
+        %th
+          .review{style: "display:flex; align-items:center"}
+            .fa.fa-star
+            Rating
+        %th
+          .price{style: "display:flex; align-items:center"}
+            .fa.fa-dollar-sign
+            Price
+        %th
+          .review{style: "display:flex; align-items:center"}
+            .fa.fa-comment
+            Review
+        %th
+          .updated_at{style: "display:flex; align-items:center"}
+            .fa.fa-calendar-check
+            Reviewed at
         %th
         %th
         %th
@@ -23,9 +46,11 @@
         %tr
           %td= enrollment.user
           %td= enrollment.course
+          %td= enrollment.created_at
           %td= enrollment.rating
           %td= enrollment.price
           %td= enrollment.review
+          %td= enrollment.updated_at
           %td= link_to 'Show', enrollment
           %td= link_to 'Edit', edit_enrollment_path(enrollment)
           %td= link_to 'Destroy', enrollment, method: :delete, data: { confirm: 'Are you sure?' }

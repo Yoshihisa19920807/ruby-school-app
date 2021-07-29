@@ -6,9 +6,10 @@
   .form-inputs
     // = f.association :user
     // = f.association :course
-    = f.input :rating
+    = f.input :rating, collection: 1..5
     // = f.input :price, :disabled => true, :input_html => { :value => @course.price }
-    = f.input :review
+    = f.rich_text_area :review
+    %small= f.error :review, class: 'text-danger'
 
   .form-actions
     = f.button :submit
