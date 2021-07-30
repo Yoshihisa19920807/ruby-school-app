@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :enrollments
   devise_for :users
   resources :courses do
+    get "purchased", "review_pending", "created", on: :collection
     resources :lessons
     resources :enrollments, only: [:new, :create]
   end

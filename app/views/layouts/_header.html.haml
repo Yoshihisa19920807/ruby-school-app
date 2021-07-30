@@ -14,7 +14,20 @@
           = link_to courses_path, class: 'nav-link' do
             .fa.fa-graduation-cap
             Courses
+        - if current_user.has_role?(:admin) || current_user.has_role?(:student)
+          %li.nav-item{class: "#{'active fw-bold' if current_page?(purchased_courses_path)}"}
+            = link_to purchased_courses_path, class: 'nav-link' do
+              .fa.fa-wallet
+              Purchased Courses
+          %li.nav-item{class: "#{'active fw-bold' if current_page?(review_pending_courses_path)}"}
+            = link_to review_pending_courses_path, class: 'nav-link' do
+              .fa.fa-comment-dots
+              Review Pending Courses
         - if current_user.has_role?(:admin) || current_user.has_role?(:teacher)
+          %li.nav-item{class: "#{'active fw-bold' if current_page?(created_courses_path)}"}
+            = link_to created_courses_path, class: 'nav-link' do
+              .fa.fa-hammer
+              Created Courses
           %li.nav-item{class: "#{'active fw-bold' if current_page?(new_course_path)}"}
             = link_to new_course_path, class: 'nav-link' do
               .fa.fa-plus

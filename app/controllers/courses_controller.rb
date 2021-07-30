@@ -12,13 +12,34 @@ class CoursesController < ApplicationController
     #   @courses = @q.result.includes(:user)
     # end
 
-    # p "@courses_ransack"
-    # p @courses_ransack
-    # @courses = @courses_ransack.result.includes(:user)
+    @ransack_path = courses_path
     @pagy, @courses = pagy(@courses_ransack.result.includes(:user))
     # @activities = PublicActivity::Activity.all
     # p "@courses"
     # p @courses
+  end
+
+  def purchased
+    @ransack_path = purchased_courses_path
+    @q = Course.includes(:enrollments).where(enrollments: {user: current_user}).ransack(params[:search_courses], search_key: :search_courses)
+    @pagy, @courses = pagy(@q.result.includes(:enrollments))
+    
+    render "index"
+  end
+
+  def review_pending
+    @ransack_path = purchased_courses_path
+    @q = Course.includes(:enrollments).where(enrollments: {user: current_user, rating: nil}).ransack(params[:search_courses], search_key: :search_courses)
+    @pagy, @courses = pagy(@q.result.includes(:enrollments))
+    render "index"
+  end
+
+  def created
+    p "created"
+    @ransack_path = created_courses_path
+    @q = Course.includes(:user).where(user: current_user).ransack(params[:search_courses], search_key: :search_courses)
+    @pagy, @courses = pagy(@q.result.includes(:user))
+    render "index"
   end
 
   # GET /courses/1 or /courses/1.json

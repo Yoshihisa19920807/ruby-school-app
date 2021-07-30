@@ -13,7 +13,7 @@
 .row
   .col-md-2
     -# = search_form_for @q do |f|
-    = search_form_for @courses_ransack, as: :search_courses, url: courses_path do |f|
+    = search_form_for @courses_ransack, as: :search_courses, url: @ransack_path do |f|
       = f.label :title
       = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm'
       -# -# alernative way for setting classes
@@ -34,7 +34,7 @@
       = f.submit
       .ml-2
       %br
-      = link_to 'refresh', courses_path
+      = link_to 'refresh', @ransack_path
   .col-md-10
     .row.row-cols-1.row-cols-md-3.g-4
       - @courses.each do |course|
