@@ -25,6 +25,7 @@ class CoursesController < ApplicationController
   def show
     p "course_show_"
     @lessons = @course.lessons
+    @enrollment = Enrollment.find_by(user_id: current_user.id, course_id: @course.id)
   end
 
   # GET /courses/new
