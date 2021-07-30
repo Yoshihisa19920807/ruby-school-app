@@ -10,9 +10,16 @@ class Enrollment < ApplicationRecord
   extend FriendlyId
   friendly_id :to_s, :use => [:slugged]
 
+  after_destroy :call_update_average_rate
+  after_update :call_update_average_rate
+
   def to_s
     p "user_id___"
     p user.slug
     user.to_s + " " + course.to_s
+  end
+
+  def call_update_average_rate
+    course.update_average_rate
   end
 end

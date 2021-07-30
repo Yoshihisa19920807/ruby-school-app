@@ -32,8 +32,14 @@
       // // .d-grid
       // //   = link_to "Join the course", new_enrollment_path(course_id: @course), class: 'btn btn-sm btn-success'
   .card-footer
-    .fas.fa-book
-    = course.lessons.count
+    .row
+      .col-6
+        .fas.fa-book
+        = course.lessons.count
+      .col-6
+        .text-end
+          .fas.fa-star
+          = course.average_rating
   .card-footer
     .row
       .col-6
