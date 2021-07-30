@@ -4,7 +4,17 @@ class EnrollmentsController < ApplicationController
 
   # GET /enrollments or /enrollments.json
   def index
-    @pagy, @enrollments = pagy(Enrollment.all)
+    @q = Enrollment.ransack(params[:q])
+    # p "_____@q"
+    # p @q.result.includes(:course, :user)
+    # @q.result.includes(:course, :user).each do |result|
+    #   p "___result"
+    #   p result
+    # end
+    @pagy, @enrollments =  pagy(@q.result.includes(:course, :user))
+    
+
+    # @pagy, @courses = pagy(@courses_ransack.result.includes(:user))
     # authorizeするオブジェクトのクラスモデルのポリシー（※コントローラ名と一致する必要あり。一致しない場合はapplication__olicyに飛ばされる）を参照する。この場合はenrollment_policy。
     authorize @enrollments
   end
@@ -83,7 +93,7 @@ class EnrollmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_enrollment
-      @enrollment = Enrollment.find(params[:id])
+      @enrollment = Enrollment.friendly.find(params[:id])
     end
 
     def set_course
