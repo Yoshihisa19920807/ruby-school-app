@@ -5,7 +5,7 @@ user = User.new(
   password_confirmation: 'admin@example.com'
 )
 user.skip_confirmation!
-user.save!
+user.save
 
 PublicActivity.enabled = false
 30.times do
