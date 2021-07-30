@@ -47,4 +47,10 @@ class Course < ApplicationRecord
     self.enrollments.where(user_id: user.id).any?
   end
 
+  def update_average_rate
+    if enrollments
+      self.update(average_rating: enrollments.average(:rating))
+    end
+  end
+
 end

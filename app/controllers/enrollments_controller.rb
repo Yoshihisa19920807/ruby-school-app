@@ -72,6 +72,7 @@ class EnrollmentsController < ApplicationController
   def update
     respond_to do |format|
       if @enrollment.update(enrollment_params)
+        # Course.friendly.find(@enrollment.course_id).update(average_rating: Enrollment.friendly.where(course: @enrollment.course).average(:rating))
         format.html { redirect_to @enrollment, notice: "Enrollment was successfully updated." }
         format.json { render :show, status: :ok, location: @enrollment }
       else
