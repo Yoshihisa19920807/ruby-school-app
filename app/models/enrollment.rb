@@ -1,6 +1,6 @@
 class Enrollment < ApplicationRecord
-  belongs_to :user
-  belongs_to :course
+  belongs_to :user, counter_cache: true
+  belongs_to :course, counter_cache: true
   # user_idとcopurse_idの組み合わせが重複するレコードの作成を禁止
   validates :user_id, uniqueness: { scope: :course_id }
   validates :rating, presence: true, on: :update

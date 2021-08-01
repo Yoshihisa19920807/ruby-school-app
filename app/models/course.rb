@@ -42,9 +42,9 @@ class Course < ApplicationRecord
   def to_s
     title
   end
-  
+
   def bought? user
-    self.enrollments.where(user_id: user.id).any?
+    self.enrollments.where(user: user).any?
   end
 
   def update_average_rate

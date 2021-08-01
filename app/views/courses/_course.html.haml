@@ -34,12 +34,16 @@
   .card-footer
     .row
       .col-6
-        .fas.fa-book
-        = course.lessons.count
+        .fas.fa-star
+        = course.average_rating
       .col-6
         .text-end
-          .fas.fa-star
-          = course.average_rating
+          .fas.fa-book
+          = course.lessons.count
+    .row
+      .col-12
+        Enrollment counts:
+        =course.enrollments_count
   .card-footer
     .row
       .col-6
