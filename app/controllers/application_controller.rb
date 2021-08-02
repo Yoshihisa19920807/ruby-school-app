@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :create_ransack_query
   after_action :update_user_status
+  before_action :set_current_user
 
   def create_ransack_query
     @courses_ransack = Course.ransack(params[:search_courses], search_key: :search_courses)
@@ -24,5 +25,10 @@ class ApplicationController < ActionController::Base
 
   def update_user_status
     current_user&.touch
+  end
+
+  protected
+  def set_current_user
+    Lesson.current_user = current_user # current_user method has been written in lib
   end
 end
