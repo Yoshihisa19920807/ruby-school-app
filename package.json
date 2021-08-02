@@ -10,6 +10,8 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.0",
     "bootstrap": "^5.0.2",
+    "chart.js": "^3.5.0",
+    "chartkick": "^4.0.5",
     "jquery": "^3.6.0",
     "masonry-layout": "^4.2.2",
     "popper.js": "^1.16.1",

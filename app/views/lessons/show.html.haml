@@ -30,8 +30,8 @@
         = number_to_percentage(@lesson.course.progress(current_user), precision: 0)
     - @lessons.each do |lesson|
       - if @lesson && lesson == @lesson
-        %li.list-group-item.list-group-item-success
+        %li.list-group-item.list-group-item-success.d-flex.align-items-center
           = render 'lessons/lesson_preview', lesson: lesson
       - else
-        %li.list-group-item
+        %li.list-group-item.d-flex.align-items-center
           = render 'lessons/lesson_preview', lesson: lesson
