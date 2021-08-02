@@ -24,5 +24,10 @@
       = render 'lessons/lesson', lesson: lesson
       %hr
     - if @enrollment and policy(@enrollment).edit?
-      .d-grid
-        = link_to 'Review this course', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
+      - if @enrollment.rating == nil
+        .d-grid
+          = link_to 'Review this course', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
+      - else
+        .d-grid
+          = link_to 'Thanks for the review! Your review is here', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
+

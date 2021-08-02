@@ -1,10 +1,19 @@
 - content_for :title do
   Coursego
   \|
-  Enrollments
+  -# Enrollments
+  = action_name.humanize
+  enrollments
 
 
-%h1 Listing enrollments
+-# %h1 Listing enrollments
+%h3
+  .text-center
+    = action_name.humanize
+    enrollments
+    .badge.bg-info
+      = @enrollments.count
+%p
 
 .row
   .col-md-2

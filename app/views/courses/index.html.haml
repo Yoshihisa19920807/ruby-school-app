@@ -1,11 +1,18 @@
 - content_for :title do
   Coursego
   \|
-  Courses
+  -# Courses
+  = action_name.humanize
+  courses
 
 %h3
   .text-center
-    Courses:
+    -# Courses:
+    .fa.fa-graduation-cap
+    -# - p "___action_name"
+    -# - p action_name.humanize
+    = action_name.humanize
+    courses
     .badge.bg-info
       = @courses.count
 %p
