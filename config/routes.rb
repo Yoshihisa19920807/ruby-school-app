@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/activity'
   get 'home/analytics'
+  get 'charts/users_per_day', to: 'charts#users_per_day'
+  get 'charts/enrollments_per_day', to: 'charts#enrollments_per_day'
+  get 'charts/courses_per_day', to: 'charts#courses_per_day'
   root 'home#index'
   # root "static_pages#landing_page"
   # get 'static_pages/landing_page'

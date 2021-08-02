@@ -10,13 +10,31 @@ class HomeController < ApplicationController
   
   # activity viewを表示時に読み込まれる
   def activity
-    @activities = PublicActivity::Activity.all
-    p "@activities.second.trackable"
-    p @activities.second.trackable
+    if current_user.has_role?(:admin)
+      # @activities = PublicActivity::Activity.all
+    else
+      redirect_to root_path, alert: "You are not authorized to perform this action"
+    end
   end
 
   def analytics
-    @enrollments = Enrollment.all
-
+    if current_user.has_role?(:admin)
+      # @enrollments = Enrollment.all
+    else
+      redirect_to root_path, alert: "You are not authorized to perform this action"
+    end
   end
+
+  # def users_per_day
+  #   render json: User.group_by_day(:created_at).count
+  # end
+
+  # def enrollments_per_day
+  #     render json: Enrollment.group_by_day(:created_at).count
+  # end
+
+  # def courses_per_day
+  #     render json: Course.group_by_day(:created_at).count
+  # end
+
 end
