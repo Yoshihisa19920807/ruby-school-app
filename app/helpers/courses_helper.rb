@@ -5,7 +5,9 @@ module CoursesHelper
         link_to "You created this course. View analytics", course_path(course)
       # elsif course.enrollments.where(user: current_user).any?
       elsif course.bought?(current_user)
-        link_to "You bought this course. Keep learning", course_path(course)
+        # link_to "You bought this course. Keep learning", course_path(course)
+        
+        link_to "Progress: #{number_to_percentage(course.progress(current_user), precision: 1 )}", course_path(course)
       elsif course.price > 0
         link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-success text-light'
       else

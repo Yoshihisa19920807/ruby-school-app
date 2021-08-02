@@ -19,6 +19,13 @@
     - if policy(@course).edit?
       .d-grid
         = link_to 'Add lesson', new_course_lesson_path(@course, course_id: @course.id), class: 'btn btn-primary btn-sm btn-block'
+    - else
+      .d-grid
+        .btn.btn-primary.btn-sm.btn-block
+          Lessons    
+    -# %hr
+    -#   Progress: 
+    -#   = number_to_percentage(@course.progress(current_user), precision: 1 )
     %hr
     - @lessons.each do |lesson|
       = render 'lessons/lesson', lesson: lesson

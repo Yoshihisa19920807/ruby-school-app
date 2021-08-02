@@ -5,6 +5,7 @@ class Course < ApplicationRecord
   
   # attr_accessor :slug
   has_many :lessons, dependent: :destroy
+  has_many :user_lessons, through: :lessons 
   belongs_to :user, counter_cache: true
   has_many :enrollments
   has_rich_text :description
@@ -53,6 +54,14 @@ class Course < ApplicationRecord
   def update_average_rate
     if enrollments
       self.update(average_rating: enrollments.average(:rating))
+    end
+  end
+
+  def progress user
+    if lessons_count !=0 
+      self.user_lessons.where(user: user).count.to_f/lessons_count.to_f*100
+    else 
+      0.0
     end
   end
 
