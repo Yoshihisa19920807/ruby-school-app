@@ -62,7 +62,7 @@
 -# if you use masonry
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
 .row.row-cols-1.row-cols-md-3.g-4
-  - @courses.each do | course |
+  - @popular_courses.each do | course |
     .col-md-4
       = render 'courses/course', course: course
     
@@ -72,7 +72,7 @@
 -# if you use masonry
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
 .row.row-cols-1.row-cols-md-3.g-4
-  - @courses.each do |course|
+  - @top_rated_courses.each do |course|
     .col-md-4
       = render 'courses/course', course: course
 

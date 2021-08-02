@@ -15,8 +15,11 @@ class Course < ApplicationRecord
   include PublicActivity::Model
   tracked
   tracked owner: Proc.new{ |controller, model| controller.current_user }
-  
 
+  scope :latest, -> { all.order(created_at: :desc).limit(3) }
+  scope :popular, -> { all.order(enrollments_count: :desc).limit(3) }
+  # scope :top_rated, -> { all.order(enrollments_count).limit(3) }
+  scope :top_rated,-> { all.order(average_rating: :desc).limit(3) }
   ## assign random id instead
   # friendly_id :generated_slug, use: :slugged
   # def generated_slug
