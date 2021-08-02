@@ -16,4 +16,22 @@
 
 %p#notice= notice
 
-= render 'lessons/lesson', lesson: @lesson
+.row
+  .col-lg-8
+    = render 'lessons/lesson', lesson: @lesson
+  .col-lg-4
+    %ul.list-group
+      %li.list-group-item
+        = link_to course_path(@lesson.course) do
+          .fa.fa-graduation-cap
+            = @lesson.course.title
+        .row
+        .fa.fa-spinner
+        = number_to_percentage(@lesson.course.progress(current_user), precision: 0)
+    - @lessons.each do |lesson|
+      - if @lesson && lesson == @lesson
+        %li.list-group-item.list-group-item-success.d-flex.align-items-center
+          = render 'lessons/lesson_preview', lesson: lesson
+      - else
+        %li.list-group-item.d-flex.align-items-center
+          = render 'lessons/lesson_preview', lesson: lesson

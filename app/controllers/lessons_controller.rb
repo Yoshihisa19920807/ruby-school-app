@@ -11,6 +11,7 @@ class LessonsController < ApplicationController
   def show
     authorize @lesson
     @lesson.view_lesson
+    @lessons = @lesson.course.lessons
     # raise "This is an exception"
   end
 
