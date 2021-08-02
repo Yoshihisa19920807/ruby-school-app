@@ -1,6 +1,8 @@
 class Lesson < ApplicationRecord
   belongs_to :course, counter_cache: true
-  has_many :user_lessons
+  # has_many :user_lessons, dependent: :destroy
+  # has_many :user_lessons, dependent: :destroy
+  has_many :user_lessons, dependent: :destroy
   extend FriendlyId
   friendly_id :title, use: :slugged
   validates :title, :content, :course, presence: true
@@ -17,10 +19,9 @@ class Lesson < ApplicationRecord
   end
 
   def view_lesson
-
     p "current_user"
     p current_user
     p self
-    UserLesson.create!(user: self.current_user, lesson: self)
+    UserLesson.create(user: self.current_user, lesson: self)
   end
 end

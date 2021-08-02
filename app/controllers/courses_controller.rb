@@ -101,10 +101,16 @@ class CoursesController < ApplicationController
   # DELETE /courses/1 or /courses/1.json
   def destroy
     authorize @course
-    @course.destroy
-    respond_to do |format|
-      format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
-      format.json { head :no_content }
+    if @course.destroy
+      respond_to do |format|
+        format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @course, alert: "Course wasn't destroyed" }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
     end
   end
 
