@@ -19,6 +19,7 @@ require("stylesheets/application.scss")
 import "@fortawesome/fontawesome-free/css/all"
 require("trix")
 require("@rails/actiontext")
+import "chartkick/chart.js"
 
 // 引数は指定しなくてよい
 // import Masonry from 'masonry-layout';

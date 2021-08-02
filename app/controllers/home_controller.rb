@@ -14,4 +14,9 @@ class HomeController < ApplicationController
     p "@activities.second.trackable"
     p @activities.second.trackable
   end
+
+  def analytics
+    @enrollments = Enrollment.all
+
+  end
 end

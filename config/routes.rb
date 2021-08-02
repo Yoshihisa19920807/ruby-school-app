@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   get 'home/index'
   get 'home/activity'
+  get 'home/analytics'
   root 'home#index'
   # root "static_pages#landing_page"
   # get 'static_pages/landing_page'

@@ -41,6 +41,8 @@ gem 'exception_notification'
 # # 最下部に配置
 # gem 'font-awesome-sass'
 gem 'pagy'
+gem "chartkick"
+gem 'groupdate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

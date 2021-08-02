@@ -1,0 +1,14 @@
+- content_for :title do
+  Coursego
+  \|
+  Analyticss
+
+%h3
+  Enrollments: 
+  = area_chart Enrollment.all.group_by_day(:created_at).count
+
+  Courses:
+  = area_chart Course.all.group_by_day(:created_at).count
+
+  Users: 
+  = line_chart User.all.group_by_day(:created_at).count
