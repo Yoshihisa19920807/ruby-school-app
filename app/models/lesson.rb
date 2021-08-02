@@ -1,5 +1,5 @@
 class Lesson < ApplicationRecord
-  belongs_to :course
+  belongs_to :course, counter_cache: true
   extend FriendlyId
   friendly_id :title, use: :slugged
   validates :title, :content, :course, presence: true

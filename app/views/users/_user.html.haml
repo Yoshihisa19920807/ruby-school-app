@@ -21,6 +21,12 @@
     .row
     = 'last_sign_in_ip'.humanize + ":"
     = user.last_sign_in_ip
+    .row
+    = 'enrollments_count'.humanize+ ":"
+    = user.enrollments_count
+    .row
+    = 'courses_created'.humanize+ ":"
+    = user.courses_count
     
     .card-footer
       Confirmed email?
