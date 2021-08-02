@@ -5,10 +5,10 @@
 
 %h3
   Enrollments: 
-  = area_chart Enrollment.all.group_by_day(:created_at).count
+  = area_chart charts_enrollments_per_day_path
 
   Courses:
-  = area_chart Course.all.group_by_day(:created_at).count
+  = area_chart charts_courses_per_day_path
 
   Users: 
-  = line_chart User.all.group_by_day(:created_at).count
+  = line_chart charts_users_per_day_path
