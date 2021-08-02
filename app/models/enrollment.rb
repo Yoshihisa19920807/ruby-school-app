@@ -6,6 +6,7 @@ class Enrollment < ApplicationRecord
   validates :rating, presence: true, on: :update
   validates :review, presence: true, on: :update
   has_rich_text :review
+  scope :reviewed, -> { where.not(rating: nil)}
 
   extend FriendlyId
   friendly_id :to_s, :use => [:slugged]
@@ -22,4 +23,5 @@ class Enrollment < ApplicationRecord
   def call_update_average_rate
     course.update_average_rate
   end
+
 end

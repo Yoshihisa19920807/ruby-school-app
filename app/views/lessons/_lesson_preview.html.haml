@@ -1,0 +1,7 @@
+.card
+  .card-header
+    - if UserLesson.where(user: current_user, lesson: lesson).present?
+      .far.fa-check-square
+    - else
+      .far.fa-square
+    = link_to lesson.title, course_lesson_path(@course, lesson)

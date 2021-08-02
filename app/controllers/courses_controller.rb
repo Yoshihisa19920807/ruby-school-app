@@ -47,6 +47,7 @@ class CoursesController < ApplicationController
     p "course_show_"
     @pagy, @lessons = pagy(@course.lessons, items: 5)
     @enrollment = Enrollment.find_by(user_id: current_user.id, course_id: @course.id)
+    @enrollments_with_review = @course.enrollments.reviewed
   end
 
   # GET /courses/new
