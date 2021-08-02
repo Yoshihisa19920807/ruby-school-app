@@ -37,11 +37,19 @@
       = f.search_field :price_lteq, class: 'form-control form-control-sm'
       = f.label :teacher
       = f.search_field :user_email_cont, placeholder: 'Teacher', class: 'form-control form-control-sm'
-      %br
+      .row.mt-3
       = f.submit
-      .ml-2
-      %br
-      = link_to 'refresh', @ransack_path
+      %hr
+      .row
+      = sort_link(@courses_ransack, :price, "Sort by Price", { default_order: :desc }, { class: "" })
+      .row
+      = sort_link(@courses_ransack, :enrollments_count, "Sort by The Number of Students", { default_order: :desc }, { class: "" })
+      .row
+      = sort_link(@courses_ransack, :average_rating, "Sort by Average Rating", { default_order: :desc }, { class: "" })
+      %hr
+      .row
+      = link_to 'refresh', @ransack_path, class: "mb-2"
+      %hr
   .col-md-10
     .row.row-cols-1.row-cols-md-3.g-4
       - @courses.each do |course|
