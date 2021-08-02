@@ -5,7 +5,7 @@ class Course < ApplicationRecord
   
   # attr_accessor :slug
   has_many :lessons, dependent: :destroy
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :enrollments
   has_rich_text :description
 

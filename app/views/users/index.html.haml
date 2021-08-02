@@ -50,6 +50,8 @@
         %th= 'last_sign_in_at'.humanize
         %th= 'current_sign_in_ip'.humanize
         %th= 'last_sign_in_ip'.humanize
+        %th= 'enrollments_count'.humanize
+        %th= 'courses_created'.humanize
         %th Confirmed email?
         %th Roles
     %tbody
@@ -63,6 +65,8 @@
           %td= user.last_sign_in_at
           %td= user.current_sign_in_ip
           %td= user.last_sign_in_ip
+          %td= user.enrollments_count
+          %td= user.courses_count
           %td= user.confirmed? ? "Yes" : "No"
           %td
             - user.roles.each do |role|
