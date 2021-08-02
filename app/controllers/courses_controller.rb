@@ -45,7 +45,7 @@ class CoursesController < ApplicationController
   # GET /courses/1 or /courses/1.json
   def show
     p "course_show_"
-    @lessons = @course.lessons
+    @pagy, @lessons = pagy(@course.lessons, items: 5)
     @enrollment = Enrollment.find_by(user_id: current_user.id, course_id: @course.id)
   end
 

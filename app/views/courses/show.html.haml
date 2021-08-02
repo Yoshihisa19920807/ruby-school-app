@@ -23,6 +23,7 @@
     - @lessons.each do |lesson|
       = render 'lessons/lesson', lesson: lesson
       %hr
+    != pagy_bootstrap_nav(@pagy)
     - if @enrollment and policy(@enrollment).edit?
       - if @enrollment.rating == nil
         .d-grid

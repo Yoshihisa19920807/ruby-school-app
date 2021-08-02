@@ -7,6 +7,14 @@ class User < ApplicationRecord
 
   has_many :courses
   has_many :enrollments
+  has_many :user_lessons
+
+  validate :must_have_a_role, on: :update
+
+  extend FriendlyId
+  friendly_id :email, use: :slugged
+
+  after_create :assign_default_role
 
   def to_s
     email
@@ -16,11 +24,6 @@ class User < ApplicationRecord
     # 2.minutes.ago: current time - 2 minutes
     updated_at > 2.minutes.ago
   end
-
-  extend FriendlyId
-  friendly_id :email, use: :slugged
-
-  after_create :assign_default_role
 
   def assign_default_role
     # if this is the first user
@@ -33,8 +36,6 @@ class User < ApplicationRecord
       self.add_role(:teacher) #if you want any user to be able to create own courses
     end
   end
-  
-  validate :must_have_a_role, on: :update
 
   private
 
