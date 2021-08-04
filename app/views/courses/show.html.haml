@@ -81,10 +81,17 @@
       .fa.fa-tasks
         = number_to_percentage(@course.progress(current_user), precision: 0)
     .mt-2    
-    %ul.list-group
+    .list-group.lesson-sortable
       - @lessons.each do |lesson|
-        %li.list-group-item
-          = render 'lessons/lesson_preview', lesson: lesson
+        -# %li.list-group-item
+        -#   = render 'lessons/lesson_preview', lesson: lesson
+        - p "___lesson.class.name.underscore"
+        - p lesson.class.name.underscore
+        = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson)} do
+          .list-group-item
+            .fa.fa-sort.all-scroll{:style => "cursor: grab;"}
+            = render 'lessons/lesson_preview', lesson: lesson
+    %p
     - if policy(@course).edit?
       .mt-3
       .d-grid

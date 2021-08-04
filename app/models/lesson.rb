@@ -21,6 +21,14 @@ class Lesson < ApplicationRecord
     title
   end
 
+  def prev
+    course.lessons.where("row_order < ?", row_order).order(:row_order).last
+  end
+
+  def next
+    course.lessons.where("row_order > ?", row_order).order(:row_order).first
+  end
+
   def view_lesson
     # UserLesson.create(user: self.current_user, lesson: self)
     user_lessons = UserLesson.where(user: self.current_user, lesson: self)
