@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :courses do
     get "purchased", "review_pending", "created", "unapproved", on: :collection
-    resources :lessons
+    resources :lessons do
+      put :sort
+    end
     # collection: without args
     resources :enrollments, only: [:new, :create]
     # member: with args

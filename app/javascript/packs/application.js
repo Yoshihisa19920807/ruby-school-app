@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
+// require("@rails/ujs").start()
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
@@ -20,7 +21,51 @@ import "@fortawesome/fontawesome-free/css/all"
 require("trix")
 require("@rails/actiontext")
 import "chartkick/chart.js"
+require("jquery")
+require("jquery-ui-dist/jquery-ui");
 
-// 引数は指定しなくてよい
-// import Masonry from 'masonry-layout';
-import 'masonry-layout';
+
+// // 引数は指定しなくてよい
+// // import Masonry from 'masonry-layout';
+// import 'masonry-layout';
+
+// $( function() {
+//   $( ".lesson-sortable" ).sortable();
+//   $( ".lesson-sortable" ).disableSelection();
+// } );
+
+$(document).on('turbolinks:load', function(){
+  $('.lesson-sortable').sortable({
+    // カーソルの形
+    cursor: "grabbing",
+    // ドラッグ中にどの位置にカーソルが固定されるか
+    cursorAt: { left: 10 },
+    placeholder: "ui-state-highlight",
+    // update時に呼ばれる
+    update: function(e, ui){
+      console.log("\\\\ui")
+      console.log(ui)
+      let item = ui.item;
+      let item_data = item.data();
+      console.log("____item_data")
+      console.log(item_data)
+      console.log("item.index()\\\\")
+      console.log(item.index())
+      console.log("\\\\\item_data.updateUrl")
+      console.log(item_data.updateUrl)
+      let params = {_method: 'put'};
+      params[item_data.modelName] = { row_order_position: item.index() }
+      console.log("\\\\\params")
+      console.log(params)
+      $.ajax({
+        type: 'POST',
+        url: item_data.updateUrl,
+        dataType: 'json',
+        data: params
+      });
+    },
+    stop: function(e, ui){
+      console.log("stop called when finishing sort of cards");
+    }
+  });
+});
