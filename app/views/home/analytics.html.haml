@@ -5,10 +5,15 @@
 
 %h3
   Enrollments: 
-  = area_chart charts_enrollments_per_day_path
+  = bar_chart charts_enrollments_per_day_path
 
-  Courses:
-  = area_chart charts_courses_per_day_path
+  -# Courses:
+  -# = area_chart charts_courses_per_day_path
+  Courses Popularity:
+  = column_chart charts_course_popularity_path
 
   Users: 
   = line_chart charts_users_per_day_path
+
+  Most Paid Courses:
+  = bar_chart charts_money_makers_path
