@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     @latest_courses = Course.latest.published.approved
     @top_rated_courses = Course.top_rated.published.approved
     @popular_courses = Course.popular.published.approved
+    @purchased_courses = Course.includes(:enrollments).where(enrollments: {user: current_user})
     # @activities = PublicActivity::Activity.all
   end
   
