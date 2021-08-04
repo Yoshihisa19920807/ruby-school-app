@@ -22,6 +22,11 @@ class Course < ApplicationRecord
   scope :popular, -> { all.order(enrollments_count: :desc).limit(3) }
   # scope :top_rated, -> { all.order(enrollments_count).limit(3) }
   scope :top_rated,-> { all.order(average_rating: :desc).limit(3) }
+  scope :published, -> { where(published: true) }
+  scope :unpublished, -> { where(published: false) }
+  scope :approved, -> { where(approved: true) }
+  scope :unapproved, -> { where(approved: false) }
+  
   ## assign random id instead
   # friendly_id :generated_slug, use: :slugged
   # def generated_slug
