@@ -18,13 +18,15 @@
 .row
   .col-md-2
     = search_form_for @q do |f|
-      = f.label :student
+      -# = f.label :student
       = f.search_field :user_email_cont, placeholder: 'Student', class: 'form-control form-control-sm'
       -# underscore avoids refering to association
-      = f.label :_course
+      -# = f.label :_course
       = f.search_field :course_title_cont, placeholder: 'Course', class: 'form-control form-control-sm'
-      = f.label :teacher
+      -# = f.label :teacher
       = f.search_field :course_user_email_cont, placeholder: 'Teacher', class: 'form-control form-control-sm'
+      = f.search_field :rating_eq, placeholder: "Rating", class: 'form-control form-control-sm'
+
       %br
       = f.submit
       .ml-2

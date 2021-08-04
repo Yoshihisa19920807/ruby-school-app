@@ -26,7 +26,7 @@ class Course < ApplicationRecord
   scope :unpublished, -> { where(published: false) }
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }
-  
+
   ## assign random id instead
   # friendly_id :generated_slug, use: :slugged
   # def generated_slug
