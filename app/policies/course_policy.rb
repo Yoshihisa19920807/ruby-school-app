@@ -39,7 +39,7 @@ class CoursePolicy < ApplicationPolicy
   end
   
   def destroy?
-    @user.has_role?(:admin) || @record.user == @user if @user.present?
+    @user.has_role?(:admin) && @record.enrollments.none? || @record.user == @user && @record.enrollments.none? if @user.present?
   end
 
   def approve?
