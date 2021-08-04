@@ -1,20 +1,20 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :create_ransack_query
-  after_action :update_user_status
+  after_action :update_user_status, if: :user_signed_in?
   before_action :set_current_user
+
+  include PublicActivity::StoreController #save current_user using gem public_activity
+
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  include Pagy::Backend
 
   def create_ransack_query
     @courses_ransack = Course.ransack(params[:search_courses], search_key: :search_courses)
     # @courses_ransack = Course.ransack(params[:courses_search], search_key: :courses_search) #navbar search
   end
-
-  include PublicActivity::StoreController #save current_user using gem public_activity
-  include Pundit
-
-  include Pagy::Backend
-
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
 
