@@ -71,8 +71,8 @@ class CoursesController < ApplicationController
   def show
     p "course_show_"
     authorize @course
-    @pagy, @lessons = pagy(@course.lessons.rank(:row_order), items: 5)
-    # @lessons = @course.lessons.rank(:row_order)
+    # @pagy, @lessons = pagy(@course.lessons.rank(:row_order), items: 5)
+    @lessons = @course.lessons.rank(:row_order)
     @enrollment = Enrollment.find_by(user_id: current_user.id, course_id: @course.id)
     @enrollments_with_review = @course.enrollments.reviewed
   end

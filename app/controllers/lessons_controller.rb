@@ -11,7 +11,7 @@ class LessonsController < ApplicationController
   def show
     authorize @lesson
     @lesson.view_lesson
-    @lessons = @lesson.course.lessons
+    @lessons = @lesson.course.lessons.rank(:row_order)
     # raise "This is an exception"
   end
 

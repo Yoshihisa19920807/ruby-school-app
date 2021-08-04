@@ -5,20 +5,36 @@
     - else
       .far.fa-square
     %b Title:
-    = link_to lesson.title, course_lesson_path(@course, lesson)
+    -# = link_to lesson.title, course_lesson_path(@course, lesson)
+    = link_to course_lesson_path(@course, lesson) do
+      %b
+        #{lesson.row_order_rank + 1}.
+      = lesson.title  
   - if policy(lesson).show?
     .card-body
       = lesson.content
+    .card-footer
+      -# %p
+      -#   %b Course:
+      -#   = lesson.course
+      - unless current_page?(course_lesson_path(@course, lesson))  
+        = link_to 'Show', course_lesson_path(@course, lesson), class: 'btn btn-sm btn-primary'  
+      - if policy(lesson).edit?
+        = link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning'
+        -# methodでpost delete put etcから指定出来る？
+        -# link_to 'リンクの文言', 'パス', class: 'クラス名', method: :HTTPリクエスト %>
+        = link_to 'Delete', course_lesson_path(@course, lesson), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger'
+        - if current_page?(course_lesson_path(@course, lesson))
+          = link_to 'Back',  course_path(@course), method: :get, class: 'btn btn-sm btn-primary'
   .card-footer
-    -# %p
-    -#   %b Course:
-    -#   = lesson.course
-    - unless current_page?(course_lesson_path(@course, lesson))  
-      = link_to 'Show', course_lesson_path(@course, lesson), class: 'btn btn-sm btn-primary'  
-    - if policy(lesson).edit?
-      = link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning'
-      -# methodでpost delete put etcから指定出来る？
-      -# link_to 'リンクの文言', 'パス', class: 'クラス名', method: :HTTPリクエスト %>
-      = link_to 'Delete', course_lesson_path(@course, lesson), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger'
-      - if current_page?(course_lesson_path(@course, lesson))
-        = link_to 'Back',  course_path(@course), method: :get, class: 'btn btn-sm btn-primary'
+    - unless lesson.prev.nil?
+      .me-auto
+        = link_to course_lesson_path(@course, lesson.prev), class: "btn btn-sm btn-primary" do
+          .fa.fa-arrow-left
+          Previous
+    - unless lesson.next.nil?
+      .ms-auto
+        = link_to course_lesson_path(@course, lesson.next), class: "btn btn-sm btn-primary" do
+          .fa.fa-arrow-right
+          Next
+      
