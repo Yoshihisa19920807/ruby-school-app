@@ -73,6 +73,10 @@
             = link_to home_activity_path, class: 'nav-link' do
               .fa.fa-bell
               Activity log
+          %li.nav-item{class: "#{'active fw-bold' if current_page?(home_analytics_path)}"}
+            = link_to home_analytics_path, class: 'nav-link' do
+              .fa.fa-chart-bar
+              Analytics
         %li.nav-item.dropdown
           -#%a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true","data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
