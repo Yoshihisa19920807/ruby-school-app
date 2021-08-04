@@ -15,7 +15,8 @@ module CoursesHelper
       end
     else
       unless current_page?(course_path(course))
-        link_to "Check the price", course_path(course), class: "btn btn-md btn-success text-light"
+        # link_to "Check the price", course_path(course), class: "btn btn-md btn-success text-light"
+        link_to "Check price", new_course_enrollment_path(course), class: "btn btn-md btn-success"
       else 
         number_to_currency(course.price)
       end
