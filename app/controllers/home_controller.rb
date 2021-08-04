@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   # activity viewを表示時に読み込まれる
   def activity
     if current_user.has_role?(:admin)
-      # @activities = PublicActivity::Activity.all
+      @pagy, @activities = pagy(PublicActivity::Activity.all)
     else
       redirect_to root_path, alert: "You are not authorized to perform this action"
     end
