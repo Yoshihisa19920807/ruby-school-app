@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy approve unapprove]
   skip_before_action :authenticate_user!, :only => [:index, :show]
 
   # GET /courses or /courses.json
@@ -40,6 +40,26 @@ class CoursesController < ApplicationController
     @q = Course.includes(:user).where(user: current_user).ransack(params[:search_courses], search_key: :search_courses)
     @pagy, @courses = pagy(@q.result.includes(:user))
     render "index"
+  end
+
+  def unapproved
+    @ransack_path = unapproved_courses_path
+    @ransack_courses = Course.unapproved.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render 'index'
+  end
+
+  def approve
+    # :approve? -> methodを設定
+    authorize @course, :approve?
+    @course.update_attribute(:approved, true)
+    redirect_to @course, notice: "Course approved and visible!"
+  end
+
+  def unapprove
+    authorize @course, :approve?
+    @course.update_attribute(:approved, false)
+    redirect_to @course, notice: "Course upapproved and hidden!"
   end
 
   # GET /courses/1 or /courses/1.json
@@ -122,6 +142,6 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:title, :description, :short_description, :language, :level, :price)
+      params.require(:course).permit(:title, :description, :short_description, :language, :level, :price, :published)
     end
 end

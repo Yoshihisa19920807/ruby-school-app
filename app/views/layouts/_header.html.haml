@@ -47,6 +47,11 @@
               Enrollments
               .badge.bg-danger.rounded-pill
                 = Enrollment.count
+            = link_to unapproved_courses_path, class: "nav-link" do
+              .fa.fa-graduation-cap
+              Unapproved courses
+              .badge.bg-danger.rounded-pill
+                = Course.unapproved.count
           %li.nav-item{class: "#{'active fw-bold' if current_page?(users_path)}"}
             = link_to users_path, class: 'nav-link' do
               .fa.fa-users

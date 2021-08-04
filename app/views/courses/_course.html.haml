@@ -60,8 +60,25 @@
     .fa.fa-chalkboard-teacher
     -# = course.user
     = link_to course.user, user_path(course.user)
-  .card-footer
-    - if policy(course).edit?
+  
+  - if policy(course).edit?
+    .card-footer
       = link_to 'Show', course, class: 'btn btn-sm btn-primary'
       = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
       = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+  - if policy(course).destroy?
+    .card-footer
+      - if course.published?
+        .badge.bg-success published
+      - else
+        .badge.bg-danger unpublished
+      - if course.approved?
+        .badge.bg-success approved
+      - else
+        .badge.bg-danger unapproved
+  - if policy(course).approve?
+    .card-footer
+      - if course.approved?
+        = link_to 'unapprove', unapprove_course_path(course), method: :patch, class: 'btn btn-sm btn-danger'
+      - else
+        = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success'
