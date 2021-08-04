@@ -19,9 +19,14 @@ class Lesson < ApplicationRecord
   end
 
   def view_lesson
-    p "current_user"
-    p current_user
-    p self
-    UserLesson.create(user: self.current_user, lesson: self)
+    # UserLesson.create(user: self.current_user, lesson: self)
+    user_lessons = UserLesson.where(user: self.current_user, lesson: self)
+    if user_lessons.any?
+      user_lessons.first.increment!(:impressions)
+      p "____user_lessons.first"
+      p user_lessons.first
+    else
+      UserLesson.create(user: self.current_user, lesson: self)
+    end
   end
 end
