@@ -21,7 +21,7 @@
       = activity.created_at.strftime('%d/%m/%y - %H:%M')
       
       ="#{time_ago_in_words(activity.created_at)} ago"
-      
+      = model_label(activity.trackable_type)
       = activity.trackable_type
       = activity.trackable_id
       -# link_to 表示名, パス
@@ -44,7 +44,8 @@
       - else
         = link_to activity.trackable, activity.trackable
       -# = activity.owner
-      = activity.key
+      -# = activity.key
+      = crud_label(activity.key.match(/\.(.*)/)[1])
 
       by
       = link_to activity.owner, user_path(activity.owner)
