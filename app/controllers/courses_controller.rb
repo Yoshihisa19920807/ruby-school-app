@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy approve unapprove]
+  before_action :set_course, only: %i[ show edit update destroy approve unapprove analytics]
   skip_before_action :authenticate_user!, :only => [:index, :show]
 
   # GET /courses or /courses.json
@@ -60,6 +60,11 @@ class CoursesController < ApplicationController
     authorize @course, :approve?
     @course.update_attribute(:approved, false)
     redirect_to @course, notice: "Course upapproved and hidden!"
+  end
+
+  def analytics
+    # :でメソッドを指名出来る
+    authorize @course, :edit?
   end
 
   # GET /courses/1 or /courses/1.json

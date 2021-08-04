@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resources :courses do
     get "purchased", "review_pending", "created", "unapproved", on: :collection
     resources :lessons
+    # collection: without args
     resources :enrollments, only: [:new, :create]
+    # member: with args
     member do
+      get :analytics
       patch :approve
       patch :unapprove
     end
