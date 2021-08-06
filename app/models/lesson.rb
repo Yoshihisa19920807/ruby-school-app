@@ -17,10 +17,10 @@ class Lesson < ApplicationRecord
 
   has_one_attached :video_thumbnail
   validates :video_thumbnail, presence: true,
-  size: { less_than: 500.kilobytes , message: 'File size must be less than 500 kb' }
+  size: { less_than: 1.megabytes , message: 'File size must be less than 500 kb' }
 
   cattr_accessor :current_user
-  
+
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
