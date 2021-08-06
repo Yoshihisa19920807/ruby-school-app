@@ -10,6 +10,14 @@ class Lesson < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: {maximum: 70}
 
   has_rich_text :content
+  has_one_attached :video
+  validates :video, presence: true,
+  content_type: ['video/mp4'],
+  size: { less_than: 50.megabytes , message: 'File size must be less than 50 mb' }
+
+  has_one_attached :video_thumbnail
+  validates :video_thumbnail, presence: true,
+  size: { less_than: 500.kilobytes , message: 'File size must be less than 500 kb' }
 
   cattr_accessor :current_user
   

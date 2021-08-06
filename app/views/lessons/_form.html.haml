@@ -7,7 +7,20 @@
     = f.input :title
     = f.label :content
     = f.rich_text_area :content
-    %small= f.error :content, class: 'text-danger'
+    %small= f.error :content, class: 'text-danger'       
+    = f.label :video_thumbnail
+    .row
+    - if @lesson.video_thumbnail.attached?
+      .row
+        = image_tag @lesson.video_thumbnail
+    = f.file_field :video_thumbnail
+    %small= f.error :video_thumbnail, class: 'text-danger'
+    
+    = f.label :video
+    .row
+    = f.file_field :video
+    %small= f.error :video, class: 'text-danger'
+  
     // = f.association :course
     // = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
   %br
