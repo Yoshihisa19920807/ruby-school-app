@@ -46,9 +46,9 @@
         .fas.fa-graduation-cap
         = @course.title
       %p
-      - if @course.avatar.attached?
-        .row
-          = image_tag @course.avatar
+      -# - if @course.avatar.attached?
+      -#   .row
+      -#     = image_tag @course.avatar
       .row
         .fas.fa-star
           = @course.average_rating
