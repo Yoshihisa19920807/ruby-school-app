@@ -54,6 +54,7 @@ $(document).on('turbolinks:load', function(){
       console.log("\\\\\item_data.updateUrl")
       console.log(item_data.updateUrl)
       let params = {_method: 'put'};
+      // .index() domのindexを取得
       params[item_data.modelName] = { row_order_position: item.index() }
       console.log("\\\\\params")
       console.log(params)

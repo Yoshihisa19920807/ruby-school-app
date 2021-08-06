@@ -46,6 +46,9 @@
         .fas.fa-graduation-cap
         = @course.title
       %p
+      - if @course.avatar.attached?
+        .row
+          = image_tag @course.avatar
       .row
         .fas.fa-star
           = @course.average_rating
@@ -87,6 +90,7 @@
         -#   = render 'lessons/lesson_preview', lesson: lesson
         - p "___lesson.class.name.underscore"
         - p lesson.class.name.underscore
+        -# model名とsort_methodのURLを渡す
         = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson)} do
           .list-group-item
             .fa.fa-sort.all-scroll{:style => "cursor: grab;"}

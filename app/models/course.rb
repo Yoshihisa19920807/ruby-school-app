@@ -10,6 +10,7 @@ class Course < ApplicationRecord
   # can't delete if there's any student
   has_many :enrollments, dependent: :restrict_with_error
   has_rich_text :description
+  has_one_attached :avatar
 
   extend FriendlyId
   friendly_id :title, use: [:slugged]

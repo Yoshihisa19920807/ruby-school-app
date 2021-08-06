@@ -63,8 +63,7 @@
     - @purchased_courses.each do |course|
       = render 'courses/course', course: course
     .ms-auto
-      = link_to 'All my purchased courses', purchased_courses_path
-  %hr    
+      = link_to 'All my purchased courses', purchased_courses_path  
       
   
 %hr
@@ -72,32 +71,32 @@
   Popular courses
 -# if you use masonry
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
-.row.row-cols-1.row-cols-md-3.g-4
+.row.row-cols-1.row-cols-md-3.g-4.flex-d
   - @popular_courses.each do | course |
     .col-md-4
       = render 'courses/course', course: course
-.text-right
-  = link_to "More popular courses", courses_path(courses_search: {s: 'enrollments_count desc'})
+  .ms-auto
+    = link_to "More popular courses", courses_path(courses_search: {s: 'enrollments_count desc'})
 
 %hr
 %h2
   Top rated courses
 -# if you use masonry
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
-.row.row-cols-1.row-cols-md-3.g-4
+.row.row-cols-1.row-cols-md-3.g-4.flex-d
   - @top_rated_courses.each do |course|
     .col-md-4
       = render 'courses/course', course: course
-.text-right
-  = link_to "More top-rated courses", courses_path(courses_search: {s: 'average_rating desc'})
+  .ms-auto
+    = link_to "More top-rated courses", courses_path(courses_search: {s: 'average_rating desc'})
 %hr
 %h2
   Latest courses
 -# if you use masonry
 -#.grid{"data-masonry" => '{ "columnWidth": 200, "itemSelector": ".grid-item" }'}
-.row.row-cols-1.row-cols-md-3.g-4
+.row.row-cols-1.row-cols-md-3.g-4.flex-d
   - @latest_courses.each do |course|
     .col-md-4
       = render 'courses/course', course: course
-.text-right
-  = link_to "More Latest courses", courses_path(courses_search: {s: 'created_at desc'})
+  .ms-auto
+    = link_to "More Latest courses", courses_path(courses_search: {s: 'created_at desc'})

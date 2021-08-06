@@ -3,6 +3,7 @@ class Lesson < ApplicationRecord
   # has_many :user_lessons, dependent: :destroy
   # has_many :user_lessons, dependent: :destroy
   has_many :user_lessons, dependent: :destroy
+  has_many :comments, dependent: :nullify
   extend FriendlyId
   friendly_id :title, use: :slugged
   validates :title, :content, :course, presence: true

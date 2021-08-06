@@ -4,6 +4,8 @@
   .card-header
     .fa.fa-graduation-cap
     = link_to course.title, course_path(course)
+    -# .row
+    -#   = image_tag @course.avatar
   .card-body
     %small= simple_format(course.short_description)
     // = course.description

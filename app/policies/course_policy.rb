@@ -43,7 +43,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def approve?
-    @user.has_role?(:admin)
+    @user.has_role?(:admin) if @user.present?
   end
   
 end

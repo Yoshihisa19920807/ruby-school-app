@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :courses do
     get "purchased", "review_pending", "created", "unapproved", on: :collection
     resources :lessons do
+      resources :comments, except: [:index]
       put :sort
     end
     # collection: without args

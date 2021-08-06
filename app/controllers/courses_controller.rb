@@ -73,7 +73,7 @@ class CoursesController < ApplicationController
     authorize @course
     # @pagy, @lessons = pagy(@course.lessons.rank(:row_order), items: 5)
     @lessons = @course.lessons.rank(:row_order)
-    @enrollment = Enrollment.find_by(user_id: current_user.id, course_id: @course.id)
+    # @enrollment = Enrollment.find_by(user_id: current_user.id, course_id: @course.id) if current_user.present?
     @enrollments_with_review = @course.enrollments.reviewed
   end
 
@@ -149,6 +149,6 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:title, :description, :short_description, :language, :level, :price, :published)
+      params.require(:course).permit(:title, :description, :short_description, :language, :level, :price, :published, :avatar)
     end
 end
