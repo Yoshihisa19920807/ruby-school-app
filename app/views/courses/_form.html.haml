@@ -12,6 +12,7 @@
           = image_tag @course.avatar
       .row
       = f.file_field :avatar
+      %small= f.error :avatar, class: 'text-danger'
       .row
       = f.label :description
       = f.rich_text_area :description

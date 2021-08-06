@@ -46,6 +46,7 @@ gem 'groupdate'
 gem 'ranked-model'
 gem 'jquery-rails' #for bootstrap to work
 gem "aws-sdk-s3", require: false
+gem 'active_storage_validations'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

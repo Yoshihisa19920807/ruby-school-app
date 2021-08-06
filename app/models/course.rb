@@ -11,6 +11,9 @@ class Course < ApplicationRecord
   has_many :enrollments, dependent: :restrict_with_error
   has_rich_text :description
   has_one_attached :avatar
+  validates :avatar, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+  size: { less_than: 100.megabytes , message: 'File size must be less than 100 mb' }
+
 
   extend FriendlyId
   friendly_id :title, use: [:slugged]
