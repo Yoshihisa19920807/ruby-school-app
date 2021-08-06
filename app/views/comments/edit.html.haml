@@ -13,16 +13,17 @@
 =link_to "Courses", courses_path
 \/
 =link_to @course.title, course_path(@course)
-\/
-Edit Lesson: 
+\/ 
 = @lesson.title
+\/
+Edit Comment
 %hr
 
 .card
   .card-header
     %h3
       .far.fa-edit
-      Edit lesson
+      Edit Comment
   .card-body
     = render 'form'
   .card-footer
