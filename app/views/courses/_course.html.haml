@@ -4,7 +4,7 @@
   .card-header
     .fa.fa-graduation-cap
     = link_to course.title, course_path(course)
-    - if @course.avatar.attached?
+    - if course.avatar.attached?
       .card-img-top
         -# = image_tag @course.avatar
         = link_to course_path(course) do
