@@ -9,7 +9,7 @@
     = link_to course_lesson_path(@course, lesson) do
       %b
         #{lesson.row_order_rank + 1}.
-      = lesson.title  
+      = lesson.title.truncate(30)
   - if policy(lesson).show?
     .card-body
       = lesson.content

@@ -6,8 +6,9 @@ class Lesson < ApplicationRecord
   has_many :comments, dependent: :nullify
   extend FriendlyId
   friendly_id :title, use: :slugged
-  validates :title, :content, :course, presence: true
-  
+  validates :content, :course, presence: true
+  validates :title, presence: true, uniqueness: true, length: {maximum: 70}
+
   has_rich_text :content
 
   cattr_accessor :current_user

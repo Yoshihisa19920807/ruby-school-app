@@ -1,6 +1,8 @@
 class Course < ApplicationRecord
-  validates :title, :short_description, :level, :language, presence: true
+  validates :level, :language, presence: true
+  validates :title, uniqueness: true, presence: true, length: {maximum: 70}
   validates :description, presence: true, length: { :minimum => 5}
+  validates :short_description, presence: true, length: {maximum: 300}
   validates :price, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 2**32 }
   
   # attr_accessor :slug
@@ -11,7 +13,9 @@ class Course < ApplicationRecord
   has_many :enrollments, dependent: :restrict_with_error
   has_rich_text :description
   has_one_attached :avatar
-  validates :avatar, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+  # validates :avatar, attached: true,
+  validates :avatar, presence: true,
+  content_type: ['image/png', 'image/jpg', 'image/jpeg'],
   size: { less_than: 100.megabytes , message: 'File size must be less than 100 mb' }
 
 
