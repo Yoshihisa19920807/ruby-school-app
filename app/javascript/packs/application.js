@@ -20,7 +20,13 @@ require("stylesheets/application.scss")
 import "@fortawesome/fontawesome-free/css/all"
 require("trix")
 require("@rails/actiontext")
-import "chartkick/chart.js"
+
+// // has issue with rich_text_area
+// import "chartkick/chart.js"
+require("chartkick/chart.js")
+// require("chartkick")
+// require("chart.js")
+
 require("jquery")
 require("jquery-ui-dist/jquery-ui");
 
