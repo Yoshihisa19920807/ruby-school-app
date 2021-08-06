@@ -25,7 +25,8 @@
         -# link_to 'リンクの文言', 'パス', class: 'クラス名', method: :HTTPリクエスト %>
         = link_to 'Delete', course_lesson_path(@course, lesson), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger'
         - if current_page?(course_lesson_path(@course, lesson))
-          = link_to 'Back',  course_path(@course), method: :get, class: 'btn btn-sm btn-primary'
+          = link_to 'Back to the course',  course_path(@course), method: :get, class: 'btn btn-sm btn-primary'
+        -# = link_to 'Leave a comment', new_course_lesson_comment_path(@course, lesson)
   .card-footer
     - unless lesson.prev.nil?
       .me-auto

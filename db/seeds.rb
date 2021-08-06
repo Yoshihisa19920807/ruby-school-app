@@ -14,9 +14,13 @@ PublicActivity.enabled = false
     short_description: Faker::TvShows::SiliconValley.motto,
     language: "English",
     level: "Beginner",
-    price: Faker::Number.between(from: 1, to: 20000),
+    # price: Faker::Number.between(from: 1, to: 20000),
+    price: 0,
     description: Faker::TvShows::GameOfThrones.quote,
-    user_id: User.first.id
+    user_id: User.first.id,
+    published: true,
+    approved: true,
+
   }])
 end
 PublicActivity.enabled = true

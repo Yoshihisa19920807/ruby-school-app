@@ -5,7 +5,9 @@
   \|
   = @course.title
   \|
-  Create A New Lesson
+  Lessons
+  \|
+  = @lesson.title
 
 = link_to 'Courses', courses_path
 \/
@@ -13,8 +15,6 @@
 \/
 = link_to @lesson.title, course_lesson_path(@course, @lesson)
 %hr
-
-%p#notice= notice
 
 = @lesson.user_lessons.where(user: current_user).first.impressions
 
@@ -37,3 +37,14 @@
       - else
         %li.list-group-item.d-flex.align-items-center
           = render 'lessons/lesson_preview', lesson: lesson
+%hr
+.row
+  %b
+    All comments:
+    = @comments.count
+  - @comments.each do |comment|
+    = render 'lessons/comments/comment', comment: comment
+  %hr
+  %b
+    New comment:
+  = render 'lessons/comments/form'

@@ -1,0 +1,30 @@
+- content_for :title do
+  Coursego
+  \|
+  Courses
+  \|
+  = @course.title
+  \|
+  Lessons
+  \|
+  = @lesson.title
+  Edit Comment: 
+  
+=link_to "Courses", courses_path
+\/
+=link_to @course.title, course_path(@course)
+\/ 
+= @lesson.title
+\/
+Edit Comment
+%hr
+
+.card
+  .card-header
+    %h3
+      .far.fa-edit
+      Edit Comment
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Back', [@course, @lesson], class: 'btn btn-sm'

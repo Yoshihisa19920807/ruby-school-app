@@ -13,6 +13,8 @@ class LessonsController < ApplicationController
     @lesson.view_lesson
     @lessons = @lesson.course.lessons.rank(:row_order)
     # raise "This is an exception"
+    @comment = Comment.new
+    @comments = @lesson.comments
   end
 
   # GET /lessons/new

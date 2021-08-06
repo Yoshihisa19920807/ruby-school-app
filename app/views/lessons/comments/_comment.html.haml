@@ -1,0 +1,9 @@
+.card
+  .card-body
+    = comment.content
+  .card-footer
+    = comment.user
+    = comment.created_at
+  - if policy(comment).edit?
+    .carf-footer
+      = link_to "edit", edit_course_lesson_comment_path(@course, @lesson, comment), class: "btn btn-sm btn-warning my-1"  
