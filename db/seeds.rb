@@ -9,7 +9,7 @@ user.save
 
 PublicActivity.enabled = false
 30.times do
-  Course.create!([{
+  @course = Course.new({
     title: Faker::Educator.course_name,
     short_description: Faker::TvShows::SiliconValley.motto,
     language: "English",
@@ -21,6 +21,7 @@ PublicActivity.enabled = false
     published: true,
     approved: true,
 
-  }])
+  })
+  @course.save(validation: false)
 end
 PublicActivity.enabled = true
