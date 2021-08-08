@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :enrollments
   devise_for :users
   resources :courses do
-    get "purchased", "review_pending", "created", "unapproved", on: :collection
+    get "purchased", "review_pending", "teaching", "created", "unapproved", on: :collection
     resources :lessons do
       resources :comments, except: [:index]
       put :sort
