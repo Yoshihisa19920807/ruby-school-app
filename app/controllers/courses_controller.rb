@@ -19,6 +19,13 @@ class CoursesController < ApplicationController
     # p @courses
   end
 
+  def teaching
+    @ransack_path = teaching_courses_path
+    @ransack_courses = Course.where(user: current_user).ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render 'index'
+  end
+
   def purchased
     @ransack_path = purchased_courses_path
     @q = Course.includes(:enrollments).where(enrollments: {user: current_user}).ransack(params[:search_courses], search_key: :search_courses)
@@ -130,7 +137,7 @@ class CoursesController < ApplicationController
     authorize @course
     if @course.destroy
       respond_to do |format|
-        format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
+        format.html { redirect_to teaching_courses_path, notice: "Course was successfully destroyed." }
         format.json { head :no_content }
       end
     else

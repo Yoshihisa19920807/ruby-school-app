@@ -2,10 +2,14 @@ Rails.application.routes.draw do
   resources :enrollments
   devise_for :users
   resources :courses do
-    get "purchased", "review_pending", "created", "unapproved", on: :collection
+    get "purchased", "review_pending", "teaching", "created", "unapproved", on: :collection
     resources :lessons do
       resources :comments, except: [:index]
       put :sort
+      member do
+        # delete path is routed to delete_video method
+        delete :delete_video
+      end
     end
     # collection: without args
     resources :enrollments, only: [:new, :create]

@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-  before_action :set_lesson, only: %i[ show edit update destroy ]
+  before_action :set_lesson, only: %i[ show edit update destroy delete_video ]
   skip_before_action :authenticate_user!, :only => [:show]
 
   # GET /lessons or /lessons.json
@@ -72,6 +72,13 @@ class LessonsController < ApplicationController
       format.html { redirect_to course_path(@course), notice: "Lesson was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def delete_video
+    authorize @lesson, :edit?
+    @lesson.video.purge
+    @lesson.video_thumbnail.purge
+    redirect_to edit_course_lesson_path(@course, @lesson), notice: 'Video successfully deleted!'
   end
 
   def sort
