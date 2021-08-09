@@ -22,8 +22,10 @@
   .col-lg-8
     = render 'lessons/lesson', lesson: @lesson
     -# = image_tag @lesson.video_thumbnail
-    %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata")
-      %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
+    - if @lesson.video.present? && @lesson.video_thumbnail.present?
+      %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata")
+        %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
+      = link_to "Delete video", delete_video_course_lesson_path(@course, @lesson), class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"}
   .col-lg-4
     %ul.list-group
       %li.list-group-item

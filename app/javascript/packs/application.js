@@ -22,13 +22,17 @@ require("trix")
 require("@rails/actiontext")
 
 // // has issue with rich_text_area
-// import "chartkick/chart.js"
-require("chartkick/chart.js")
+import "chartkick/chart.js"
+// require("chartkick/chart.js")
 // require("chartkick")
 // require("chart.js")
+import "../trix_overrides"
+
 
 require("jquery")
 require("jquery-ui-dist/jquery-ui");
+// require("../trix_overrides.js")
+
 
 
 // // 引数は指定しなくてよい

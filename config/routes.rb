@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     resources :lessons do
       resources :comments, except: [:index]
       put :sort
+      member do
+        # delete path is routed to delete_video method
+        delete :delete_video
+      end
     end
     # collection: without args
     resources :enrollments, only: [:new, :create]

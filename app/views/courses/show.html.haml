@@ -74,6 +74,9 @@
       %p
       .fa.fa-chalkboard-teacher
         = link_to @course.user, user_path(@course.user)
+
+      %hr
+      = @course.description
     
     %hr
     %p

@@ -8,4 +8,10 @@
 .form-control.is-invalid{ background-image: none; }
 .form-control.is-valid{ background-image: none; }
 
+// highlight moving lesson
 .ui-state-highlight { height: 3em; line-height: 1.2em; background-color: grey; }
+
+// hide attachment button on axtion text
+.trix-button-group--file-tools {
+  display: none !important;
+}
