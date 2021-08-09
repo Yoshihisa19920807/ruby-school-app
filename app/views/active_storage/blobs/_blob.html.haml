@@ -10,8 +10,8 @@
     - p "video____"
     %video(controls="true" width="100%" preload="metadata")
       %source{src: rails_blob_url(blob), type:"#{blob.content_type}"}
-    %video(controls="true" width="100%" preload="metadata")
-      %source{src: rails_blob_url(blob), type:"#{blob.content_type}"}
+    -# %video-js#player-id.vjs-theme-sea{ :controls => "", "data-setup" => "{\"liveui\": true,\"fluid\": true}", :preload => ""}
+    -#   %source{:src => rails_blob_url(blob), :type => ""}
   - elsif blob.audio?
     %audio{:controls => ""}
       %source{:src => rails_blob_url(blob)}
