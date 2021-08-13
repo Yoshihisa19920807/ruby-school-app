@@ -12,13 +12,14 @@ module RubyGemsBootcamp
     config.load_defaults 6.1
     
     config.hosts << "1c70c97566c046c9b9b3b8359c0e23d5.vfs.cloud9.ap-northeast-1.amazonaws.com"
-
+  
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = 'Tokyo'
     # config.eager_load_paths << Rails.root.join("extras")
 
 

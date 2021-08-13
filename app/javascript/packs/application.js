@@ -50,6 +50,7 @@ import '@videojs/themes/dist/forest/index.css';
 // Sea
 import '@videojs/themes/dist/sea/index.css';
 
+
 // // 引数は指定しなくてよい
 // // import Masonry from 'masonry-layout';
 // import 'masonry-layout';
@@ -95,18 +96,23 @@ $(document).on('turbolinks:load', function(){
     }
   });
 
-  let videoPlayer = videojs(document.getElementById('my-video'), {
-    controls: true,
-    playbackRates: [0.5, 1, 1.5],
-    autoplay: false,
-    fluid: true,
-    preload: false,
-    liveui: true,
-    responsive: true,
-    loop: false,
-    // poster: "https://i.imgur.com/EihmtGG.jpg"
-  })
-  videoPlayer.addClass('video-js')
-  videoPlayer.addClass('vjs-big-play-centered')
-  videoPlayer.addClass('vjs-theme-sea')
+  let videoPlayerInstance = document.getElementById('my-video')
+  console.log("videoPlayerInstance")
+  console.log(videoPlayerInstance)
+  if (videoPlayerInstance) {
+    let videoPlayer = videojs(document.getElementById('my-video'), {
+      controls: true,
+      playbackRates: [0.5, 1, 1.5],
+      autoplay: false,
+      fluid: true,
+      preload: false,
+      liveui: true,
+      responsive: true,
+      loop: false,
+      // poster: "https://i.imgur.com/EihmtGG.jpg"
+    })
+    videoPlayer.addClass('video-js')
+    videoPlayer.addClass('vjs-big-play-centered')
+    videoPlayer.addClass('vjs-theme-sea')
+  }
 });
