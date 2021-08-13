@@ -15,8 +15,8 @@ class Enrollment < ApplicationRecord
   after_update :call_update_average_rate
 
   def to_s
-    p "user_id___"
-    p user.slug
+    # p "user_id___"
+    # p user.slug
     user.to_s + " " + course.to_s
   end
 

@@ -56,6 +56,23 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    authorize @comment
+    @lesson = Lesson.friendly.find(params[:lesson_id])
+    @course = Course.friendly.find(params[:course_id])    
+    respond_to do |format|
+      if @comment.destroy!
+        format.html { redirect_to [@course, @lesson], notice: "Comment was successfully deleted." }
+        format.json { render :show, status: :ok, location: @lesson }
+      else
+        # flash.now[:alert] = "The process wasn't done properly."
+        format.html { redirect_to [@course, @lesson], alert: "The process wasn't done properly." }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def comment_params
     params.require(:comment).permit(:content)
   end
