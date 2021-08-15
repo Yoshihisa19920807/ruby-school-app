@@ -86,7 +86,7 @@
         = pluralize(@course.lessons_count, "lesson")
       .fa.fa-tasks
         = number_to_percentage(@course.progress(current_user), precision: 0)
-    .mt-2    
+    .mt-2
     .list-group.lesson-sortable
       - @lessons.each do |lesson|
         -# %li.list-group-item
@@ -95,7 +95,7 @@
         - p lesson.class.name.underscore
         -# model名とsort_methodのURLを渡す
         = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson)} do
-          .list-group-item
+          .list-group-item.rounded
             .fa.fa-sort.all-scroll{:style => "cursor: grab;"}
             = render 'lessons/lesson_preview', lesson: lesson
     %p

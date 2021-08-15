@@ -117,4 +117,8 @@ $(document).on('turbolinks:load', function(){
     videoPlayer.addClass('vjs-big-play-centered')
     videoPlayer.addClass('vjs-theme-sea')
   }
+
+  $("video").on("contextmenu",function(){
+    return false;
+  });
 });
