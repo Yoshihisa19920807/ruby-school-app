@@ -22,7 +22,7 @@
   </div>
 
   <spacn class="text-danger"><%= flash[:recaptcha_error] %></span>
-  <%= recaptcha_tags %>
+  <%= recaptcha_v3(action: 'registration') %>
 
 <% end %>
 

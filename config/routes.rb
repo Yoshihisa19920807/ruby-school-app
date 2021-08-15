@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :enrollments
-  devise_for :users
+  # devise_for :users
+  # devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, :controllers => { registrations: 'users/registrations'}
   resources :courses do
     get "purchased", "review_pending", "teaching", "created", "unapproved", on: :collection
     resources :lessons do
