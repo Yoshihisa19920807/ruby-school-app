@@ -27,6 +27,14 @@
     .row
     = 'courses_created'.humanize+ ":"
     = user.courses_count
+    .row
+    .fa.fa-comment
+    Comments:
+    = user.comments_count
+    .row
+    .fa.fa-chalkboard
+    Lessons this user viewed:
+    = user.user_lessons_count
     
     .card-footer
       Confirmed email?

@@ -26,8 +26,13 @@
   Impressions:
   = lesson.user_lessons.map(&:impressions).sum
   %br
-  Reviews:
+  Comments:
   = lesson.comments_count
+  %br
+  Unique views:
+  - p "lesson.user_lessons"
+  - p lesson.user_lessons
+  = lesson.user_lessons_count
 
   -# - if UserLesson.where(user: current_user, lesson: lesson).present?
   -#   .far.fa-check-square
