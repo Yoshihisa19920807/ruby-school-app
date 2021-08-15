@@ -13,11 +13,11 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  DELETE /resource/sign_out
-  def destroy
-    super
-     p "destroy___"
-  end
+  # DELETE /resource/sign_out
+  # def destroy
+  #   super
+  #    p "destroy___"
+  # end
 
   # protected
 
