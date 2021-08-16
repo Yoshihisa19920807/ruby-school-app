@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   # skip authentication on top page
-  skip_before_action :authenticate_user!, :only => [:index]
+  skip_before_action :authenticate_user!, :only => [:index, :privacy_policy]
   def index
     @latest_courses = Course.latest.published.approved
     @top_rated_courses = Course.top_rated.published.approved
