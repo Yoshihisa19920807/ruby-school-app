@@ -108,6 +108,10 @@
               .fa.fa-sign-out-alt
               %b Sign out
     - else
-      %ul.navbar-nav.me-auto
+      %ul.navbar-nav.ms-auto
         %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
         %li.nav-item= link_to 'Log In', new_user_session_path, class: 'nav-link'
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
+          = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'nav-link' do
+            .fab.fa-google
+            Sign in with Google
