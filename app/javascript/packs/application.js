@@ -15,7 +15,9 @@ ActiveStorage.start()
 
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
-require("stylesheets/application.scss")
+require("stylesheets/application")
+// import '../stylesheets/application'
+// require.context('../images', true)
 
 import "@fortawesome/fontawesome-free/css/all"
 require("trix")
@@ -115,4 +117,8 @@ $(document).on('turbolinks:load', function(){
     videoPlayer.addClass('vjs-big-play-centered')
     videoPlayer.addClass('vjs-theme-sea')
   }
+
+  $("video").on("contextmenu",function(){
+    return false;
+  });
 });

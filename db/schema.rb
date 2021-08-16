@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2021_08_15_081654) do
     t.integer "enrollments_count", default: 0, null: false
     t.integer "lessons_count", default: 0, null: false
     t.boolean "approved", default: false
-    t.boolean "published"
+    t.boolean "published", default: false
     t.index ["slug"], name: "index_courses_on_slug", unique: true
     t.index ["user_id"], name: "index_courses_on_user_id"
   end

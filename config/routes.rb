@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/activity'
   get 'home/analytics'
+  get 'home/privacy_policy'
   namespace :charts do
     get "users_per_day"
     get 'enrollments_per_day'
