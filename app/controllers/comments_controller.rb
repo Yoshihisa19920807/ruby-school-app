@@ -35,6 +35,7 @@ class CommentsController < ApplicationController
     # render file: "#{Rails.root}/app/views/lessons/comments/edit.html.haml", comment: @comment
     # app/views/lessons/comments/_comment.html.haml
     # /mnt/c/Users/USER/Projects/ruby-gems-bootcamp/app/views/lessons/comments/_comment.html.haml
+    render "lessons/comments/edit"
   end
 
   def update
