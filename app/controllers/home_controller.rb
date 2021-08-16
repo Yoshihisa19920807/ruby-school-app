@@ -27,6 +27,9 @@ class HomeController < ApplicationController
     end
   end
 
+  def privacy_policy
+  end
+
   # def users_per_day
   #   render json: User.group_by_day(:created_at).count
   # end

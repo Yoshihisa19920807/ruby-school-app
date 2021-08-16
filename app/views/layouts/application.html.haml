@@ -3,13 +3,15 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{description: 'Online Learning and Skill sharing platform'}/
+    %meta{keywords: 'online education, course platform, video tutorials, udemy clone'}/
+    %meta{author: 'Yoshihisa Okada'}/
     -# = favicon_link_tag 'line_157082726308416_.jpg'
     = favicon_link_tag 'thumbnail__.png'
     -# = image_tag 'thumbnail_.png'
     -# = favicon_link_tag 'PNG_transparency_demonstration_1.png'
     %title
-      = content_for?(:title) ? yield(:title) : "Corsego"
+      = content_for?(:title) ? yield(:title) : "Rubygems"
     // %title= yield(:title)
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     = csrf_meta_tags
@@ -29,5 +31,6 @@
     .container
       %p
       = yield
-    .bg-dark.text-white
+    -# .bg-dark.text-white
+    .purple-background.text-light
       = render 'layouts/footer'
