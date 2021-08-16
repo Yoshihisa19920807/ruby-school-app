@@ -120,7 +120,8 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.hosts << "54.248.194.243"
-  # config.hosts << "localhost"
+  config.hosts << "localhost"
+  config.hosts << "yoshihisaokada.net"
   config.action_mailer.default_url_options = { host: '54.248.194.243' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
