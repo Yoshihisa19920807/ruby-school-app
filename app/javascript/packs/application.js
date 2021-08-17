@@ -38,7 +38,7 @@ import "../trix_overrides"
 require("jquery")
 require("jquery-ui-dist/jquery-ui");
 
-
+require("@nathanvda/cocoon")
 
 // import "video.js"
 // require("video.js")
@@ -52,6 +52,8 @@ import '@videojs/themes/dist/fantasy/index.css';
 import '@videojs/themes/dist/forest/index.css';
 // Sea
 import '@videojs/themes/dist/sea/index.css';
+
+import './course'
 
 
 // // 引数は指定しなくてよい
