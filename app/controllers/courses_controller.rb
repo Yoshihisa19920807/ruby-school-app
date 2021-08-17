@@ -30,7 +30,7 @@ class CoursesController < ApplicationController
     @ransack_path = purchased_courses_path
     @q = Course.includes(:enrollments).where(enrollments: {user: current_user}).ransack(params[:search_courses], search_key: :search_courses)
     @pagy, @courses = pagy(@q.result.includes(:enrollments))
-    
+
     render "index"
   end
 
@@ -87,6 +87,7 @@ class CoursesController < ApplicationController
   # GET /courses/new
   def new
     @course = Course.new
+    @course.course_tags.build
     authorize @course
   end
 
@@ -94,7 +95,7 @@ class CoursesController < ApplicationController
   def edit
     # authorize by pundit
     # p "courses_controller_def_edit"
-    
+
     # refers to edit method in course_policy
     authorize @course
   end
@@ -103,7 +104,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.user = current_user
-    
+
     authorize @course
 
     respond_to do |format|
@@ -156,6 +157,11 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:title, :description, :short_description, :language, :level, :price, :published, :avatar)
+      params.require(:course).permit(
+        :title, :description, :short_description, :language, :level, :price, :published, :avatar,
+        course_tags_attributes: [:id, :tag_id, :_destroy,
+          tag_attributes: [:id, :name, :_destroy]
+        ]
+      )
     end
 end

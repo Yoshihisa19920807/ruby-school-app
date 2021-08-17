@@ -1,27 +1,26 @@
 class Course < ApplicationRecord
-  validates :level, :language, presence: true
-  validates :title, uniqueness: true, presence: true, length: {maximum: 70}
-  validates :description, presence: true, length: { :minimum => 5}
-  validates :short_description, presence: true, length: {maximum: 300}
-  validates :price, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 2**32 }
-  
+
   # attr_accessor :slug
   has_many :lessons, dependent: :destroy
-  has_many :user_lessons, through: :lessons 
-  belongs_to :user, counter_cache: true
+  has_many :user_lessons, through: :lessons
+
+  has_many :course_tags
+  has_many :tags, through: :course_tags
+
   # can't delete if there's any student
   has_many :enrollments, dependent: :restrict_with_error
+
+  belongs_to :user, counter_cache: true
+
   has_rich_text :description
   has_one_attached :avatar
-  # validates :avatar, attached: true,
-  validates :avatar,
-  content_type: ['image/png', 'image/jpg', 'image/jpeg'],
-  size: { less_than: 100.megabytes , message: 'File size must be less than 100 mb' }
 
+  accepts_nested_attributes_for :tags, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :course_tags, reject_if: :all_blank, allow_destroy: true
 
   extend FriendlyId
   friendly_id :title, use: [:slugged]
-  
+
   include PublicActivity::Model
   tracked
   tracked owner: Proc.new{ |controller, model| controller.current_user }
@@ -35,6 +34,17 @@ class Course < ApplicationRecord
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }
   scope :purchased, -> (user) {includes(:enrollments).where(enrollments: {user: user})} 
+
+  # validates :avatar, attached: true,
+  validates :avatar,
+    content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+    size: { less_than: 100.megabytes , message: 'File size must be less than 100 mb' }
+  validates :level, :language, presence: true
+  validates :title, uniqueness: true, presence: true, length: {maximum: 70}
+  validates :description, presence: true, length: { :minimum => 5}
+  validates :short_description, presence: true, length: {maximum: 300}
+  validates :price, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 2**32 }
+
   ## assign random id instead
   # friendly_id :generated_slug, use: :slugged
   # def generated_slug

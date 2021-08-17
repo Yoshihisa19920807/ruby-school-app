@@ -22,9 +22,9 @@
   -#   - else
   -#     .d-grid
   -#       .btn.btn-primary.btn-sm.btn-block
-  -#         Lessons    
+  -#         Lessons
   -#   -# %hr
-  -#   -#   Progress: 
+  -#   -#   Progress:
   -#   -#   = number_to_percentage(@course.progress(current_user), precision: 1 )
   -#   %hr
   -#   - @lessons.each do |lesson|
@@ -38,8 +38,7 @@
   -#     - else
   -#       .d-grid
   -#         = link_to 'Thanks for the review! Your review is here', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
-  
-  
+
   .col-lg-8.order-1.order-lg-1
     .bg-light.rounded
       %h3
@@ -56,11 +55,11 @@
         .fas.fa-book
           = @course.lessons_count
       .row
-      
+
       %h6
         Enrollments count:
         =@course.enrollments_count
-      
+
       %p
       .row
         .fa.fa-language
@@ -70,14 +69,17 @@
       .fa.fa-clock
         = @course.created_at.strftime('%d-%b-%Y')
       .row
-      
+      .fas.fa-tags
+        - @course.tags.each do | tag |
+          = tag.name
+
       %p
       .fa.fa-chalkboard-teacher
         = link_to @course.user, user_path(@course.user)
 
       %hr
       = @course.description
-    
+
     %hr
     %p
     .d-grid
@@ -114,7 +116,6 @@
     %ul.list-group
       - @enrollments_with_review.each do |enrollment|
         = render 'enrollments/enrollment', enrollment: enrollment
-  
-  
+
   .col-lg-4.order-0.order-lg-1
     = render 'courses/course', course: @course
