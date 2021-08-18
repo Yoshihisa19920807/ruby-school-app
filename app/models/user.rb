@@ -43,15 +43,40 @@ class User < ApplicationRecord
 
     p "___access_token"
     p access_token
+    p "access_token.credentials.refresh_token"
+    p access_token.credentials.refresh_token
     data = access_token.info
+    p "data___"
+    p data
+    p data['name']
     user = User.where(email: data['email']).first
 
     # Uncomment the section below if you want users to be created if they don't exist
     unless user
-        user = User.create(name: data['name'],
-           email: data['email'],
-           password: Devise.friendly_token[0,20]
-        )
+      p "unless_user"  
+      user = User.create(
+        provider: access_token['provider'],
+        uid: access_token['uid'],
+        email: data['email'],
+        password: Devise.friendly_token[0,20],
+        name: data['name'],
+        image: data.image,
+        token: access_token.credentials['token'],
+        expires_at: access_token.credentials['expires_at'],
+        refresh_token: access_token.credentials.refresh_token,
+        confirmed_at: Time.now #autoconfirm user from omniauth
+      )
+    else
+      user.update(
+        name: access_token.info.name,
+        image: access_token.info.image,
+        provider: access_token.provider,
+        uid: access_token.uid,
+        token: access_token.credentials.token,
+        expires_at: access_token.credentials.expires_at,
+        expires: access_token.credentials.expires,
+        refresh_token: access_token.credentials.refresh_token
+      )
     end
     user
 end

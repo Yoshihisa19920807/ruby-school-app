@@ -1,8 +1,7 @@
 -# %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-%nav.navbar.navbar-expand-lg.navbar-dark.purple-background
+%nav.navbar.navbar-expand-lg.navbar-dark.purple-background.px-2
   -# enable home button
   %a.navbar-brand{:href => "/"}
-  .me-auto
     = image_tag 'logo-navbar.png', size: '20x20', alt: "logo", class: 'rounded'
     -# .fa.fa-graduation-cap
     Rubygems
@@ -10,12 +9,12 @@
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.me-auto
-      %li.nav-item{class: "#{'active fw-bold' if current_page?(root_path)}"}
-        = link_to root_path, class: 'nav-link' do
+      %li.nav-item
+        = link_to root_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do
           .fa.fa-home
           Home
-      %li.nav-item{class: "#{'active fw-bold' if current_page?(courses_path)}"}
-        = link_to courses_path, class: 'nav-link' do
+      %li.nav-item
+        = link_to courses_path, class: "nav-link #{'active fw-bold' if current_page?(courses_path)}" do
           .fa.fa-graduation-cap
           Courses
       -if @courses_ransack.present?
@@ -109,8 +108,8 @@
               %b Sign out
     - else
       %ul.navbar-nav.ms-auto
-        %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
-        %li.nav-item= link_to 'Log In', new_user_session_path, class: 'nav-link'
+        %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: "nav-link #{'active font-weight-bold' if current_page?(new_user_registration_path)}"
+        %li.nav-item= link_to 'Log In', new_user_session_path, class: "nav-link #{'active font-weight-bold' if current_page?(new_user_session_path)}"
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
           = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'nav-link' do
             .fab.fa-google
