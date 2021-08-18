@@ -34,25 +34,25 @@
               .fa.fa-cog
               Admin
             .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
-              = link_to users_path, class: "nav-link dropdown-item #{'active fw-bold' if current_page?(users_path)}" do
+              = link_to users_path, class: "dropdown-item #{'active fw-bold' if current_page?(users_path)}" do
                 .fa.fa-users
                 Users
                 .badge.bg-danger.rounded-pill
                   = User.count
-              = link_to unapproved_courses_path, class: "nav-link dropdown-item dropdown-item #{'active fw-bold' if current_page?(unapproved_courses_path)}" do
+              = link_to unapproved_courses_path, class: "dropdown-item dropdown-item #{'active fw-bold' if current_page?(unapproved_courses_path)}" do
                 .fa.fa-graduation-cap
                 Unapproved courses
                 .badge.bg-danger.rounded-pill
                   = Course.unapproved.count
-              = link_to enrollments_path, class: "nav-link dropdown-item #{'active fw-bold' if current_page?(enrollments_path)}" do
+              = link_to enrollments_path, class: "dropdown-item #{'active fw-bold' if current_page?(enrollments_path)}" do
                 .fas.fa-sign-in-alt
                 Enrollments
                 .badge.bg-danger.rounded-pill
                   = Enrollment.count
-              = link_to home_activity_path, class: "nav-link dropdown-item #{'active fw-bold' if current_page?(home_activity_path)}" do
+              = link_to home_activity_path, class: "dropdown-item #{'active fw-bold' if current_page?(home_activity_path)}" do
                 .fa.fa-bell
                 Activity log
-              = link_to home_analytics_path, class: "nav-link dropdown-item #{'active fw-bold' if current_page?(home_analytics_path)}" do
+              = link_to home_analytics_path, class: "dropdown-item #{'active fw-bold' if current_page?(home_analytics_path)}" do
                 .fa.fa-chart-bar
                 Analytics
 
@@ -62,12 +62,12 @@
               .fa.fa-chalkboard-teacher
               Teach
             .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
-              = link_to created_courses_path, class: "nav-link #{'active fw-bold' if current_page?(created_courses_path)} dropdown-item" do
+              = link_to created_courses_path, class: "#{'active fw-bold' if current_page?(created_courses_path)} dropdown-item" do
                 .fa.fa-hammer
                 Created Courses
                 .badge.bg-danger.rounded-pill
                   = Course.where(user: current_user).count.to_s
-              = link_to new_course_path, class: "nav-link #{'active fw-bold' if current_page?(new_course_path)} dropdown-item" do
+              = link_to new_course_path, class: "#{'active fw-bold' if current_page?(new_course_path)} dropdown-item" do
                 .fa.fa-plus
                 New Course
 
@@ -77,13 +77,13 @@
               .fa.fa-student
               Learn
             .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
-              = link_to purchased_courses_path, class: "nav-link #{'active fw-bold' if current_page?(purchased_courses_path)} dropdown-item" do
+              = link_to purchased_courses_path, class: "#{'active fw-bold' if current_page?(purchased_courses_path)} dropdown-item" do
                 .fa.fa-wallet
                 Purchased Courses
                 .badge.bg-danger.rounded-pill
                   -# = Enrollment.where(user: current_user).count.to_s
                   = current_user.enrollments_count
-              = link_to review_pending_courses_path, class: "nav-link dropdown-item #{'active fw-bold' if current_page?(review_pending_courses_path)}" do
+              = link_to review_pending_courses_path, class: "dropdown-item #{'active fw-bold' if current_page?(review_pending_courses_path)}" do
                 .fa.fa-comment-dots
                 Review Pending Courses
                 .badge.bg-danger.rounded-pill
