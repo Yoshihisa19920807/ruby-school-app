@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :trackable, :confirmable,:omniauthable , omniauth_providers: [:google_oauth2]
+         :trackable, :confirmable,:omniauthable , omniauth_providers: [:google_oauth2, :github]
 
   has_many :courses, dependent: :nullify
   has_many :enrollments, dependent: :nullify
@@ -62,6 +62,7 @@ class User < ApplicationRecord
         name: data['name'],
         image: data.image,
         token: access_token.credentials['token'],
+        expires: access_token.credentials.expires,
         expires_at: access_token.credentials['expires_at'],
         refresh_token: access_token.credentials.refresh_token,
         confirmed_at: Time.now #autoconfirm user from omniauth
