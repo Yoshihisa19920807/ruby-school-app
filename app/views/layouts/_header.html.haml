@@ -113,4 +113,12 @@
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
           = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'nav-link' do
             .fab.fa-google
-            Sign in with Google
+            // Sign in with Google
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_github_omniauth_authorize_path)}"}
+          = link_to user_github_omniauth_authorize_path, method: :post, class: 'nav-link' do
+            .fab.fa-github
+            // Sign in with Github
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_facebook_omniauth_authorize_path)}"}
+          = link_to user_facebook_omniauth_authorize_path, method: :post, class: 'nav-link' do
+            .fab.fa-facebook
+            // Sign in with Facebook

@@ -10,6 +10,12 @@
       = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary btn-sm' do
         .fab.fa-google
         Sync with Google
+      = link_to user_github_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary btn-sm ms-1' do
+        .fab.fa-github
+        Sync with Github
+      = link_to user_facebook_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary btn-sm ms-1' do
+        .fab.fa-facebook
+        Sync with Facebook
       %p
     - if user.image?
       .row
