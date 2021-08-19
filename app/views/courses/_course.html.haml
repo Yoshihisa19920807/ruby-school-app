@@ -61,9 +61,11 @@
   .card-footer
     .fas.fa-tags
     - course.tags.each do | tag |
-      -# .btn.btn-sm.btn-primary
-      .badge.bg-primary
-        = tag.name
+      .course_tag{style: "display:inline;"}
+        = link_to courses_path(search_courses: {course_tags_tag_id_eq: tag.id}) do
+          .badge.bg-info
+            = tag.name
+            = tag.course_tags_count
     .row
     .fa.fa-clock
     = course.created_at.strftime('%d-%b-%Y')

@@ -52,6 +52,14 @@
       .row
       = link_to 'refresh', @ransack_path, class: "mb-2"
       %hr
+    Tags:
+    .row
+      - @tags.all.order(course_tags_count: :desc).each do |tag|
+        .course_tag{style: "display:inline;"}
+          = link_to courses_path(search_courses: {course_tags_tag_id_eq: tag.id}) do
+            .badge.bg-info
+              = tag.name
+              = tag.course_tags_count
   .col-md-10
     .row.row-cols-1.row-cols-md-3.g-4
       - @courses.each do |course|

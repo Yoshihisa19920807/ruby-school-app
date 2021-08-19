@@ -71,8 +71,11 @@
       .row
       .fas.fa-tags
         - @course.tags.each do | tag |
-          .badge.bg-primary
-            = tag.name
+          .course_tag{style: "display:inline;"}
+            = link_to courses_path(search_courses: {course_tags_tag_id_eq: tag.id}) do
+              .badge.bg-info
+                = tag.name
+                = tag.course_tags_count
 
       %p
       .fa.fa-chalkboard-teacher
