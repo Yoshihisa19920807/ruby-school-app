@@ -4,7 +4,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :trackable, :confirmable,:omniauthable , omniauth_providers: [:google_oauth2, :github]
+        # omniauth_providers indicates the authorization path?
+         :trackable, :confirmable,:omniauthable , omniauth_providers: [:google_oauth2, :github, :facebook]
 
   has_many :courses, dependent: :nullify
   has_many :enrollments, dependent: :nullify
@@ -80,7 +81,7 @@ class User < ApplicationRecord
       )
     end
     user
-end
+  end
 
   private
 

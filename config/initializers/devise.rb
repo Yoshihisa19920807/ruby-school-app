@@ -18,6 +18,7 @@ Devise.setup do |config|
 
   config.omniauth :google_oauth2, "#{Rails.application.credentials.dig(:google_oauth, :client_id)}", "#{Rails.application.credentials.dig(:google_oauth, :client_secret)}", {}
   config.omniauth :github, "#{Rails.application.credentials.dig(:github_oauth, :app_id)}", "#{Rails.application.credentials.dig(:github_oauth, :app_secret)}", scope: 'user,public_repo'
+  config.omniauth :facebook, "#{Rails.application.credentials.dig(:facebook_oauth, :app_id)}", "#{Rails.application.credentials.dig(:facebook_oauth, :app_secret)}"
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
