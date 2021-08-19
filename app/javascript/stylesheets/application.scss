@@ -11,6 +11,9 @@
 //@import '@videojs/themes/dist/forest/index.css';
 @import '@videojs/themes/dist/sea/index.css';
 
+@import "selectize/dist/css/selectize";
+@import "selectize/dist/css/selectize.default";
+
 // body { background: #f8f0e6; }
 
 .form-control.is-invalid{ background-image: none; }

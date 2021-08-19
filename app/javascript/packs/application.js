@@ -53,6 +53,8 @@ import '@videojs/themes/dist/forest/index.css';
 // Sea
 import '@videojs/themes/dist/sea/index.css';
 
+require("selectize")
+
 import './course'
 
 
@@ -66,6 +68,8 @@ import './course'
 // } );
 
 $(document).on('turbolinks:load', function(){
+
+  // drag and drop for lessons on course show
   $('.lesson-sortable').sortable({
     // カーソルの形
     cursor: "grabbing",
@@ -124,4 +128,12 @@ $(document).on('turbolinks:load', function(){
   $("video").on("contextmenu",function(){
     return false;
   });
+
+  if ($(".selectize")) {
+    console.log("if_selectize")
+    $(".selectize").selectize(
+
+    );
+  }
+
 });

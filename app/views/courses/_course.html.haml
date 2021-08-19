@@ -31,7 +31,7 @@
       // - else
       //   - unless current_page?(course_path(course))
       //     = link_to "Check the price", course_path(course), class: "btn btn-md btn-success text-light"
-      //   - else 
+      //   - else
       //     = number_to_currency(course.price)
       // // %br
       // // .d-grid
@@ -59,13 +59,19 @@
           .fa.fa-signal
           = course.level
   .card-footer
+    .fas.fa-tags
+    - course.tags.each do | tag |
+      -# .btn.btn-sm.btn-primary
+      .badge.bg-primary
+        = tag.name
+    .row
     .fa.fa-clock
     = course.created_at.strftime('%d-%b-%Y')
     .row
     .fa.fa-chalkboard-teacher
     -# = course.user
     = link_to course.user, user_path(course.user)
-  
+
   - if policy(course).edit?
     .card-footer
       = link_to 'Show', course, class: 'btn btn-sm btn-primary'

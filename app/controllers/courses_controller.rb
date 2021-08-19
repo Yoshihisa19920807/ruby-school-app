@@ -13,7 +13,8 @@ class CoursesController < ApplicationController
     # end
 
     @ransack_path = courses_path
-    @pagy, @courses = pagy(@courses_ransack.result.includes(:user))
+    @pagy, @courses = pagy(@courses_ransack.result.includes(:user, :tags))
+    @tags = Tag.all
     # @activities = PublicActivity::Activity.all
     # p "@courses"
     # p @courses
@@ -22,22 +23,24 @@ class CoursesController < ApplicationController
   def teaching
     @ransack_path = teaching_courses_path
     @ransack_courses = Course.where(user: current_user).ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user, :tags))
+    @tags = Tag.all
     render 'index'
   end
 
   def purchased
     @ransack_path = purchased_courses_path
     @q = Course.includes(:enrollments).where(enrollments: {user: current_user}).ransack(params[:search_courses], search_key: :search_courses)
-    @pagy, @courses = pagy(@q.result.includes(:enrollments))
-
+    @pagy, @courses = pagy(@q.result.includes(:enrollments, :tags))
+    @tags = Tag.all
     render "index"
   end
 
   def review_pending
     @ransack_path = purchased_courses_path
     @q = Course.includes(:enrollments).where(enrollments: {user: current_user, rating: nil}).ransack(params[:search_courses], search_key: :search_courses)
-    @pagy, @courses = pagy(@q.result.includes(:enrollments))
+    @pagy, @courses = pagy(@q.result.includes(:enrollments, :tags))
+    @tags = Tag.all
     render "index"
   end
 
@@ -45,14 +48,16 @@ class CoursesController < ApplicationController
     p "created"
     @ransack_path = created_courses_path
     @q = Course.includes(:user).where(user: current_user).ransack(params[:search_courses], search_key: :search_courses)
-    @pagy, @courses = pagy(@q.result.includes(:user))
+    @pagy, @courses = pagy(@q.result.includes(:user, :tags))
+    @tags = Tag.all
     render "index"
   end
 
   def unapproved
     @ransack_path = unapproved_courses_path
     @ransack_courses = Course.unapproved.ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user, :tags))
+    @tags = Tag.all
     render 'index'
   end
 
@@ -161,7 +166,8 @@ class CoursesController < ApplicationController
         :title, :description, :short_description, :language, :level, :price, :published, :avatar,
         course_tags_attributes: [:id, :tag_id, :_destroy,
           tag_attributes: [:id, :name, :_destroy]
-        ]
+        ],
+        tag_ids: []
       )
     end
 end
