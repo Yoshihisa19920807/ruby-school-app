@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       patch :unapprove
     end
   end
+  resources :tags, only: [:create, :destroy, :index]
   resources :users, only: [:index, :show, :edit, :update]
   get 'home/index'
   get 'home/activity'

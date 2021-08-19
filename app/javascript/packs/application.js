@@ -129,11 +129,33 @@ $(document).on('turbolinks:load', function(){
     return false;
   });
 
+  // tag form using selectize
   if ($(".selectize")) {
     console.log("if_selectize")
-    $(".selectize").selectize(
-
-    );
+    $(".selectize").selectize({
+      create: function(input, callback) {
+        console.log("_____input")
+        console.log(input)
+        console.log("___callback")
+        console.log(callback)
+        // calling create method on tags_controller
+        $.ajax({
+          type: "POST",
+          url: "/tags",
+          data: { tag: { name: input } },
+        })
+          .done(function(response){
+            console.log(response)
+            callback({value: response.id, text: response.name });
+          })
+        // // shorthand
+        // $.post('/tags.json', { tag: { name: input } })
+        //   .done(function(response){
+        //     console.log(response)
+        //     callback({value: response.id, text: response.name });
+        //   })
+      }
+    });
   }
 
 });

@@ -1,5 +1,5 @@
 - content_for :title do
-  Coursego
+  Ruby Gems Bootcamp
   \|
   -# Courses
   = action_name.humanize
@@ -56,10 +56,15 @@
     .row
       - @tags.all.order(course_tags_count: :desc).each do |tag|
         .course_tag{style: "display:inline;"}
-          = link_to courses_path(search_courses: {course_tags_tag_id_eq: tag.id}) do
+          -# = link_to courses_path(search_courses: {course_tags_tag_id_eq: tag.id}) do
+          -# ↓ doesn't redirect to new path? 
+          = link_to controller: controller_name, action: action_name, search_courses: {course_tags_tag_id_eq: tag.id} do
             .badge.bg-info
               = tag.name
               = tag.course_tags_count
+    -# = controller_name
+    -# = action_name
+    -# = link_to 'current page', controller: controller_name, action: action_name
   .col-md-10
     .row.row-cols-1.row-cols-md-3.g-4
       - @courses.each do |course|
