@@ -23,6 +23,8 @@
     = search_form_for @courses_ransack, as: :search_courses, url: @ransack_path do |f|
       = f.label :title
       = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm'
+      = f.label :tags
+      = f.search_field :tags_name_cont, placeholder: 'Tag', class: 'form-control form-control-sm'
       -# -# alernative way for setting classes
       -# = f.search_field :title_cont, placeholder: 'Title', class: ["form-control", "form-control-sm"]
       = f.label :description

@@ -71,7 +71,8 @@
       .row
       .fas.fa-tags
         - @course.tags.each do | tag |
-          = tag.name
+          .badge.bg-primary
+            = tag.name
 
       %p
       .fa.fa-chalkboard-teacher

@@ -77,7 +77,7 @@ Rails.application.configure do
 
   config.hosts << "cf1a67f7bf1b43329b1f5241e70fdf93.vfs.cloud9.eu-central-1.amazonaws.com"
   config.hosts << "localhost"
-  config.hosts << "a0e16876060c.ngrok.io"
+  config.hosts << "yoshihisaokada.loca.lt"
   # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.default_url_options = { host: 'https://1c70c97566c046c9b9b3b8359c0e23d5.vfs.cloud9.ap-northeast-1.amazonaws.com'}
   config.action_mailer.raise_delivery_errors = true

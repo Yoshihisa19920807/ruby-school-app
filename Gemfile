@@ -53,6 +53,8 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'cocoon'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-facebook'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 
 group :development, :test do

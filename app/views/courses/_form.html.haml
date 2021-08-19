@@ -25,6 +25,7 @@
       = f.input :price
 
       Tag
+      -# tag form using cocoon
       #tags
         / simply renders a form
         = f.simple_fields_for :course_tags do |course_tag|
@@ -32,6 +33,11 @@
         .links.mt-1
           / creates add course tag form button
           = link_to_add_association '・Add another tag', f, :course_tags, class: "btn btn-sm btn-success"
+
+      -# -# tag form using selectize
+      -# - p "tags____"
+      -# - p Tag.all.pluck(:name, :id)
+      -# = f.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: "selectize" }
 
       = f.input :published, :label => "Publish"
 
