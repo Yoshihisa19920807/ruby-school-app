@@ -10,4 +10,8 @@ class CommentPolicy < ApplicationPolicy
   def destroy?
     @user.has_role?(:admin) || @record.user == @user if @user.present?
   end
+
+  def update?
+    @record.user == @user if @user.present? || @user.has_role?(:admin)
+  end
 end

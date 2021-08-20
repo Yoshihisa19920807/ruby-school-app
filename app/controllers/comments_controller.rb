@@ -14,11 +14,17 @@ class CommentsController < ApplicationController
         format.html { redirect_to [@course, @lesson], notice: "Comment was successfully submitted." }
         format.json { render :show, status: :created, location: @lesson }
       else
-        flash.now[:alert] = "The process wasn't done properly."
-        format.html { render :new, status: :unprocessable_entity }
+        # flash.now[:alert] = "The process wasn't done properly."
+        # format.html { redirect_to [@course, @lesson], notice: "Comment was successfully submitted." }
+        # format.html { redirect_back(fallback_location: [@course, @lesson]) }
+        format.html { redirect_to request.referrer, alert: "The process wasn't done properly." }
+        # format.html { render 'lessons/comments/new' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def show
   end
 
   def new
@@ -32,10 +38,9 @@ class CommentsController < ApplicationController
     authorize @comment
     @lesson = Lesson.friendly.find(params[:lesson_id])
     @course = Course.friendly.find(params[:course_id])
-    # render file: "#{Rails.root}/app/views/lessons/comments/edit.html.haml", comment: @comment
-    # app/views/lessons/comments/_comment.html.haml
-    # /mnt/c/Users/USER/Projects/ruby-gems-bootcamp/app/views/lessons/comments/_comment.html.haml
-    render "lessons/comments/edit"
+    # View下のPathを書けばOK
+    render 'lessons/comments/edit'
+
   end
 
   def update
@@ -44,14 +49,14 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     authorize @comment
     @lesson = Lesson.friendly.find(params[:lesson_id])
-    @course = Course.friendly.find(params[:course_id])    
+    @course = Course.friendly.find(params[:course_id])
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to [@course, @lesson], notice: "Comment was successfully submitted." }
         format.json { render :show, status: :ok, location: @lesson }
       else
-        flash.now[:alert] = "The process wasn't done properly."
-        format.html { render :edit, status: :unprocessable_entity }
+        # flash.now[:alert] = "The process wasn't done properly."
+        format.html { render 'lessons/comments/edit', status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -61,7 +66,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     authorize @comment
     @lesson = Lesson.friendly.find(params[:lesson_id])
-    @course = Course.friendly.find(params[:course_id])    
+    @course = Course.friendly.find(params[:course_id])
     respond_to do |format|
       if @comment.destroy!
         format.html { redirect_to [@course, @lesson], notice: "Comment was successfully deleted." }

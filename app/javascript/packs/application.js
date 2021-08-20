@@ -39,6 +39,8 @@ require("jquery")
 require("jquery-ui-dist/jquery-ui");
 
 require("@nathanvda/cocoon")
+window.jQuery = $;
+window.$ = $;
 
 // import "video.js"
 // require("video.js")
