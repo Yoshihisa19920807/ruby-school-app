@@ -45,6 +45,7 @@ gem "chartkick"
 gem 'groupdate'
 gem 'ranked-model'
 gem 'jquery-rails' #for bootstrap to work
+gem 'jquery-turbolinks'
 gem "aws-sdk-s3", require: false
 gem 'active_storage_validations'
 gem 'recaptcha'
