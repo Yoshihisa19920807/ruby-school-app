@@ -119,10 +119,15 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.hosts << "54.248.194.243"
-  config.hosts << "localhost"
-  config.hosts << "yoshihisaokada.net"
-  # config.action_mailer.default_url_options = { host: '54.248.194.243' }
+  config.log_level = :debug
+  #config.hosts << "54.248.194.243"
+  #config.hosts << "localhost"
+  #config.hosts << "yoshihisaokada.net"
+  #config.hosts << "alb-for-rgb-113756311.ap-northeast-1.elb.amazonaws.com"
+  #config.hosts << "dualstack.alb-for-rgb-113756311.ap-northeast-1.elb.amazonaws.com"
+  #config.hosts = ["example.org", IPAddr.new("10.0.99.0/24")]
+  config.hosts.clear
+  config.action_mailer.default_url_options = { host: '54.248.194.243' }
   config.action_mailer.default_url_options = { host: 'yoshihisaokada.net' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp

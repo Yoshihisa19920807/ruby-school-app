@@ -5,9 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
         # omniauth_providers indicates the authorization path?
-         :trackable, :confirmable,:omniauthable , omniauth_providers: [:google_oauth2, :github
-        #  , :facebook
-        ]
+         :trackable, :confirmable,:omniauthable , omniauth_providers: [:google_oauth2, :github, :facebook]
 
   has_many :courses, dependent: :nullify
   has_many :enrollments, dependent: :nullify
@@ -54,10 +52,15 @@ class User < ApplicationRecord
     p data['name']
     user = User.where(email: data['email']).first
 
+    unless user
+      user = User.create(
+        email: data['email'],
+        password: Devise.friendly_token[0,20],
+      )
+    end
+
     user.provider = access_token['provider'],
     user.uid = access_token['uid'],
-    user.email = data['email'],
-    user.password = Devise.friendly_token[0,20],
     user.name = data['name'],
     user.image = data.image,
     user.token = access_token.credentials['token'],
