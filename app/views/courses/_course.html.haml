@@ -86,7 +86,8 @@
   - if policy(course).edit?
     .card-footer
       = link_to "analytics", analytics_course_path(course), class: 'btn btn-sm btn-info'
-  
+      = link_to course_course_wizards_path(course), class: 'btn btn-sm btn-warning mr-1' do
+        wizard
   - if policy(course).destroy?
     .card-footer
       - if course.published?

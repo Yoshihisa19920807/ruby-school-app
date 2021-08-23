@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       patch :approve
       patch :unapprove
     end
+    resources :course_wizards, controller: "courses/course_wizards"
   end
   resources :tags, only: [:create, :destroy, :index]
   resources :users, only: [:index, :show, :edit, :update]
