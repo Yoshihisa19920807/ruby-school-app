@@ -2,7 +2,7 @@
   A new student has enrolled to your course
 .row
 Course:
-= link_to @enrollment.course, @enrollment.course
+= link_to @enrollment.course, course_url(@enrollment.course)
 .row
 User email:
 = @enrollment.user.email
