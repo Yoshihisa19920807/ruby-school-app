@@ -1,41 +1,4 @@
-- content_for :title do
-  Ruby Gems Bootcamp
-  \|
-  Editing course
-  = @course.title
-
-= link_to 'Courses', courses_path
-\/
-= link_to @course.title, course_path(@course)
-\/
-= link_to course_course_wizards_path(@course) do
-  Edit
-  = step.to_s.humanize
--# = render "template"
-.card
-  .progress
-    .progress-bar{style: "width: #{@progress}%"}
-  .card-header
-    %h5
-      = wizard_steps.index(step) + 1
-      \/
-      = wizard_steps.count
-      = step.to_s.humanize
-  .card-body
-    = simple_form_for(@course) do |f|
-      = f.error_notification
-      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-
-      .form-inputs.field
-      %hr
-      .form-actions
-        = f.button :submit, class: 'btn btn-sm btn-primary'
-  .card-footer
-    .float-left
-      = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
-        .fa.fa-arrow-left
-        Previous
-    .float-right
-      = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
-        .fa.fa-arrow-right
-        Skip
+= render layout: 'courses/course_wizards/template' do
+  = simple_form_for @course, url: course_course_wizard_path, method: :put do |f|
+    = f.input :published
+    = f.button :submit, class: 'btn btn-sm btn-primary'

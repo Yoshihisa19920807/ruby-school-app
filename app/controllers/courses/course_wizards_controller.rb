@@ -43,13 +43,12 @@ class Courses::CourseWizardsController < ApplicationController
   def update
     case step
     when :first
-      @course.update(course_params)
     when :second
       @tags = Tag.all
-      @course.update(course_params)
     when :third
-      @course.update(course_params)
+      flash[:notice] = 'Course was successfully updated.'
     end
+    @course.update(course_params)
     render_wizard @course
   end
 
