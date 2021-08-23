@@ -28,20 +28,26 @@ class EnrollmentPolicy < ApplicationPolicy
     # p @record
     @user.has_role?(:admin) || @record.user_id == @user.id if @user.present?
   end
-  
+
   def update?
     @user.has_role?(:admin) || @record.course.user_id == @user.id if @user.present?
   end
-  
+
   def create?
     # @record.course.user_id != @user.id if @user.present?
   end
-  
+
   def new?
     # @record.course.user_id != @user.id if @user.present?
   end
-  
+
   def destroy?
     @user.has_role?(:admin) if @user.present?
   end
+
+  def certificate?
+    # if lessons number === viewed lessons
+    @record.course.lessons_count == @record.course.user_lessons.where(user: @record.user).count
+  end
+
 end
