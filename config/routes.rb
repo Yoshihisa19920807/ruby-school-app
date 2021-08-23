@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
-  resources :enrollments
+  resources :enrollments do
+    # collection do
+    #   get :my_students
+    # end
+    # ↑ same
+    get :my_students, on: :collection
+    # member do
+    #   get :certificate
+    # end
+    get :certificate, on: :member
+  end
   # devise_for :users
   # devise_for :users, controllers: { sessions: 'users/sessions' }
   devise_for :users, :controllers => { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :courses do
+    # collection: without args
     get "purchased", "review_pending", "teaching", "created", "unapproved", on: :collection
     resources :lessons do
       resources :comments, except: [:index]
@@ -13,7 +24,6 @@ Rails.application.routes.draw do
         delete :delete_video
       end
     end
-    # collection: without args
     resources :enrollments, only: [:new, :create]
     # member: with args
     member do

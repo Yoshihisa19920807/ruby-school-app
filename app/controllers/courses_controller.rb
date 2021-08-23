@@ -87,15 +87,15 @@ class CoursesController < ApplicationController
     @lessons = @course.lessons.rank(:row_order)
     # @enrollment = Enrollment.find_by(user_id: current_user.id, course_id: @course.id) if current_user.present?
     @enrollments_with_review = @course.enrollments.reviewed
-    respond_to do |format|
-      p "espond_to do |format|"
-      format.html
-      format.pdf do
-        # expects there is a file named show.pdf.haml
-        render pdf: "#{@course.title}, #{current_user.email}",   # Excluding ".pdf" extension.
-               low_quality: true
-      end
-    end
+    # respond_to do |format|
+    #   p "espond_to do |format|"
+    #   format.html
+    #   format.pdf do
+    #     # expects there is a file named show.pdf.haml
+    #     render pdf: "#{@course.title}, #{current_user.email}",   # Excluding ".pdf" extension.
+    #            low_quality: true
+    #   end
+    # end
   end
 
   # GET /courses/new
@@ -167,6 +167,7 @@ class CoursesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.friendly.find(params[:id])
+      @enrollment = @course.enrollments.where(user: current_user).first
     end
 
     # Only allow a list of trusted parameters through.

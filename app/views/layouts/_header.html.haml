@@ -67,6 +67,9 @@
                 Created Courses
                 .badge.bg-danger.rounded-pill
                   = Course.where(user: current_user).count.to_s
+              = link_to my_students_enrollments_path, class: "dropdown-item" do
+                .fa.fa-users
+                My students
               = link_to new_course_path, class: "#{'active fw-bold' if current_page?(new_course_path)} dropdown-item" do
                 .fa.fa-plus
                 New Course
