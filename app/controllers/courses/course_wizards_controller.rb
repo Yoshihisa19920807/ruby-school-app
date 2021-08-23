@@ -43,12 +43,12 @@ class Courses::CourseWizardsController < ApplicationController
   def update
     case step
     when :first
-      @course.update_attributes(course_params)
+      @course.update(course_params)
     when :second
       @tags = Tag.all
-      @course.update_attributes(course_params)
+      @course.update(course_params)
     when :third
-      @course.update_attributes(course_params)
+      @course.update(course_params)
     end
     render_wizard @course
   end

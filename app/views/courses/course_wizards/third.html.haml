@@ -1,4 +1,16 @@
--# = render "template"
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  Editing course
+  = @course.title
+
+= link_to 'Courses', courses_path
+\/
+= link_to @course.title, course_path(@course)
+\/
+= link_to course_course_wizards_path(@course) do
+  Edit
+  = step.to_s.humanize
 -# = render "template"
 .card
   .progress
