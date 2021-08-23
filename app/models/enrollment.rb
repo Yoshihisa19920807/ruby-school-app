@@ -7,6 +7,7 @@ class Enrollment < ApplicationRecord
   validates :review, presence: true, on: :update
   has_rich_text :review
   scope :reviewed, -> { where.not(rating: nil)}
+  scope :review_pending, -> { where(rating: nil)}
 
   extend FriendlyId
   friendly_id :to_s, :use => [:slugged]
