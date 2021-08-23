@@ -76,6 +76,8 @@ class EnrollmentsController < ApplicationController
           p "save_enrollment_succeeded___"
           format.html { redirect_to @course, notice: "Enrollment was successfully created." }
           format.json { render :show, status: :created, location: @enrollment }
+          EnrollmentMailer.student_enrollment(@enrollment).deliver_later
+          EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
         else
           p "save_enrollment_failed___"
           p @enrollment.errors

@@ -79,7 +79,8 @@ Rails.application.configure do
   config.hosts << "localhost"
   config.hosts << "yoshihisaokada.loca.lt"
   # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.default_url_options = { host: 'https://1c70c97566c046c9b9b3b8359c0e23d5.vfs.cloud9.ap-northeast-1.amazonaws.com'}
+  # config.action_mailer.default_url_options = { host: 'https://1c70c97566c046c9b9b3b8359c0e23d5.vfs.cloud9.ap-northeast-1.amazonaws.com'}
+  config.action_mailer.default_url_options = { host: 'yoshihisaokada.loca.lt'}
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {

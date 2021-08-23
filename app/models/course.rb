@@ -76,8 +76,13 @@ class Course < ApplicationRecord
   end
 
   def update_average_rate
-    if enrollments
-      self.update(average_rating: enrollments.average(:rating))
+    # if enrollments
+    #   self.update(average_rating: enrollments.average(:rating) || 0)
+    # end
+    if enrollments.any? && enrollments.where.not(rating: nil).any?
+      update_column :average_rating, (enrollments.average(:rating).round(2).to_f)
+    else
+      update_column :average_rating, (0)
     end
   end
 
