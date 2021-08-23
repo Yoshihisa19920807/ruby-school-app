@@ -1,11 +1,11 @@
-class CourseCreatorController < ApplicationController
+class Courses::CourseWizardsController < ApplicationController
   include Wicked::Wizard
 
   steps :first, :second, :third
 
-  before_action :set_course, only: %i[ show edit update destroy]
-  skip_before_action :authenticate_user!, :only => [:index, :show]
-  before_action :set_progress, only: %i[ show edit update destroy]
+  # before_action :set_course, only: %i[ show edit update destroy finish_wizard_path]
+  # skip_before_action :authenticate_user!, :only => [:index, :show]
+  before_action :set_progress, only: %i[ show ]
 
   def new
     @course = Course.new
@@ -20,25 +20,27 @@ class CourseCreatorController < ApplicationController
   def show
     p "____@progress"
     p @progress
+    @course = Course.friendly.find params[:course_id]
     # case step
     # when
     # end
-    render_wizard @course
-    p "_____wizard_steps"
-    p wizard_steps.index(step)
-    p "_____step"
-    p wizard_steps.count
+    render_wizard
+    # p "_____wizard_steps"
+    # p wizard_steps.index(step)
+    # p "_____step"
+    # p wizard_steps.count
   end
 
   def finish_wizard_path
-    user_path(current_user)
+    @course = Course.friendly.find(params[:course_id])
+    course_path(@course)
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_course
-    # @course = Course.friendly.find(params[:id])
-    # @enrollment = @course.enrollments.where(user: current_user).first
+    @course = Course.friendly.find(params[:course_id])
+    @enrollment = @course.enrollments.where(user: current_user).first
   end
 
   # Only allow a list of trusted parameters through.
@@ -53,11 +55,6 @@ class CourseCreatorController < ApplicationController
   end
 
   def set_progress
-    p "hoge_"
-    p wizard_steps.index(step) + 1
-    p "fuga_"
-    p wizard_steps.count
-    p 1.to_d / 3.to_d
     if wizard_steps.any? && wizard_steps.index(step).present?
       @progress = (wizard_steps.index(step) + 1).to_d / wizard_steps.count.to_d * 100
     else
