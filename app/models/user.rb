@@ -18,6 +18,7 @@ class User < ApplicationRecord
   friendly_id :email, use: :slugged
 
   after_create :assign_default_role
+  after_create :call_user_mail
 
   def to_s
     email
@@ -70,6 +71,10 @@ class User < ApplicationRecord
     user.confirmed_at = Time.now #autoconfirm user from omniauth
 
     user
+  end
+
+  def call_user_mail
+    UserMailer.new_user(self).deliver_later
   end
 
   private
