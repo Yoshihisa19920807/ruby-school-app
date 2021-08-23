@@ -1,0 +1,45 @@
+.card
+  .progress
+    .progress-bar{style: "width: #{@progress}%"}
+  .card-header
+    %h5
+      = wizard_steps.index(step) + 1
+      \/
+      = wizard_steps.count
+      = step.to_s.humanize
+  .card-body
+    = @course.title
+    = simple_form_for(@course, url: course_course_wizard_path, method: :put) do |f|
+      = f.error_notification
+      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+      .form-inputs.field
+        = f.input :title
+        = f.label :avatar
+        - if @course.avatar.attached?
+          .row
+            = image_tag @course.avatar
+        .row
+        = f.file_field :avatar
+        -# = f.input :avatar, as: :file
+        -# = f.input :avatar
+        %small= f.error :avatar, class: 'text-danger'
+        .row
+        -# = f.label :description
+        -# = f.rich_text_area :description
+        -# %small= f.error :description, class: 'text-danger'
+        = f.input :description, as: :rich_text_area
+        = f.input :short_description
+      %hr
+      .form-actions
+        = f.button :submit, class: 'btn btn-sm btn-primary'
+  .card-footer
+    .float-left
+      = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
+        .fa.fa-arrow-left
+        Previous
+    .float-right
+      = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
+        .fa.fa-arrow-right
+        Skip
+-# = render "template"

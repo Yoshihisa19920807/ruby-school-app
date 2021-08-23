@@ -44,6 +44,7 @@
       %h3
         .fas.fa-graduation-cap
         = @course.title
+        = link_to 'course creator', course_course_wizards_path(@course)
       %p
       -# - if @course.avatar.attached?
       -#   .row
