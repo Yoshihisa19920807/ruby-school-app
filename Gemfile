@@ -57,6 +57,7 @@ gem 'omniauth-facebook'
 gem 'wicked_pdf'
 # gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.6.0'
+gem 'wicked' #multistep forms
 
 
 group :development, :test do

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       patch :unapprove
     end
   end
+  resources :course_creator
   resources :tags, only: [:create, :destroy, :index]
   resources :users, only: [:index, :show, :edit, :update]
   get 'home/index'
