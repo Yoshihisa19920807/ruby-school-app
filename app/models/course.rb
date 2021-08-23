@@ -82,9 +82,9 @@ class Course < ApplicationRecord
   end
 
   def progress user
-    if lessons_count !=0 
+    if lessons_count !=0
       user_lessons.where(user: user).count.to_f/lessons_count.to_f*100
-    else 
+    else
       0.0
     end
   end
