@@ -1,5 +1,7 @@
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: %i[ show edit update destroy ]
+  # ↓ before_action :set_enrollment, only: [:show, :edit, :update, :destroy, :certificate]
+  before_action :set_enrollment, only: %i[ show edit update destroy certificate]
+  skip_before_action :authenticate_user!, only: %i[ certificate ]
   before_action :set_course, only: %i[ new create ]
 
   # GET /enrollments or /enrollments.json
@@ -12,11 +14,34 @@ class EnrollmentsController < ApplicationController
     #   p result
     # end
     @pagy, @enrollments =  pagy(@q.result.includes(:course, :user))
-    
-
+    authorize @enrollments
     # @pagy, @courses = pagy(@courses_ransack.result.includes(:user))
     # authorizeするオブジェクトのクラスモデルのポリシー（※コントローラ名と一致する必要あり。一致しない場合はapplication__olicyに飛ばされる）を参照する。この場合はenrollment_policy。
+    @ransack_path = enrollments_path
+  end
+
+  def my_students
+    @ransack_path = my_students_enrollments_path
+    @q = Enrollment.joins(:course).where(courses: {user: current_user}).ransack(params[:q])
+    @pagy, @enrollments = pagy(@q.result.includes(:user))
     authorize @enrollments
+    render 'index'
+  end
+
+  def certificate
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@enrollment.course.title}, #{@enrollment.user.email}",
+        page_size: 'A4',
+        template: "enrollments/show.pdf.haml",
+        layout: "pdf.html.haml",
+        orientation: "Landscape",
+        lowquality: true,
+        zoom: 1,
+        dpi: 75
+      end
+    end
   end
 
   # GET /enrollments/1 or /enrollments/1.json
@@ -37,11 +62,11 @@ class EnrollmentsController < ApplicationController
 
   # POST /enrollments or /enrollments.json
   def create
-    
+
     if @course.price > 0
       flash.now[:alert] = "This course is currently unavailable."
       render :new
-      
+
       # flash[:alert] = "You can not access paid courses yet."
       # redirect_to new_course_enrollment_path(@course)
     else
@@ -59,13 +84,10 @@ class EnrollmentsController < ApplicationController
           format.json { render json: @enrollment.errors, status: :unprocessable_entity }
         end
       end
-      
-      
       # # @course = Course.friendly.find(params[:course_id])
       # @enrollment = Enrollment.create(course: @course, user: current_user, price: @course.price)
       # redirect_to course_path(@course)
     end
-    
   end
 
   # PATCH/PUT /enrollments/1 or /enrollments/1.json

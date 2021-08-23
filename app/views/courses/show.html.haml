@@ -120,6 +120,13 @@
     %ul.list-group
       - @enrollments_with_review.each do |enrollment|
         = render 'enrollments/enrollment', enrollment: enrollment
+      - if @enrollment and policy(@enrollment).edit?
+        - if @enrollment.rating == nil
+          .d-grid
+            = link_to 'Review this course', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
+        - else
+          .d-grid
+            = link_to 'Thanks for the review! Your review is here', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
 
   .col-lg-4.order-0.order-lg-1
     = render 'courses/course', course: @course

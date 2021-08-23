@@ -17,7 +17,7 @@
 
 .row
   .col-md-2
-    = search_form_for @q do |f|
+    = search_form_for @q, url: @ransack_path do |f|
       -# = f.label :student
       = f.search_field :user_email_cont, placeholder: 'Student', class: 'form-control form-control-sm'
       -# underscore avoids refering to association
@@ -31,7 +31,7 @@
       = f.submit
       .ml-2
       %br
-      = link_to 'refresh', enrollments_path
+      = link_to 'refresh', @ransack_path
   .col-md-10
     .table-responsive
       %table.table.table-bordered.table-striped.table-sm
@@ -72,6 +72,10 @@
                 .fa.fa-comment
                 Review
             %th{style: "white-space:nowrap"}
+              .certificate{style: "display:flex; align-items:center"}
+                .fas.fas-stamp
+                Certificate
+            %th{style: "white-space:nowrap"}
               .updated_at{style: "display:flex; align-items:center"}
                 .fa.fa-calendar-check
                 -# Reviewed at
@@ -92,6 +96,7 @@
               %td= enrollment.rating
               %td= enrollment.price
               %td= enrollment.review
+              %td= link_to "Issue the Certificate", certificate_enrollment_path(enrollment, format: :pdf)
               %td= enrollment.updated_at
               %td= link_to 'Show', enrollment
               %td= link_to 'Edit', edit_enrollment_path(enrollment)
