@@ -118,12 +118,15 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.user = current_user
+    @course.description = 'Curriculum Description'
+    @course.short_description = 'Marketing Description'
 
     authorize @course
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: "Course was successfully created." }
+        # format.html { redirect_to @course, notice: "Course was successfully created." }
+        format.html { redirect_to course_course_wizards_path(@course), notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
         # flash.now[:alert] = "The process wasn't done properly."
@@ -173,11 +176,12 @@ class CoursesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def course_params
       params.require(:course).permit(
-        :title, :description, :short_description, :language, :level, :price, :published, :avatar,
-        course_tags_attributes: [:id, :tag_id, :_destroy,
-          tag_attributes: [:id, :name, :_destroy]
-        ],
-        tag_ids: []
+        :title,
+        # :description, :short_description, :language, :level, :price, :published, :avatar,
+        # course_tags_attributes: [:id, :tag_id, :_destroy,
+        #   tag_attributes: [:id, :name, :_destroy]
+        # ],
+        # tag_ids: []
       )
     end
 end
