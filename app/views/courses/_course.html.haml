@@ -81,13 +81,13 @@
   - if policy(course).edit?
     .card-footer
       = link_to 'Show', course, class: 'btn btn-sm btn-primary'
-      = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
+      -# = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
       = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
   - if policy(course).edit?
     .card-footer
-      = link_to "analytics", analytics_course_path(course), class: 'btn btn-sm btn-info'
-      = link_to course_course_wizards_path(course), class: 'btn btn-sm btn-warning mr-1' do
+      = link_to course_course_wizards_path(course), class: 'btn btn-sm btn-warning me-1' do
         wizard
+      = link_to "analytics", analytics_course_path(course), class: 'btn btn-sm btn-info'
   - if policy(course).destroy?
     .card-footer
       - if course.published?
