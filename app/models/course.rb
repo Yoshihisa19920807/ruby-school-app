@@ -95,4 +95,9 @@ class Course < ApplicationRecord
     end
   end
 
+  def update_course_income
+    self.update(income: self.enrollments.map(&:price).sum)
+    user.update_user_income
+  end
+
 end

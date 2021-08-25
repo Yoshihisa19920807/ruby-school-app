@@ -14,6 +14,8 @@ class Enrollment < ApplicationRecord
 
   after_destroy :call_update_average_rate
   after_update :call_update_average_rate
+  after_create :update_balance
+  after_destroy :update_balance
 
   def to_s
     # p "user_id___"
@@ -23,6 +25,11 @@ class Enrollment < ApplicationRecord
 
   def call_update_average_rate
     course.update_average_rate
+  end
+
+  def update_balance
+    course.update_course_income
+    user.update_user_expense
   end
 
 end
