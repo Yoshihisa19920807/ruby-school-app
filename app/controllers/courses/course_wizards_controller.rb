@@ -1,7 +1,7 @@
 class Courses::CourseWizardsController < ApplicationController
   include Wicked::Wizard
 
-  steps :first, :second, :third
+  steps :first, :second, :lesson, :third
 
   before_action :set_course, only: %i[ show update finish_wizard_path]
   # skip_before_action :authenticate_user!, :only => [:index, :show]
@@ -31,6 +31,13 @@ class Courses::CourseWizardsController < ApplicationController
     when :first
     when :second
       @tags = Tag.all
+    when :lesson
+      # deal with the case when there's no lesson
+      unless @course.lessons.any?
+        @course.lessons.build
+        p "@course.lessons____"
+        p @course.lessons
+      end
     when :third
     end
     render_wizard
@@ -45,6 +52,7 @@ class Courses::CourseWizardsController < ApplicationController
     when :first
     when :second
       @tags = Tag.all
+    when :lesson
     when :third
       flash[:notice] = 'Course was successfully updated.'
     end
@@ -71,7 +79,8 @@ class Courses::CourseWizardsController < ApplicationController
       course_tags_attributes: [:id, :tag_id, :_destroy,
         tag_attributes: [:id, :name, :_destroy]
       ],
-      tag_ids: []
+      tag_ids: [],
+      lessons_attributes: [:title, :content, :course_id, :row_order_position, :video, :video_thumbnail, :_destroy]
     )
   end
 

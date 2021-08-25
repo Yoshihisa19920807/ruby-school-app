@@ -67,7 +67,6 @@ class LessonsController < ApplicationController
   # DELETE /lessons/1 or /lessons/1.json
   def destroy
     authorize @lesson
-    
     if @lesson.destroy!
       respond_to do |format|
         format.html { redirect_to course_path(@course), notice: "Lesson was successfully destroyed." }

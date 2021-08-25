@@ -1,0 +1,18 @@
+= render layout: 'courses/course_wizards/template' do
+  = simple_form_for(@course, url: course_course_wizard_path, method: :put) do |f|
+    = f.error_notification
+    = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+    .form-inputs.field
+      -# lesson form using cocoon
+      #lessons
+        / simply renders a form
+        = f.simple_fields_for :lessons do |l|
+          = render 'lesson_fields', f: l
+        .links.mt-1
+          / creates add lesson form button
+          = link_to_add_association '・Add another lesson', f, :lessons, class: "btn btn-sm btn-success"
+
+    %hr
+    .form-actions
+      = f.button :submit, "Save & Continue", class: 'btn btn-sm btn-primary'
