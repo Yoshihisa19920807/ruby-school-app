@@ -59,6 +59,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.6.0'
 gem 'wicked' #multistep forms
 gem 'aws-partitions'
+gem 'stripe'
 
 
 group :development, :test do
