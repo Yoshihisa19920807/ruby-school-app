@@ -63,13 +63,13 @@ class EnrollmentsController < ApplicationController
   # POST /enrollments or /enrollments.json
   def create
 
-    if @course.price > 0
-      flash.now[:alert] = "This course is currently unavailable."
-      render :new
+    # if @course.price > 0
+    #   flash.now[:alert] = "This course is currently unavailable."
+    #   render :new
 
-      # flash[:alert] = "You can not access paid courses yet."
-      # redirect_to new_course_enrollment_path(@course)
-    else
+    #   # flash[:alert] = "You can not access paid courses yet."
+    #   # redirect_to new_course_enrollment_path(@course)
+    # else
       @enrollment = Enrollment.new(course: @course, user: current_user, price: @course.price)
       respond_to do |format|
         if @enrollment.save
@@ -85,7 +85,7 @@ class EnrollmentsController < ApplicationController
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @enrollment.errors, status: :unprocessable_entity }
         end
-      end
+      # end
       # # @course = Course.friendly.find(params[:course_id])
       # @enrollment = Enrollment.create(course: @course, user: current_user, price: @course.price)
       # redirect_to course_path(@course)

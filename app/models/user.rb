@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   rolify
+  cattr_accessor :current_user
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -77,6 +78,17 @@ class User < ApplicationRecord
     UserMailer.new_user(self).deliver_later
   end
 
+  def update_user_income
+    # courses = self.courses
+    self.update(course_income: courses.map(&:income).sum)
+    self.update(balance: course_income - expense)
+  end
+
+  def update_user_expense
+    self.update(expense: enrollments.map(&:price).sum)
+    self.update(balance: course_income - expense)
+  end
+
   private
 
   def must_have_a_role
@@ -85,5 +97,5 @@ class User < ApplicationRecord
       errors.add(:roles, "must have at least one role")
     end
   end
-  
+
 end
