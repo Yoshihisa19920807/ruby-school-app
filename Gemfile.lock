@@ -199,6 +199,8 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     nio4r (2.5.8)
+    nokogiri (1.12.3-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.12.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
@@ -331,6 +333,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stripe (5.38.0)
     temple (0.8.2)
     thor (1.1.0)
     tilt (2.0.10)
@@ -414,6 +417,7 @@ DEPENDENCIES
   selenium-webdriver
   simple_form
   spring
+  stripe
   turbolinks (~> 5)
   tzinfo-data
   unicorn

@@ -65,7 +65,8 @@ Course.all.each do |course|
 
   Enrollment.create!([{
     user: User.find_by(email: "studentteacher@example.com"),
-    course: course
+    course: course,
+    price: course.price
   }])
 
   Enrollment.create!([{

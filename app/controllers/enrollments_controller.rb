@@ -70,7 +70,44 @@ class EnrollmentsController < ApplicationController
     #   # flash[:alert] = "You can not access paid courses yet."
     #   # redirect_to new_course_enrollment_path(@course)
     # else
-      @enrollment = Enrollment.new(course: @course, user: current_user, price: @course.price)
+    @enrollment = Enrollment.new(course: @course, user: current_user, price: @course.price)
+      # Stripe::PaymentIntent.create({
+      #   amount: 1000,
+      #   currency: 'jpy',
+      #   payment_method_types: ['card'],
+      #   receipt_email: 'jenny.rosen@example.com',
+      # })
+      # respond_to do |format|
+      #   if @enrollment.save
+      #     p "save_enrollment_succeeded___"
+      #     format.html { redirect_to @course, notice: "Enrollment was successfully created." }
+      #     format.json { render :show, status: :created, location: @enrollment }
+      #     EnrollmentMailer.student_enrollment(@enrollment).deliver_later
+      #     EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
+      #   else
+      #     p "save_enrollment_failed___"
+      #     p @enrollment.errors
+      #     flash.now[:alert] = "The process wasn't done properly."
+      #     format.html { render :new, status: :unprocessable_entity }
+      #     format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+      #   end
+      # end
+    if @course.price > 0
+
+      @amount = (@course.price * 100).to_i
+      # customer = Stripe::Customer.create(
+      #   email: @enrollment.user.email,
+      # )
+      customer = Stripe::Customer.create(
+        email: params[:stripeEmail],
+        source: params[:stripeToken]
+      )
+      charge = Stripe::Charge.create(
+        customer:    customer.id,
+        amount:      @amount,
+        description: 'Ruby Gems Bootcamp Premium Content',
+        currency:    'usd'
+      )
       respond_to do |format|
         if @enrollment.save
           p "save_enrollment_succeeded___"
@@ -85,10 +122,23 @@ class EnrollmentsController < ApplicationController
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @enrollment.errors, status: :unprocessable_entity }
         end
-      # end
-      # # @course = Course.friendly.find(params[:course_id])
-      # @enrollment = Enrollment.create(course: @course, user: current_user, price: @course.price)
-      # redirect_to course_path(@course)
+      end
+    else
+      respond_to do |format|
+        if @enrollment.save
+          p "save_enrollment_succeeded___"
+          format.html { redirect_to @course, notice: "Enrollment was successfully created." }
+          format.json { render :show, status: :created, location: @enrollment }
+          EnrollmentMailer.student_enrollment(@enrollment).deliver_later
+          EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
+        else
+          p "save_enrollment_failed___"
+          p @enrollment.errors
+          flash.now[:alert] = "The process wasn't done properly."
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 

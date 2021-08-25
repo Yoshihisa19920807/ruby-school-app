@@ -7,9 +7,17 @@
       = @course.title
   .card-body
     // = render 'enrollments/form', course: @course
+    Please put the number "5555 5555 5555 4444" beacuse in development
+    .row
+    Also provide any future date and any 3 digit number
     = form_with url: course_enrollments_path(@course, method: :post) do |f|
-      = submit_tag "pay #{number_to_currency(@course.price)}", class:'btn btn-success text-light'
-
+      -# = submit_tag "pay #{number_to_currency(@course.price)}", class:'btn btn-success text-light'
+      %script.stripe-button{"data-amount" => "#{(@course.price * 100).to_i}",
+                          "data-description" => "#{@course.title} (#{number_to_currency @course.price})",
+                          "data-email" => "#{current_user.email}",
+                          "data-key" => "#{Rails.application.credentials.dig(:stripe, :publishable_key)}",
+                          "data-locale" => "auto",
+                          :src => "https://checkout.stripe.com/checkout.js"}
   .card-footer
     = link_to 'Back', :back
 
