@@ -56,6 +56,9 @@
         %th= 'last_sign_in_ip'.humanize
         %th= sort_link(@q, :enrollments_count)
         %th= sort_link(@q, :courses_count)
+        %th= sort_link(@q, :courses_income, "income".humanize)
+        %th= sort_link(@q, :expense)
+        %th= sort_link(@q, :balance)
         %th= sort_link(@q, :user_lessons_count, "Lessons this user viewed")
         %th= sort_link(@q, :comments_count)
         %th Confirmed email?
@@ -73,6 +76,9 @@
           %td= user.last_sign_in_ip
           %td= user.enrollments_count
           %td= user.courses_count
+          %td= user.course_income
+          %td= user.expense
+          %td= user.balance
           %td= user.user_lessons_count
           %td= user.comments_count
           %td= user.confirmed? ? "Yes" : "No"
