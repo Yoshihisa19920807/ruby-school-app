@@ -113,10 +113,10 @@
       %ul.navbar-nav.ms-auto
         %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: "nav-link #{'active font-weight-bold' if current_page?(new_user_registration_path)}"
         %li.nav-item= link_to 'Log In', new_user_session_path, class: "nav-link #{'active font-weight-bold' if current_page?(new_user_session_path)}"
-        -# %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
-        -#   = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'nav-link' do
-        -#     .fab.fa-google
-        -#     // Sign in with Google
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
+          = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'nav-link' do
+            .fab.fa-google
+            // Sign in with Google
         -# %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_github_omniauth_authorize_path)}"}
         -#   = link_to user_github_omniauth_authorize_path, method: :post, class: 'nav-link' do
         -#     .fab.fa-github

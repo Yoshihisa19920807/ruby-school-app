@@ -6,7 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
         # omniauth_providers indicates the authorization path?
-         :trackable, :confirmable,:omniauthable , omniauth_providers: [:google_oauth2, :github, :facebook]
+         :trackable, :confirmable,:omniauthable ,
+        #  omniauth_providers: [:google_oauth2, :github, :facebook]
+         omniauth_providers: [:google_oauth2]
 
   has_many :courses, dependent: :nullify
   has_many :enrollments, dependent: :nullify
