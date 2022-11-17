@@ -1,0 +1,21 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  Courses
+  \|
+  Course Analytics: #{@course.title}
+
+%h3
+  Enrollments: 
+  = column_chart @course.enrollments.group_by_day(:created_at).count
+
+  -# Courses:
+  -# = area_chart charts_courses_per_day_path
+  Course Revenue:
+  = bar_chart @course.enrollments.group_by_day(:created_at).sum(:price)
+
+  Unique Views per Lesson: 
+  = line_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').count
+
+  Impressions per Lesson:
+  = line_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').sum(:impressions)

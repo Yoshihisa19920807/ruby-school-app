@@ -1,0 +1,12 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  Enrollments
+  \|
+  Enrollment:
+  =@enrollment.to_s
+
+-# -# notification
+-# %p#notice= notice
+
+= render 'enrollments/enrollment', enrollment: @enrollment

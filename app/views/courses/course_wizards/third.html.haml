@@ -1,0 +1,4 @@
+= render layout: 'courses/course_wizards/template' do
+  = simple_form_for @course, url: course_course_wizard_path, method: :put do |f|
+    = f.input :published
+    = f.button :submit, "Save & Continue", class: 'btn btn-sm btn-primary'

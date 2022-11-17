@@ -1,0 +1,17 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  Courses
+  \|
+  Editing Course:
+  =@course.title
+
+.card
+  .card-header
+    %h1 Editing course
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Show', @course, class: 'btn btn-sm btn-link'
+    \|
+    = link_to 'Back', courses_path, class: 'btn btn-sm btn-link'

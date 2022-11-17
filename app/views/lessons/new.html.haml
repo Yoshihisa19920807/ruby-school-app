@@ -1,0 +1,31 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  Courses
+  \|
+  = @course.title
+  \|
+  Create A New Lesson
+
+=link_to "Courses", courses_path
+\/
+=link_to @course.title, course_path(@course)
+\/
+New Lesson
+%hr
+
+.card
+  .card-header
+    %h3
+      .far.fa-plus-square
+      New Lesson
+  .card-body
+    = render 'form'
+  // .br
+  //   %br
+  //     :css
+  //       .br {
+  //         line-height: 50%;
+  //       }
+  .card-footer
+    = link_to 'Back', @course, class: 'btn btn-sm btn-link'

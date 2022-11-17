@@ -16,6 +16,8 @@
 #
 default: &default
   adapter: postgresql
+  #username: postgresql
+  #password: dbabkidb8
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
@@ -82,6 +84,6 @@ test:
 production:
   <<: *default
   database: ruby_gems_bootcamp_production
-  # create this user on ec2 instance with the previlege of create DB and with password
-  username: yoshi
-  password: dbabkidb8
+  # # create this user on ec2 instance with the previlege of create DB and with password
+  # username: yoshi
+  # password: dbabkidb8

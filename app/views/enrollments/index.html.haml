@@ -1,0 +1,107 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  -# Enrollments
+  = action_name.humanize
+  enrollments
+
+
+-# %h1 Listing enrollments
+%h3
+  .text-center
+    = action_name.humanize
+    enrollments
+    .badge.bg-info
+      = @enrollments.count
+%p
+
+.row
+  .col-md-2
+    = search_form_for @q, url: @ransack_path do |f|
+      -# = f.label :student
+      = f.search_field :user_email_cont, placeholder: 'Student', class: 'form-control form-control-sm'
+      -# underscore avoids refering to association
+      -# = f.label :_course
+      = f.search_field :course_title_cont, placeholder: 'Course', class: 'form-control form-control-sm'
+      -# = f.label :teacher
+      = f.search_field :course_user_email_cont, placeholder: 'Teacher', class: 'form-control form-control-sm'
+      = f.search_field :rating_eq, placeholder: "Rating", class: 'form-control form-control-sm'
+
+      %br
+      = f.submit
+      .ml-2
+      %br
+      = link_to 'refresh', @ransack_path
+  .col-md-10
+    .table-responsive
+      %table.table.table-bordered.table-striped.table-sm
+        %thead
+          %tr
+            %th
+              .user{style: "display:flex; align-items:center"}
+                .fa.fa-user
+                -# User
+                = sort_link(@q, :user_email, "User")
+            %th
+              .course{style: "display:flex; align-items:center"}
+                .fa.fa-graduation-cap
+                -# Course
+                = sort_link(@q, :course_title, "Course")
+            %th
+              .course{style: "display:flex; align-items:center"}
+                .fa.fa-teacher-chalkboard
+                -# Teacher
+                = sort_link(@q, :course_user_email, "Teacher")
+            %th{style: "white-space:nowrap"}
+              .enrollment_date{style: "display:flex; align-items:center"}
+                .fa.fa-calendar-day
+                -# Enrollment Date
+                = sort_link(@q, :created_at, "Enrollment Date")
+            %th{style: "white-space:nowrap"}
+              .review{style: "display:flex; align-items:center"}
+                .fa.fa-star
+                -# Rating
+                = sort_link(@q, :rating, "Rating")
+            %th{style: "white-space:nowrap"}
+              .price{style: "display:flex; align-items:center"}
+                .fa.fa-dollar-sign
+                -# Price
+                = sort_link(@q, :price, "Price")
+            %th{style: "white-space:nowrap"}
+              .review{style: "display:flex; align-items:center"}
+                .fa.fa-comment
+                Review
+            %th{style: "white-space:nowrap"}
+              .certificate{style: "display:flex; align-items:center"}
+                .fas.fas-stamp
+                Certificate
+            %th{style: "white-space:nowrap"}
+              .updated_at{style: "display:flex; align-items:center"}
+                .fa.fa-calendar-check
+                -# Reviewed at
+                = sort_link(@q, :updated_at, "Reviewed at")
+            %th
+            %th
+            %th
+      
+        %tbody
+          -# - p "view__@enrollments"
+          -# - p @enrollments
+          - @enrollments.each do |enrollment|
+            %tr
+              %td= enrollment.user
+              %td= enrollment.course
+              %td= enrollment.course.user
+              %td= enrollment.created_at
+              %td= enrollment.rating
+              %td= enrollment.price
+              %td= enrollment.review
+              %td= link_to "Issue the Certificate", certificate_enrollment_path(enrollment, format: :pdf)
+              %td= enrollment.updated_at
+              %td= link_to 'Show', enrollment
+              %td= link_to 'Edit', edit_enrollment_path(enrollment)
+              %td= link_to 'Destroy', enrollment, method: :delete, data: { confirm: 'Are you sure?' }
+    != pagy_bootstrap_nav(@pagy)
+%br
+
+-# = link_to 'New Enrollment', new_enrollment_path

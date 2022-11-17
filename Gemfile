@@ -23,10 +23,44 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+gem "haml-rails", "~> 2.0"
+gem 'simple_form'
+gem 'faker'
+gem 'devise'
+gem 'friendly_id', '~> 5.4.0'
+gem 'public_activity'
+gem "rolify"
+gem 'ransack'
+gem "pundit"
+gem 'exception_notification'
+# gem 'rmagick'
+# # 最下部に配置
+# gem 'font-awesome-sass'
+gem 'pagy'
+gem "chartkick"
+gem 'groupdate'
+gem 'ranked-model'
+gem 'jquery-rails' #for bootstrap to work
+gem 'jquery-turbolinks'
+gem "aws-sdk-s3", require: false
+gem 'active_storage_validations'
+gem 'recaptcha'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem 'cocoon'
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-facebook'
+gem 'wicked_pdf'
+# gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.6.0'
+gem 'wicked' #multistep forms
+gem 'aws-partitions'
+gem 'stripe'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,6 +76,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rails-erd' #sudo apt-get install graphviz; bundle exec erd
 end
 
 group :test do

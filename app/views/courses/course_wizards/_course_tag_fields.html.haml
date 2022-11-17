@@ -1,0 +1,7 @@
+.nested-fields.course-tag-fields.d-flex.align-items-center
+  .d-flex.align-items-center.mb-1
+    .me-1.tag_from_list
+      = f.association :tag, collection: Tag.order(:name), prompt: 'Choose an existing tag', label: false
+    = link_to_add_association 'or create a new tag', f, :tag, class: 'me-1'
+    = link_to_remove_association f, class: 'badge bg-warning text-dark' do
+      .fas.fa-times

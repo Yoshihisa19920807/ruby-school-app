@@ -1,7 +1,6 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.hosts << "cf1a67f7bf1b43329b1f5241e70fdf93.vfs.cloud9.eu-central-1.amazonaws.com"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -32,7 +31,8 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -74,4 +74,30 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.hosts << "cf1a67f7bf1b43329b1f5241e70fdf93.vfs.cloud9.eu-central-1.amazonaws.com"
+  config.hosts << "localhost"
+  config.hosts << "yoshihisaokada.loca.lt"
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.default_url_options = { host: 'https://1c70c97566c046c9b9b3b8359c0e23d5.vfs.cloud9.ap-northeast-1.amazonaws.com'}
+  config.action_mailer.default_url_options = { host: 'yoshihisaokada.loca.lt'}
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => 'smtp.gmail.com',
+    :user_name => "yoshi19920807@gmail.com",
+    :password => "wbzqxbstvmfairbc",
+    :authentication => 'login'
+  }
+  # Rails.application.config.middleware.use ExceptionNotification::Rack,
+  #   email: {
+  #     # deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+  #     email_prefix: '[PREFIX] ',
+  #     sender_address: %{"notifier" <notifier@example.com>},
+  #     # ↓email address to send error message
+  #     exception_recipients: %w{yoshi19920807@gmail.com}
+  #   }
 end

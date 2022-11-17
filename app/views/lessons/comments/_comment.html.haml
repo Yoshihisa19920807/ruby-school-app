@@ -1,0 +1,13 @@
+.card
+  .card-body
+    = comment.content
+  .card-footer
+    = comment.created_at.strftime('%d-%b-%Y %p %I:%m')
+    by
+    = link_to comment.user, user_path(comment.user)
+  - if policy(comment).edit? || policy(comment).destroy?
+    .card-footer
+      - if policy(comment).edit?
+        = link_to "edit", edit_course_lesson_comment_path(@course, @lesson, comment), class: "btn btn-sm btn-warning my-1"
+      - if policy(comment).destroy?
+        = link_to "delete", course_lesson_comment_path(@course, @lesson, comment), method: :delete, class: "btn btn-sm btn-danger my-1"

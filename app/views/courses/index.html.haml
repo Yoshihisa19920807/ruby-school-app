@@ -1,0 +1,84 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  -# Courses
+  = action_name.humanize
+  courses
+
+%h3
+  .text-center
+    -# Courses:
+    .fa.fa-graduation-cap
+    -# - p "___action_name"
+    -# - p action_name.humanize
+    = action_name.humanize
+    courses
+    .badge.bg-info
+      = @courses.count
+%p
+
+.row
+  .col-md-2
+    -# = search_form_for @q do |f|
+    = search_form_for @courses_ransack, as: :search_courses, url: @ransack_path do |f|
+      = f.label :title
+      = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm'
+      = f.label :tags
+      = f.search_field :tags_name_cont, placeholder: 'Tag', class: 'form-control form-control-sm'
+      -# -# alernative way for setting classes
+      -# = f.search_field :title_cont, placeholder: 'Title', class: ["form-control", "form-control-sm"]
+      = f.label :description
+      = f.search_field :short_description_cont, placeholder: 'Description', class: 'form-control form-control-sm'
+      = f.label :language
+      = f.select :language_cont, Course.languages, include_blank: true
+      = f.label :level
+      = f.select :level_cont, Course.levels, include_blank: true
+      = f.label :price_gteq
+      = f.search_field :price_gteq, class: 'form-control form-control-sm'
+      = f.label :price_lteq
+      = f.search_field :price_lteq, class: 'form-control form-control-sm'
+      = f.label :teacher
+      = f.search_field :user_email_cont, placeholder: 'Teacher', class: 'form-control form-control-sm'
+      .row.mt-3
+      = f.submit
+      %hr
+      .row
+      = sort_link(@courses_ransack, :price, "Sort by Price", { default_order: :desc }, { class: "" })
+      .row
+      = sort_link(@courses_ransack, :enrollments_count, "Sort by The Number of Students", { default_order: :desc }, { class: "" })
+      .row
+      = sort_link(@courses_ransack, :average_rating, "Sort by Average Rating", { default_order: :desc }, { class: "" })
+      %hr
+      .row
+      = link_to 'refresh', @ransack_path, class: "mb-2"
+      %hr
+    Tags:
+    .row
+      - @tags.all.order(course_tags_count: :desc).each do |tag|
+        .course_tag{style: "display:inline;"}
+          -# = link_to courses_path(search_courses: {course_tags_tag_id_eq: tag.id}) do
+          -# ↓ doesn't redirect to new path? 
+          = link_to controller: controller_name, action: action_name, search_courses: {course_tags_tag_id_eq: tag.id} do
+            .badge.bg-info
+              = tag.name
+              = tag.course_tags_count
+    -# = controller_name
+    -# = action_name
+    -# = link_to 'current page', controller: controller_name, action: action_name
+  .col-md-10
+    .row.row-cols-1.row-cols-md-3.g-4
+      - @courses.each do |course|
+        .col-md-4
+          = render 'courses/course', course: course
+          %p
+    %hr
+    -# != pagy_nav(@pagy)
+    != pagy_bootstrap_nav(@pagy)
+    -# != pagy_bootstrap_nav_js(@pagy)
+    -# != pagy_bootstrap_combo_nav_js(@pagy)
+
+
+-# = p @activities
+
+%br
+

@@ -1,0 +1,26 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  Enrollments
+  \|
+  Edit Enrollment:
+  =@enrollment.to_s
+
+// %h1 Editing enrollment
+
+// = render 'form'
+
+// = link_to 'Show', @enrollment
+// \|
+// = link_to 'Back', enrollments_path
+
+.card
+  .card-header
+    .far.fa-edit-square
+    Review
+  .card-body
+    = render 'enrollments/form'
+  .card-footer
+    = link_to 'Show Review', @enrollment
+    \|
+    = link_to 'Back to course', course_path(@enrollment.course) 

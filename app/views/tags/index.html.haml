@@ -1,0 +1,29 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  -# Users
+  = action_name.humanize
+  tags
+
+%h3
+  .text-center
+    -# Users:
+    = action_name.humanize
+    Tags
+
+.table-responsive
+  %table.table.table-boarded.table-striped.table-sm
+    %thead
+      %tr
+        %th id
+        %th name
+        %th Count
+        %th
+    %tbody
+      - @tags.each do |tag|
+        %tr
+          %td= tag.id
+          %td= tag.name
+          %td= tag.course_tags_count
+          %td= link_to 'Delete', tag_path(tag), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger'
+-# != pagy_bootstrap_nav(@pagy)

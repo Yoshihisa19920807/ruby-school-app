@@ -1,0 +1,68 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  Courses
+  \|
+  = @course.title
+  \|
+  Lessons
+  \|
+  = @lesson.title
+
+= link_to 'Courses', courses_path
+\/
+= link_to @lesson.course.title, course_path(@lesson.course)
+\/
+= link_to @lesson.title, course_lesson_path(@course, @lesson)
+%hr
+
+= @lesson.user_lessons.where(user: current_user).first.impressions
+
+.row
+  .col-lg-8
+    = render 'lessons/lesson', lesson: @lesson
+    -# = image_tag @lesson.video_thumbnail
+    - if @lesson.video.present? && @lesson.video_thumbnail.present?
+      
+      -# -# can be used when replacing <import videojs from 'video.js'> with <import 'video.js'> 
+      -# %video-js#player-id.vjs-theme-sea{ poster: rails_blob_url(@lesson.video_thumbnail), :controls => true, "data-setup" => "{\"liveui\": true,\"fluid\": true, \"controls\": true, \"playbackRates\": [0.5, 1, 1.5], \"height\": 100}", :preload => ""}
+      -#   -# %source{:src => rails_blob_url(@lesson.video), :type => ""}
+      -#   -# same with the above
+      -#   = tag :source, :src => rails_blob_url(@lesson.video), :type => ""
+      
+      /VIDEO-JS VIDEO
+      = content_tag :video, id: 'my-video', poster: rails_blob_url(@lesson.video_thumbnail) do
+        = tag :source, src: url_for(@lesson.video), type: @lesson.video.content_type
+
+      = link_to "Delete video", delete_video_course_lesson_path(@course, @lesson), class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"}
+
+  .col-lg-4
+    %ul.list-group
+      %li.list-group-item
+        = link_to course_path(@lesson.course) do
+          .fa.fa-graduation-cap
+            = @lesson.course.title
+        .row
+        .fa.fa-spinner
+        = number_to_percentage(@lesson.course.progress(current_user), precision: 0)
+    - @lessons.each do |lesson|
+      - if @lesson && lesson == @lesson
+        %li.list-group-item.list-group-item-success.d-flex.align-items-center
+          = render 'lessons/lesson_preview', lesson: lesson
+      - else
+        %li.list-group-item.d-flex.align-items-center
+          = render 'lessons/lesson_preview', lesson: lesson
+%hr
+  %b
+    .fa.fa-comment
+    All comments:
+    = @comments.count
+  - @comments.each do |comment|
+    = render 'lessons/comments/comment', comment: comment
+  %hr
+  .card
+    .card-header
+      %b
+        New comment:
+    .card-body
+      = render 'lessons/comments/form'

@@ -1,0 +1,54 @@
+.container
+  -# frozen_string_literal: true
+  = simple_form_for(@course) do |f|
+    = f.error_notification
+    = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+    .form-inputs.field
+      = f.input :title
+      -# = f.label :avatar
+      -# - if @course.avatar.attached?
+      -#   .row
+      -#     = image_tag @course.avatar
+      -# .row
+      -# = f.file_field :avatar
+      -# -# = f.input :avatar, as: :file
+      -# -# = f.input :avatar
+      -# %small= f.error :avatar, class: 'text-danger'
+      -# .row
+      -# -# = f.label :description
+      -# -# = f.rich_text_area :description
+      -# -# %small= f.error :description, class: 'text-danger'
+      -# = f.input :description, as: :rich_text_area
+      -# = f.input :short_description
+      -# = f.input :language, collection: ["English", "Russian", "Japanese"]
+      -# = f.input :level, collection: ["Beginner", "Intermidiate", "Advanced"], prompt: "Select the level"
+      -# = f.input :price
+
+      -# = f.label :tag
+      -# -# -# tag form using cocoon
+      -# -# #tags
+      -# -#   / simply renders a form
+      -# -#   = f.simple_fields_for :course_tags do |course_tag|
+      -# -#     = render 'course_tag_fields', f: course_tag
+      -# -#   .links.mt-1
+      -# -#     / creates add course tag form button
+      -# -#     = link_to_add_association '・Add another tag', f, :course_tags, class: "btn btn-sm btn-success"
+
+      -# -# tag form using selectize
+      -# - p "tags____"
+      -# - p Tag.all.pluck(:name, :id)
+      -# = f.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: "selectize" }
+
+      -# = f.input :published, :label => "Publish"
+
+    %hr
+    .form-actions
+      = f.button :submit, class: 'btn btn-sm btn-primary'
+  
+- if @course.errors.any?
+  :javascript
+    $(document).ready(function() {
+      console.log("hoge____")
+      history.pushState('', '', location.href + '/new')
+    });

@@ -1,0 +1,24 @@
+%b
+  A new student has enrolled to your course
+.row
+Course:
+= link_to @enrollment.course, course_url(@enrollment.course)
+.row
+User email:
+= @enrollment.user.email
+.row
+Enrollment date:
+= @enrollment.created_at
+.row
+Enrollment ID:
+= @enrollment.slug
+.row
+Course price:
+= @enrollment.course.price
+.row
+Price paid:
+= @enrollment.price
+.row
+Regards,
+.row
+= link_to 'The Ruby Gems Bootcamp team', root_url

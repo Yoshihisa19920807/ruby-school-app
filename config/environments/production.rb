@@ -38,7 +38,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -117,4 +118,35 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.log_level = :debug
+  #config.hosts << "54.248.194.243"
+  #config.hosts << "localhost"
+  #config.hosts << "yoshihisaokada.net"
+  #config.hosts << "alb-for-rgb-113756311.ap-northeast-1.elb.amazonaws.com"
+  #config.hosts << "dualstack.alb-for-rgb-113756311.ap-northeast-1.elb.amazonaws.com"
+  #config.hosts = ["example.org", IPAddr.new("10.0.99.0/24")]
+  config.hosts.clear
+  config.action_mailer.default_url_options = { host: '54.248.194.243' }
+  config.action_mailer.default_url_options = { host: 'yoshihisaokada.net' }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => 'smtp.gmail.com',
+    :user_name => "yoshi19920807@gmail.com",
+    :password => "wbzqxbstvmfairbc",
+    :authentication => 'login'
+  }
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+      # deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+      email_prefix: '[PREFIX] ',
+      sender_address: %{"notifier" <notifier@example.com>},
+      # ↓email address to send error message
+      exception_recipients: %w{yoshi19920807@gmail.com}
+    }
 end

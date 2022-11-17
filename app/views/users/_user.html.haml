@@ -1,0 +1,75 @@
+.card
+  .card-header
+    - if user.online?
+      .text-success.far.fa-circle
+    - else
+      .text-danger.far.fa-circle
+    = link_to user.email, user_path(user) 
+  .card-footer
+    - if user == current_user && user.uid.nil?
+      = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary btn-sm' do
+        .fab.fa-google
+        Sync with Google
+      = link_to user_github_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary btn-sm ms-1' do
+        .fab.fa-github
+        Sync with Github
+      = link_to user_facebook_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary btn-sm ms-1' do
+        .fab.fa-facebook
+        Sync with Facebook
+      %p
+    - if user.image?
+      .row
+      = image_tag user.image, size: '40x40', alt: "#{@user.email}", class: 'rounded-circle'
+    .row
+    = @user.name
+  .card-footer
+    Signed up
+    = time_ago_in_words(user.created_at)
+    ago
+  .card-footer
+    = 'sign_in_count'.humanize + ":"
+    = user.sign_in_count
+    .row
+    = 'current_sign_in_at'.humanize + ":"
+    = user.current_sign_in_at
+    .row
+    = 'current_sign_in_ip'.humanize + ":"
+    = user.current_sign_in_ip
+    .row
+    = 'last_sign_in_ip'.humanize + ":"
+    = user.last_sign_in_ip
+    .row
+    = 'enrollments_count'.humanize+ ":"
+    = user.enrollments_count
+    .row
+    = 'courses_created'.humanize+ ":"
+    = user.courses_count
+    .row
+    = 'income'.humanize+ ":"
+    = user.course_income
+    .row
+    = 'expense'.humanize+ ":"
+    = user.expense
+    .row
+    = 'balance'.humanize+ ":"
+    = user.balance
+    .row
+    .fa.fa-comment
+    Comments:
+    = user.comments_count
+    .row
+    .fa.fa-chalkboard
+    Lessons this user viewed:
+    = user.user_lessons_count
+    .card-footer
+      Confirmed email?
+      - if user.confirmed_at.present?
+        .badge.bg-success Yes
+      - else
+        .badge.bg-danger No
+    .card-footer
+      - user.roles.each do |role|
+        .badge.bg-info
+          = role.name
+      - if policy(user).edit?
+        = link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning'

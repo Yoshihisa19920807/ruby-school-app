@@ -1,0 +1,92 @@
+- content_for :title do
+  Ruby Gems Bootcamp
+  \|
+  -# Users
+  = action_name.humanize
+  users
+
+%h3
+  .text-center
+    -# Users:
+    = action_name.humanize
+    users
+    .badge.bg-info
+      = @users.count
+%p
+
+-# .card-group
+-#   - @users.each do |user|
+-#     = render 'users/user', user: user
+
+%br
+.form-inline
+  = search_form_for @q do |f|
+    = f.label :email_cont
+    = f.search_field :email_cont
+    and
+    %br
+    = f.label :sign_in_count_gt
+    = f.search_field :sign_in_count_gt
+    and
+    %br
+    = f.label :sign_in_count_lt
+    = f.search_field :sign_in_count_lt
+    -# -# not working
+    -# = f.search_field :email_or_sign_in_count_eq, placeholder: 'email or sign in count'
+    -# -# needs datepicker or something
+    -# = f.search_field :last_sign_in_at_gteq, placeholder: 'last sign in is later than or equal'
+    -# = f.search_field :last_sign_in_at_lteq, placeholder: 'last sign in is earlier than or equal'
+    %br
+    = f.submit
+    .ml-2
+    %br
+    = link_to 'refresh', users_path
+
+.table-responsive
+  %table.table.table-boarded.table-striped.table-sm
+    %thead
+      %tr
+        %th id
+        %th= sort_link(@q, :email)
+        %th= sort_link(@q, :created_at)
+        %th= 'sign_in_count'.humanize
+        %th= 'current_sign_in_at'.humanize
+        %th= 'last_sign_in_at'.humanize
+        %th= 'current_sign_in_ip'.humanize
+        %th= 'last_sign_in_ip'.humanize
+        %th= sort_link(@q, :enrollments_count)
+        %th= sort_link(@q, :courses_count)
+        %th= sort_link(@q, :courses_income, "income".humanize)
+        %th= sort_link(@q, :expense)
+        %th= sort_link(@q, :balance)
+        %th= sort_link(@q, :user_lessons_count, "Lessons this user viewed")
+        %th= sort_link(@q, :comments_count)
+        %th Confirmed email?
+        %th Roles
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.id
+          %td= link_to user.email, user_path(user)
+          %td= user.created_at.strftime('%d/%m/%y - %H:%M')
+          %td= user.sign_in_count
+          %td= user.current_sign_in_at
+          %td= user.last_sign_in_at
+          %td= user.current_sign_in_ip
+          %td= user.last_sign_in_ip
+          %td= user.enrollments_count
+          %td= user.courses_count
+          %td= user.course_income
+          %td= user.expense
+          %td= user.balance
+          %td= user.user_lessons_count
+          %td= user.comments_count
+          %td= user.confirmed? ? "Yes" : "No"
+          %td
+            - user.roles.each do |role|
+              .badge.bg-info
+                = role.name
+            - if policy(user).edit?
+              .mt-1
+              = link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning'
+!= pagy_bootstrap_nav(@pagy)

@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{description: 'Online Learning and Skill sharing platform'}/
+    %meta{keywords: 'online education, course platform, video tutorials, udemy clone'}/
+    %meta{author: 'Yoshihisa Okada'}/
+    -# = favicon_link_tag 'line_157082726308416_.jpg'
+    = favicon_link_tag 'thumbnail___.png'
+    -# = image_tag 'thumbnail_.png'
+    -# = favicon_link_tag 'PNG_transparency_demonstration_1.png'
+    %title
+      = content_for?(:title) ? yield(:title) : "Rubygems"
+    // %title= yield(:title)
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    -# -# webpack packs/stylesheets下
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    -# sprockets, assets/stylesheets下
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    - if Rails.env.production?
+      = render 'layouts/google_analytics'
+  %body
+    = render 'layouts/header'
+    = render 'layouts/messages'
+    -#%p.notice= notice
+    -#%p.alert= alert
+    .container
+      %p
+      = yield
+    -# .bg-dark.text-white
+    .purple-background.text-light
+      = render 'layouts/footer'

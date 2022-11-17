@@ -1,0 +1,29 @@
+.container
+  -# frozen_string_literal: true
+  = simple_form_for(@course) do |f|
+    = f.error_notification
+    = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+    .form-inputs.field
+      = f.input :title
+      = f.label :avatar
+      - if @course.avatar.attached?
+        .row
+          = image_tag @course.avatar
+      .row
+      = f.file_field :avatar
+      -# = f.input :avatar, as: :file
+      -# = f.input :avatar
+      %small= f.error :avatar, class: 'text-danger'
+      .row
+      = f.label :description
+      = f.rich_text_area :description
+      %small= f.error :description, class: 'text-danger'
+      = f.input :short_description
+      = f.input :language, collection: ["English", "Russian", "Japanese"]
+      = f.input :level, collection: ["Beginner", "Intermidiate", "Advanced"], prompt: "Select the level"
+      = f.input :price
+      = f.input :published, :label => "Publish"
+
+    .form-actions
+      = f.button :submit, class: 'btn btn-sm btn-primary'
