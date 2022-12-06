@@ -1,21 +1,23 @@
 %center
   -# enclose the div with setting border
-  %div{:style => "width:1200px; height:800px; padding:20px; text-align:center; border: 10px solid #563d7c"}
-    %div{:style => "width:1150px; height:750px; padding:20px; text-align:center; border: 5px solid #563d7c"}
-      %br
-      %br
-      %br
-      %br
-      %span{:style => "font-size:50px; font-weight:bold"} Certificate of Completion
-
-      /%center
-      /  %h1
-      /    Certificate of Completion
-
-      %br
-      %br
-      %br
-      %br
+  {
+    style: 'width:1200px; height:800px; padding:20px; text-align:center; border: 10px solid #563d7c'
+  }
+    {
+      style: 'width:1150px; height:750px; padding:20px; text-align:center; border: 5px solid #563d7c'
+    }
+      %br/
+      %br/
+      %br/
+      %br/
+      %span{style: 'font-size:50px; font-weight:bold'} Certificate of Completion
+      / %center
+      / %h1
+      / Certificate of Completion
+      %br/
+      %br/
+      %br/
+      %br/
       %p
       %h3
         This is to certify that the owner of the email address
@@ -29,30 +31,22 @@
           = @enrollment.course.title
       %h3
         on the yoshihisaokada.net platform
-
       %p
-
-      %br
-      %br
-      %br
-      %br
+      %br/
+      %br/
+      %br/
+      %br/
       %b Certificate id:
-      #{@enrollment.slug}
-
+      = "#{@enrollment.slug}"
       %p
-
       %b Certificate url:
-      - p "_____request"
-      - p request.fullpath
-      #{request.base_url}#{request.original_fullpath}
-
+      = "#{request.base_url}#{request.original_fullpath}"
       %p
       %b Registration date:
-      #{@enrollment.created_at.strftime('%d-%b-%Y')}
-
-      %br
-      %br
-      %br
+      = "#{@enrollment.created_at.strftime('%d-%b-%Y')}"
+      %br/
+      %br/
+      %br/
       %center
         %h3
           = image_tag wicked_pdf_asset_base64('thumbnail___.png'), height: "30", width: "auto"

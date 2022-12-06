@@ -1,22 +1,18 @@
 - content_for :title do
   Ruby Gems Bootcamp
-  \|
+  |
   -# Courses
   = action_name.humanize
   courses
-
 %h3
   .text-center
     -# Courses:
     .fa.fa-graduation-cap
-    -# - p "___action_name"
-    -# - p action_name.humanize
     = action_name.humanize
     courses
     .badge.bg-info
       = @courses.count
 %p
-
 .row
   .col-md-2
     -# = search_form_for @q do |f|
@@ -41,23 +37,23 @@
       = f.search_field :user_email_cont, placeholder: 'Teacher', class: 'form-control form-control-sm'
       .row.mt-3
       = f.submit
-      %hr
+      %hr/
       .row
       = sort_link(@courses_ransack, :price, "Sort by Price", { default_order: :desc }, { class: "" })
       .row
       = sort_link(@courses_ransack, :enrollments_count, "Sort by The Number of Students", { default_order: :desc }, { class: "" })
       .row
       = sort_link(@courses_ransack, :average_rating, "Sort by Average Rating", { default_order: :desc }, { class: "" })
-      %hr
+      %hr/
       .row
       = link_to 'refresh', @ransack_path, class: "mb-2"
-      %hr
+      %hr/
     Tags:
     .row
       - @tags.all.order(course_tags_count: :desc).each do |tag|
-        .course_tag{style: "display:inline;"}
+        .course_tag{style: 'display:inline;'}
           -# = link_to courses_path(search_courses: {course_tags_tag_id_eq: tag.id}) do
-          -# ↓ doesn't redirect to new path? 
+          -# ↓ doesn't redirect to new path?
           = link_to controller: controller_name, action: action_name, search_courses: {course_tags_tag_id_eq: tag.id} do
             .badge.bg-info
               = tag.name
@@ -71,14 +67,10 @@
         .col-md-4
           = render 'courses/course', course: course
           %p
-    %hr
+    %hr/
     -# != pagy_nav(@pagy)
-    != pagy_bootstrap_nav(@pagy)
+    = pagy_bootstrap_nav(@pagy)
     -# != pagy_bootstrap_nav_js(@pagy)
     -# != pagy_bootstrap_combo_nav_js(@pagy)
-
-
 -# = p @activities
-
-%br
-
+%br/

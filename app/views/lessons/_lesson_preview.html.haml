@@ -7,39 +7,36 @@
         .text-danger.fa.fa-check-square
     - else
       .fa.fa-check-square
-    = link_to course_lesson_path(@course, lesson) do 
-      /= lesson.row_order
+    = link_to course_lesson_path(@course, lesson) do
+      / = lesson.row_order
       -# = lesson.row_order_rank + 1
       %b
-        #{lesson.row_order_rank + 1}.
+        = "#{lesson.row_order_rank + 1}."
       = lesson.title.truncate(15)
   - else
     .fa.fa-check-square
     -# = link_to lesson.title, course_lesson_path(@course, lesson)
-    = link_to course_lesson_path(@course, lesson) do 
-      /= lesson.row_order
+    = link_to course_lesson_path(@course, lesson) do
+      / = lesson.row_order
       -# = lesson.row_order_rank + 1
       %b
-        #{lesson.row_order_rank + 1}.
+        = "#{lesson.row_order_rank + 1}."
       = lesson.title.truncate(15)
-  %br
+  %br/
   Impressions:
   = lesson.user_lessons.map(&:impressions).sum
-  %br
+  %br/
   Comments:
   = lesson.comments_count
-  %br
+  %br/
   Unique views:
-  - p "lesson.user_lessons"
-  - p lesson.user_lessons
   = lesson.user_lessons_count
-
   -# - if UserLesson.where(user: current_user, lesson: lesson).present?
-  -#   .far.fa-check-square
+  -# .far.fa-check-square
   -# - else
-  -#   .far.fa-square
+  -# .far.fa-square
   -# = link_to lesson.title, course_lesson_path(@course, lesson)
-  -# -# = link_to course_lesson_path(@course, lesson) do 
+  -# -# = link_to course_lesson_path(@course, lesson) do
   -# -#   = lesson.row_order
   -# -#   -# = lesson.row_order_rank + 1
   -# -#   = lesson.title

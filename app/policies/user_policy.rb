@@ -12,7 +12,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    p "user_edit____"
     @user.has_role?:admin if @user.present?
   end
 

@@ -1,44 +1,41 @@
 - content_for :title do
   Ruby Gems Bootcamp
-  \|
+  |
   Courses
-  \|
+  |
   Course Detail:
   = @course.title
-
 = link_to 'Courses', courses_path
 \/
 = link_to @course.title, course_path(@course)
 -# = render 'courses/course', course: @course
-%hr
-
+%hr/
 .row
   -# .col-lg-6
-  -#   = render 'courses/course', course: @course
+  -# = render 'courses/course', course: @course
   -# .col-lg-6
-  -#   - if policy(@course).edit?
-  -#     .d-grid
-  -#       = link_to 'Add lesson', new_course_lesson_path(@course, course_id: @course.id), class: 'btn btn-primary btn-sm btn-block'
-  -#   - else
-  -#     .d-grid
-  -#       .btn.btn-primary.btn-sm.btn-block
-  -#         Lessons
-  -#   -# %hr
-  -#   -#   Progress:
-  -#   -#   = number_to_percentage(@course.progress(current_user), precision: 1 )
-  -#   %hr
-  -#   - @lessons.each do |lesson|
-  -#     = render 'lessons/lesson_preview', lesson: lesson
-  -#     -# %hr
-  -#   != pagy_bootstrap_nav(@pagy)
-  -#   - if @enrollment and policy(@enrollment).edit?
-  -#     - if @enrollment.rating == nil
-  -#       .d-grid
-  -#         = link_to 'Review this course', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
-  -#     - else
-  -#       .d-grid
-  -#         = link_to 'Thanks for the review! Your review is here', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
-
+  -# - if policy(@course).edit?
+  -# .d-grid
+  -# = link_to 'Add lesson', new_course_lesson_path(@course, course_id: @course.id), class: 'btn btn-primary btn-sm btn-block'
+  -# - else
+  -# .d-grid
+  -# .btn.btn-primary.btn-sm.btn-block
+  -# Lessons
+  -# -# %hr
+  -# -#   Progress:
+  -# -#   = number_to_percentage(@course.progress(current_user), precision: 1 )
+  -# %hr
+  -# - @lessons.each do |lesson|
+  -# = render 'lessons/lesson_preview', lesson: lesson
+  -# -# %hr
+  -# != pagy_bootstrap_nav(@pagy)
+  -# - if @enrollment and policy(@enrollment).edit?
+  -# - if @enrollment.rating == nil
+  -# .d-grid
+  -# = link_to 'Review this course', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
+  -# - else
+  -# .d-grid
+  -# = link_to 'Thanks for the review! Your review is here', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
   .col-lg-8.order-1.order-lg-1
     .bg-light.rounded
       %h3
@@ -47,8 +44,8 @@
         -# = link_to 'course creator', course_course_wizards_path(@course)
       %p
       -# - if @course.avatar.attached?
-      -#   .row
-      -#     = image_tag @course.avatar
+      -# .row
+      -# = image_tag @course.avatar
       .row
         .fas.fa-star
           = @course.average_rating
@@ -56,11 +53,9 @@
         .fas.fa-book
           = @course.lessons_count
       .row
-
       %h6
         Enrollments count:
-        =@course.enrollments_count
-
+        = @course.enrollments_count
       %p
       .row
         .fa.fa-language
@@ -72,20 +67,17 @@
       .row
       .fas.fa-tags
         - @course.tags.each do | tag |
-          .course_tag{style: "display:inline;"}
+          .course_tag{style: 'display:inline;'}
             = link_to courses_path(search_courses: {course_tags_tag_id_eq: tag.id}) do
               .badge.bg-info
                 = tag.name
                 = tag.course_tags_count
-
       %p
       .fa.fa-chalkboard-teacher
         = link_to @course.user, user_path(@course.user)
-
-      %hr
+      %hr/
       = @course.description
-
-    %hr
+    %hr/
     %p
     .d-grid
       .fa.fa-book-open
@@ -97,21 +89,18 @@
     .list-group.lesson-sortable
       - @lessons.each do |lesson|
         -# %li.list-group-item
-        -#   = render 'lessons/lesson_preview', lesson: lesson
-        - p "___lesson.class.name.underscore"
-        - p lesson.class.name.underscore
+        -# = render 'lessons/lesson_preview', lesson: lesson
         -# model名とsort_methodのURLを渡す
         = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson)} do
           .list-group-item.rounded
-            .fa.fa-sort.all-scroll{:style => "cursor: grab;"}
+            .fa.fa-sort.all-scroll{style: 'cursor: grab;'}
             = render 'lessons/lesson_preview', lesson: lesson
     %p
     - if policy(@course).edit?
       .mt-3
       .d-grid
-        = link_to 'Add lesson', new_course_lesson_path(@course, course_id: @course.id), class: 'btn btn-primary btn-sm btn-block' 
-
-    %hr
+        = link_to 'Add lesson', new_course_lesson_path(@course, course_id: @course.id), class: 'btn btn-primary btn-sm btn-block'
+    %hr/
     %p
     .d-grid
       .fa.fa-comments
@@ -122,22 +111,20 @@
       - @enrollments_with_review.each do |enrollment|
         = render 'enrollments/enrollment', enrollment: enrollment
       -# - if @enrollment and policy(@enrollment).edit?
-      -#   - if @enrollment.rating == nil
-      -#     .d-grid
-      -#       = link_to 'Review this course', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
-      -#   - else
-      -#     .d-grid
-      -#       = link_to 'Thanks for the review! Your review is here', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
-
+      -# - if @enrollment.rating == nil
+      -# .d-grid
+      -# = link_to 'Review this course', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
+      -# - else
+      -# .d-grid
+      -# = link_to 'Thanks for the review! Your review is here', edit_enrollment_path(@enrollment), class: 'btn btn-primary btn-sm btn-block'
   .col-lg-4.order-0.order-lg-1
     = render 'courses/course', course: @course
-
 %h4
   .fa.fa-graduation-cap
   Similar Courses:
 - Course.where.not(id: @course.id).each do |course|
   .row
-  /= course.tags.pluck(:id)
+  / = course.tags.pluck(:id)
   -# filter the courses without the same tag
   - unless @course.tags.pluck(:id).intersection(course.tags.pluck(:id)).count.zero?
     .card-columns
