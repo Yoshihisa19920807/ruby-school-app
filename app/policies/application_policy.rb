@@ -3,15 +3,11 @@ class ApplicationPolicy
 
   def initialize(user, record)
     @user = user
-    # p "_____record"
-    # p record
     # record = target object to be changed
     @record = record
   end
 
   def index?
-    
-    p "application_policy"
     false
   end
 

@@ -1,19 +1,14 @@
 class EnrollmentsController < ApplicationController
   # ↓ before_action :set_enrollment, only: [:show, :edit, :update, :destroy, :certificate]
-  before_action :set_enrollment, only: %i[ show edit update destroy certificate]
-  skip_before_action :authenticate_user!, only: %i[ certificate ]
-  before_action :set_course, only: %i[ new create ]
+  before_action :set_enrollment, only: %i[show edit update destroy certificate]
+  skip_before_action :authenticate_user!, only: %i[certificate]
+  before_action :set_course, only: %i[new create]
 
   # GET /enrollments or /enrollments.json
   def index
     @q = Enrollment.ransack(params[:q])
-    # p "_____@q"
-    # p @q.result.includes(:course, :user)
-    # @q.result.includes(:course, :user).each do |result|
-    #   p "___result"
-    #   p result
-    # end
-    @pagy, @enrollments =  pagy(@q.result.includes(:course, :user))
+
+    @pagy, @enrollments = pagy(@q.result.includes(:course, :user))
     authorize @enrollments
     # @pagy, @courses = pagy(@courses_ransack.result.includes(:user))
     # authorizeするオブジェクトのクラスモデルのポリシー（※コントローラ名と一致する必要あり。一致しない場合はapplication__olicyに飛ばされる）を参照する。この場合はenrollment_policy。
@@ -22,7 +17,11 @@ class EnrollmentsController < ApplicationController
 
   def my_students
     @ransack_path = my_students_enrollments_path
-    @q = Enrollment.joins(:course).where(courses: {user: current_user}).ransack(params[:q])
+    @q =
+      Enrollment
+        .joins(:course)
+        .where(courses: { user: current_user })
+        .ransack(params[:q])
     @pagy, @enrollments = pagy(@q.result.includes(:user))
     authorize @enrollments
     render 'index'
@@ -33,13 +32,13 @@ class EnrollmentsController < ApplicationController
       format.html
       format.pdf do
         render pdf: "#{@enrollment.course.title}, #{@enrollment.user.email}",
-        page_size: 'A4',
-        template: "enrollments/certificate.pdf.haml",
-        layout: "pdf.html.haml",
-        orientation: "Landscape",
-        lowquality: true,
-        zoom: 1,
-        dpi: 75
+               page_size: 'A4',
+               template: 'enrollments/certificate.pdf.haml',
+               layout: 'pdf.html.haml',
+               orientation: 'Landscape',
+               lowquality: true,
+               zoom: 1,
+               dpi: 75
       end
     end
   end
@@ -62,7 +61,6 @@ class EnrollmentsController < ApplicationController
 
   # POST /enrollments or /enrollments.json
   def create
-
     # if @course.price > 0
     #   flash.now[:alert] = "This course is currently unavailable."
     #   render :new
@@ -70,73 +68,83 @@ class EnrollmentsController < ApplicationController
     #   # flash[:alert] = "You can not access paid courses yet."
     #   # redirect_to new_course_enrollment_path(@course)
     # else
-    @enrollment = Enrollment.new(course: @course, user: current_user, price: @course.price)
-      # Stripe::PaymentIntent.create({
-      #   amount: 1000,
-      #   currency: 'jpy',
-      #   payment_method_types: ['card'],
-      #   receipt_email: 'jenny.rosen@example.com',
-      # })
-      # respond_to do |format|
-      #   if @enrollment.save
-      #     p "save_enrollment_succeeded___"
-      #     format.html { redirect_to @course, notice: "Enrollment was successfully created." }
-      #     format.json { render :show, status: :created, location: @enrollment }
-      #     EnrollmentMailer.student_enrollment(@enrollment).deliver_later
-      #     EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
-      #   else
-      #     p "save_enrollment_failed___"
-      #     p @enrollment.errors
-      #     flash.now[:alert] = "The process wasn't done properly."
-      #     format.html { render :new, status: :unprocessable_entity }
-      #     format.json { render json: @enrollment.errors, status: :unprocessable_entity }
-      #   end
-      # end
+    @enrollment =
+      Enrollment.new(course: @course, user: current_user, price: @course.price)
+    # Stripe::PaymentIntent.create({
+    #   amount: 1000,
+    #   currency: 'jpy',
+    #   payment_method_types: ['card'],
+    #   receipt_email: 'jenny.rosen@example.com',
+    # })
+    # respond_to do |format|
+    #   if @enrollment.save
+    #     p "save_enrollment_succeeded___"
+    #     format.html { redirect_to @course, notice: "Enrollment was successfully created." }
+    #     format.json { render :show, status: :created, location: @enrollment }
+    #     EnrollmentMailer.student_enrollment(@enrollment).deliver_later
+    #     EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
+    #   else
+    #     p "save_enrollment_failed___"
+    #     p @enrollment.errors
+    #     flash.now[:alert] = "The process wasn't done properly."
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+    #   end
+    # end
     if @course.price > 0
-
       @amount = (@course.price * 100).to_i
       # customer = Stripe::Customer.create(
       #   email: @enrollment.user.email,
       # )
-      customer = Stripe::Customer.create(
-        email: params[:stripeEmail],
-        source: params[:stripeToken]
-      )
-      charge = Stripe::Charge.create(
-        customer:    customer.id,
-        amount:      @amount,
-        description: 'Ruby Gems Bootcamp Premium Content',
-        currency:    'usd'
-      )
+      customer =
+        Stripe::Customer.create(
+          email: params[:stripeEmail],
+          source: params[:stripeToken],
+        )
+      charge =
+        Stripe::Charge.create(
+          customer: customer.id,
+          amount: @amount,
+          description: 'Ruby Gems Bootcamp Premium Content',
+          currency: 'usd',
+        )
       respond_to do |format|
         if @enrollment.save
-          p "save_enrollment_succeeded___"
-          format.html { redirect_to @course, notice: "Enrollment was successfully created." }
+          p 'save_enrollment_succeeded___'
+          format.html do
+            redirect_to @course, notice: 'Enrollment was successfully created.'
+          end
           format.json { render :show, status: :created, location: @enrollment }
           EnrollmentMailer.student_enrollment(@enrollment).deliver_later
           EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
         else
-          p "save_enrollment_failed___"
+          p 'save_enrollment_failed___'
           p @enrollment.errors
           flash.now[:alert] = "The process wasn't done properly."
           format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+          format.json do
+            render json: @enrollment.errors, status: :unprocessable_entity
+          end
         end
       end
     else
       respond_to do |format|
         if @enrollment.save
-          p "save_enrollment_succeeded___"
-          format.html { redirect_to @course, notice: "Enrollment was successfully created." }
+          p 'save_enrollment_succeeded___'
+          format.html do
+            redirect_to @course, notice: 'Enrollment was successfully created.'
+          end
           format.json { render :show, status: :created, location: @enrollment }
           EnrollmentMailer.student_enrollment(@enrollment).deliver_later
           EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
         else
-          p "save_enrollment_failed___"
+          p 'save_enrollment_failed___'
           p @enrollment.errors
           flash.now[:alert] = "The process wasn't done properly."
           format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+          format.json do
+            render json: @enrollment.errors, status: :unprocessable_entity
+          end
         end
       end
     end
@@ -147,11 +155,16 @@ class EnrollmentsController < ApplicationController
     respond_to do |format|
       if @enrollment.update(enrollment_params)
         # Course.friendly.find(@enrollment.course_id).update(average_rating: Enrollment.friendly.where(course: @enrollment.course).average(:rating))
-        format.html { redirect_to @enrollment, notice: "Enrollment was successfully updated." }
+        format.html do
+          redirect_to @enrollment,
+                      notice: 'Enrollment was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @enrollment }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @enrollment.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -160,23 +173,33 @@ class EnrollmentsController < ApplicationController
   def destroy
     @enrollment.destroy
     respond_to do |format|
-      format.html { redirect_to enrollments_url, notice: "Enrollment was successfully destroyed." }
+      format.html do
+        redirect_to enrollments_url,
+                    notice: 'Enrollment was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_enrollment
-      @enrollment = Enrollment.friendly.find(params[:id])
-    end
 
-    def set_course
-      @course = Course.friendly.find(params[:course_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_enrollment
+    @enrollment = Enrollment.friendly.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def enrollment_params
-      params.require(:enrollment).permit(:user_id, :course_id, :rating, :price, :review)
-    end
+  def set_course
+    @course = Course.friendly.find(params[:course_id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def enrollment_params
+    params.require(:enrollment).permit(
+      :user_id,
+      :course_id,
+      :rating,
+      :price,
+      :review,
+    )
+  end
 end

@@ -1,9 +1,12 @@
 - flash.each do |name, msg|
-  -#- p "name"
-  -#- p name
-  -#- p "msg"
-  -#- p msg
   - if msg.is_a?(String)
-    %div{:class => "alert alert-#{name.to_s == 'notice' ? 'success' : 'danger'} alert-dismissible fade show", :role => "alert"}
+    %div{
+      class: "alert alert-#{name.to_s == 'notice' ? 'success' : 'danger'} alert-dismissible fade show",
+      role: 'alert'
+    }
       = content_tag :div, msg, :id => "flash_#{name}"
-      %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+      %button.btn-close{
+        'aria-label': 'Close',
+        'data-bs-dismiss': 'alert',
+        type: 'button'
+      }
