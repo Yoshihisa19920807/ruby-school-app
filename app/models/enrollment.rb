@@ -6,11 +6,11 @@ class Enrollment < ApplicationRecord
   validates :rating, presence: true, on: :update
   validates :review, presence: true, on: :update
   has_rich_text :review
-  scope :reviewed, -> { where.not(rating: nil)}
-  scope :review_pending, -> { where(rating: nil)}
+  scope :reviewed, -> { where.not(rating: nil) }
+  scope :review_pending, -> { where(rating: nil) }
 
   extend FriendlyId
-  friendly_id :to_s, :use => [:slugged]
+  friendly_id :to_s, use: [:slugged]
 
   after_destroy :call_update_average_rate
   after_update :call_update_average_rate
@@ -18,9 +18,7 @@ class Enrollment < ApplicationRecord
   after_destroy :update_balance
 
   def to_s
-    # p "user_id___"
-    # p user.slug
-    user.to_s + " " + course.to_s
+    user.to_s + ' ' + course.to_s
   end
 
   def call_update_average_rate
@@ -31,5 +29,4 @@ class Enrollment < ApplicationRecord
     course.update_course_income
     user.update_user_expense
   end
-
 end

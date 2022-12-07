@@ -6,11 +6,6 @@ class EnrollmentPolicy < ApplicationPolicy
   end
 
   def index?
-    # p "index???"
-    # p "record___"
-    # p @record
-    # p "user___"
-    # p @user
     @user.has_role?(:admin) if @user.present?
   end
 
@@ -24,13 +19,13 @@ class EnrollmentPolicy < ApplicationPolicy
 
   def edit?
     # defined in application_policy.rb
-    # p "____@record"
-    # p @record
     @user.has_role?(:admin) || @record.user_id == @user.id if @user.present?
   end
 
   def update?
-    @user.has_role?(:admin) || @record.course.user_id == @user.id if @user.present?
+    if @user.present?
+      @user.has_role?(:admin) || @record.course.user_id == @user.id
+    end
   end
 
   def create?
@@ -47,7 +42,7 @@ class EnrollmentPolicy < ApplicationPolicy
 
   def certificate?
     # if lessons number === viewed lessons
-    @record.course.lessons_count == @record.course.user_lessons.where(user: @record.user).count
+    @record.course.lessons_count ==
+      @record.course.user_lessons.where(user: @record.user).count
   end
-
 end

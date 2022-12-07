@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-
   def index
     if current_user.has_role?(:admin)
       @tags = Tag.all
@@ -13,18 +12,19 @@ class TagsController < ApplicationController
     if @tag.save
       render json: @tag
     else
-      render json: {errors: @tag.errors.full_messages}
+      render json: { errors: @tag.errors.full_messages }
     end
   end
 
   def destroy
     @tag = Tag.find(params[:id])
 
-    p "tag_destroy"
     authorize @tag
     if @tag.destroy
       respond_to do |format|
-        format.html { redirect_to tags_path, notice: "Tag was successfully destroyed." }
+        format.html do
+          redirect_to tags_path, notice: 'Tag was successfully destroyed.'
+        end
         format.json { head :no_content }
       end
     else
